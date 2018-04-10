@@ -1,0 +1,1 @@
+1. delete a from tbl1 a join tbl2 b on a.id = b.xid where b.field = val;
