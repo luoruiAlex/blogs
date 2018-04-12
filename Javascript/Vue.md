@@ -29,3 +29,41 @@
 3. 执行`npm run dev`启动项目，开始编译，如果webpack中配置了html-webpack-plugin会自动在浏览器中打开页面
 4. 修改源码，自动重新编译，编译完成后自动在浏览器中更新(HMR)
 5. 如果有需要，执行`npm run test`进行JS的单元测试，执行`npm run lint`检测JS代码是否符合代码规范
+# Vue.js介绍
+## 1. Vue.js 是什么? Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式框架，Vue的核心库只关注视图层。
+## 2. Vue.js与其他框架的对比
+- jQuery jQuery根本就不是框架，它只是一个工具集，它的精髓在于方便了操作DOM
+- React React跟Vue.js很像，它的核心库也只关注视图层，通过首创的Virtual DOM技术让开发人员几乎可以不操作DOM而开发出高性能的前端界面。
+- AngularJS是唯一一个真正意义上的前端框架，框架该有的它都有，但是性能明显比React、Vue.js差，而且学习曲线太陡。
+## 3. 怎么样更好地使用Vue.js进行开发?
+- 之前说过，Vue的核心库只关注视图层，不能算完整的框架，需要搭配其他的库开发。我们通常说Vue，指的是它的一整套技术栈。
+- Vue的技术栈主要包括 vue、vue-router、vuex、axios和webpack
+# 开始学习
+- 我们将开始写一个类似于[http://element-cn.eleme.io/#/zh-CN/component/installation](http://element-cn.eleme.io/#/zh-CN/component/installation) 的SPA，来进行Vue.js的学习
+## 1. 搭建环境
+- 安装chrome、Node.js和Visual Studio Code，在chrome中安装vue-devtools扩展，在VS Code中安装Vetur扩展。
+- 初始化工程(实际开发中由架构师完成): 新建componentdocs文件夹，目录结构和文件如下
+```
+componentdocs
+ |-- build
+   |-- build.js
+   |-- check-versions.js
+   |-- dev-client.js
+   |-- utils.js
+   |-- vue-loader.conf.js
+   |-- webpack.base.conf.js
+   |-- webpack.dev.conf.js
+   |-- webpack.prod.conf.js
+ |-- config
+   |-- dev.env.js
+   |-- index.js
+   |-- prod.env.js
+   |-- test.env.js
+ |-- src
+ |-- static
+ |-- index.html
+ |-- package.json
+```
+build目录下存放的是构建脚本，也包括构建的配置，config目录想放的是环境脚本，使webpack在开发环境、生成环境、测试环境上进行不同的构建。src存放的是项目源码，static存放图片等静态资源，index.html就是我们的SPA的页面，其中只有一个id为root的DIV。
+- 在VS Code中打开componentdocs文件夹，执行Ctrl + ~命令打开控制台，执行npm install命令下载依赖的模块
+## 2. Hello World
