@@ -67,3 +67,14 @@
 # 打包原理
 - 所有资源统一入口：入口JS直接或间接引入其他文件资源
 - 文件管理： 每个入口文件打包所有依赖的资源，每个资源打包一次；多个入口文件互不相干
+
+# Webpack Dev Server
+- 两种刷新页面的模式
+  - iframe: 不需要额外配置，需要指定URL，改变时重载
+  - inline: 命令行增加 --inline; webpack中增加devServer: {inline: true}
+  
+# Webpack代码分割、异步加载
+- 原理：将JS独立词JS文件，需要用到的时候，创建一个Script对象，加入到document.head中
+- `require.ensure([], function(){var x = require('x.js')})`
+  - 可加入第3个参数name，使打包后生成的chunk文件点带name，以增加可读性
+  - 如果多个chunk打包时name相同，可避免[]中依赖被重复打包（将所有文件打成一个）
