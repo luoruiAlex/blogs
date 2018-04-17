@@ -33,6 +33,36 @@
   - filename: 提取出的文件名，默认为name
   - chunks： 通过name来提取chunk，默认提取所有
   - minChunks
+- HtmlWebpackPlugin
+  - 生成HTML文件
+  - title: HTML文件的title
+  - filename: 默认index.html
+  - favicon: 图标
+  - template: 可以为多种格式的模板，单必须安装对应的loader
+  - inject： 默认`true`，表示<script>在<body>底部，`body`与`true`相同，`false`表示不生成<script>，`head`表示<script>在<head>内
+  - minify: 默认false，表示不压缩生成的html
+- webpack.optimize.UglifyPlugin()
+  - warning: false 去掉删除无用代码时的警告
+- ExtractTextWebpackPlugin
+  - filename: [name].css [id] [contenthash]
+  - allChunks: 配合CommonChunksPlugin使用
+- webpack.DefinePlugin
+  - 创建在编译时刻配置的全局变量
+  - `'process.env': JSON.stringify({NODE_ENV: 'production'})`
+- ProviderPlugin
+  - HACK不规范的模块，比如$:'jquery'
+- OpenBrowserWebpackPlugin({url:xx})
+  - url默认为`http://localhost:8080`
+- CleanWebpackPlugin(paths, {options})
+  - paths: ['dist', 'build']
+  - options: root: __dirname; exclude: []; verbose: boolean; dry: false---true表示真的删除
+- OccurenceOrderPlugin
+  - webpack为每个模块指定唯一的id，改插件可是webpack为最常用的模块分配最小的id
+- CopyWebpackPlugin
+  - from to
+  - force ignore
+  - context
+  - flatten 忽略文件夹
 
 # 打包原理
 - 所有资源统一入口：入口JS直接或间接引入其他文件资源
