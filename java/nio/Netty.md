@@ -20,6 +20,111 @@
     * AbstractBootstrap 客户端新接入的连接Socket对应的ChannelPipeline的Handler
     * ServerBootstrap NioServerSocketChannel对应的ChannelPipeline的Handler
 
+### Decoder使用
+#### EchoServer.java
+```
+public void bind(int port) throws Exception {
+	EventLoopGroup bossGroup = new NioEventLoopGroup();
+	EventLoopGroup workerGroup = new NioEventLoopGroup();
+	try
+	{
+		ServerBootstrap b = new ServerBootstrap();
+		b.group(bossGroup, workerGroup)
+			.channel(NioServerSocketChannel.class)
+			.option(ChannelOption.SO_BACKLOG, 1024)
+			.handler(new LoggingHandler(LogLevel.INFO))
+			.childHandler(new ChannelInitializer<SocketChannel>()
+		{
+			@Override
+			protected void initChannel(SocketChannel ch) throws Exception
+			{
+				ByteBuf delimiter = Unpooled.copiedBuffer("$_".getBytes());
+				ch.pipeline().addLast(new DelimiterBasedFrameDecoder(1024, delimiter));
+				ch.pipeline().addLast(new StringDecoder());
+				ch.pipeline().addLast(new ChannelInboundHandlerAdapter(){
+					int counter = 0;
+					@Override
+					public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception
+					{
+						String body = (String) msg;
+						System.out.println("This is " + ++counter + " times receive client: [" + body + "]");
+						body += "$_";
+						ByteBuf echo = Unpooled.copiedBuffer(body.getBytes());
+						ctx.writeAndFlush(echo);
+					}
+				});
+			}
+		});
+	  ChannelFuture f = b.bind(port).sync();
+		f.channel().closeFuture().sync();
+}
+finally
+{
+	bossGroup.shutdownGracefully();
+	workerGroup.shutdownGracefully();
+	}
+}
+```
+#### EchoClient.java
+```
+public void connect(String host, int port) throws Exception {
+	EventLoopGroup group = new NioEventLoopGroup();
+	try
+	{
+		Bootstrap b = new Bootstrap();
+		b.group(group).channel(NioSocketChannel.class)
+			.option(ChannelOption.TCP_NODELAY, true)
+			.handler(new ChannelInitializer<SocketChannel>()
+			{
+				@Override
+				protected void initChannel(SocketChannel ch) throws Exception
+				{
+					ByteBuf delimiter = Unpooled.copiedBuffer("$_".getBytes());
+					ch.pipeline().addLast(new DelimiterBasedFrameDecoder(1024, delimiter));
+					ch.pipeline().addLast(new StringDecoder());
+					ch.pipeline().addLast(new ChannelInboundHandlerAdapter(){
+						private int counter;
+						private static final String ECHO_REQ = "Hi. welcome to Netty.$_";
+						@Override
+						public void channelActive(ChannelHandlerContext ctx) throws Exception
+						{
+								for (int i = 0; i < 10; i++) {
+										ByteBuf msg = Unpooled.copiedBuffer(ECHO_REQ.getBytes());
+										ctx.writeAndFlush(msg);
+								}
+						}
+						@Override
+						public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception
+						{
+								System.out.println("This is " + ++counter + " times receive server: [" + msg + "]");
+						}
+						@Override
+						public void channelReadComplete(ChannelHandlerContext ctx) throws Exception
+						{
+								ctx.flush();
+						}
+						@Override
+						public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception
+						{
+								cause.printStackTrace();
+								ctx.close();
+						}
+					});
+				}
+			});
+		ChannelFuture f = b.connect(host, port).sync();
+		f.channel().closeFuture().sync();
+	}
+	finally
+	{
+		group.shutdownGracefully();
+	}
+}
+```
+
+
+
+
 
 ### protobuf
 #### SubscribeReq.proto
@@ -73,11 +178,11 @@ message SubscribeReq{
             }
 
             private SubscribeRespProto.SubscribeResp resp(int subReqId) {
-                SubscribeRespProto.SubscribeResp.Builder b = SubscribeRespProto.SubscribeResp.newBuilder();
-                b.setSubReqId(subReqId);
-                b.setRespCode(0);
-                b.setDesc("Netty book order succeed!");
-                return b.build();
+							SubscribeRespProto.SubscribeResp.Builder b = SubscribeRespProto.SubscribeResp.newBuilder();
+							b.setSubReqId(subReqId);
+							b.setRespCode(0);
+							b.setDesc("Netty book order succeed!");
+							return b.build();
             }
         });
 ```
@@ -97,25 +202,25 @@ message SubscribeReq{
         @Override
         public void channelActive(ChannelHandlerContext ctx) throws Exception
         {
-            for (int i = 0; i < 10; i++) {
-                ctx.write(subReq(i));
-            }
-            ctx.flush();
+					for (int i = 0; i < 10; i++) {
+							ctx.write(subReq(i));
+					}
+					ctx.flush();
         }
 
         @Override
         public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception
         {
-            SubscribeRespProto.SubscribeResp resp = (SubscribeResp) msg;
-            System.out.println("Client received response : [" + resp.toString() + "]");
+					SubscribeRespProto.SubscribeResp resp = (SubscribeResp) msg;
+					System.out.println("Client received response : [" + resp.toString() + "]");
         }
 
         private SubscribeReqProto.SubscribeReq subReq(int i) {
-            SubscribeReqProto.SubscribeReq.Builder b = SubscribeReqProto.SubscribeReq.newBuilder();
-            b.setSubReqId(i);
-            b.setUserName("Bob");
-            b.setProductName("Netty book for protobuf");
-            b.setAddress("tianjing");
-            return b.build();
+					SubscribeReqProto.SubscribeReq.Builder b = SubscribeReqProto.SubscribeReq.newBuilder();
+					b.setSubReqId(i);
+					b.setUserName("Bob");
+					b.setProductName("Netty book for protobuf");
+					b.setAddress("tianjing");
+					return b.build();
         }
 ```
