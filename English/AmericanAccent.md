@@ -66,3 +66,17 @@
 
 ## reduce vowel of the unstressed syllable. [ə]
 - symb***o***l loc***a***l
+
+## Pronounce each voice
+
+## Vowel is longer before voiced consonant.
+- ice eyes
+- back bag
+- safe save
+- pick pig
+- lock log
+- light lied
+- leaf leave
+- cup cub
+
+## L is longer and softer in American English.
