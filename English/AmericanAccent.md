@@ -53,3 +53,16 @@
 ## [aɪ]
 ## [aʊ]
 ## [ɔɪ]
+
+
+## Stressed syllable and stressed words should be prolonged
+- banana Canana biology photographer
+- I ***love*** it.
+- I have to ***call*** him.
+- You're really ***tall***.
+- It's ***hot***.
+- Let's go to the ***park***.
+- I got a ***job*** at the ***hospital***.
+
+## reduce vowel of the unstressed syllable. [ə]
+- symb***o***l loc***a***l
