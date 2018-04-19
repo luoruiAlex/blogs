@@ -80,3 +80,26 @@
 - cup cub
 
 ## L is longer and softer in American English.
+
+## 发 N 音记得把舌头上翘
+
+## s发z音
+- has is was please these those always because
+
+## stops - continuants
+- prolong the continuant
+- Don't release the stop before a consonant
+
+## T between two vowels souds D
+
+## T followed by N, Hold the T before an N, don't release
+- wirtten mountain button certain cotton forgotten Great Britain sentence
+
+## TU and DU sounds like TRU and DRU
+- nature picture graduate educate schedule individual
+- can't you did you
+
+## ED endings
+- 前一个字母为t、d, 发音为ED，注意前一个T要浊化 waited painted attended
+- 前一个字母为voiceless，发音为T stopped parked cooked passed与past pushed
+- 前一个字母为voiced，发音为D robbed loved used called
