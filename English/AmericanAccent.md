@@ -144,6 +144,7 @@
 ## Reducing words
 - as on at to for or our and[n]
 - ***h***e ***h***is ***h***im ***h***er ***h***ers ***th***em
+- I'll He'll 中间带点[y]
 - difficult contractions
   - could have[dove] should have would have
   - could not have [dnove] should not have would not have
