@@ -144,7 +144,7 @@
 ## Reducing words
 - as on at to for or our and[n]
 - ***h***e ***h***is ***h***im ***h***er ***h***ers ***th***em
-- I'll He'll 中间带点[y]
+- He'll 中间带点[y] you'd
 - difficult contractions
   - could have[dove] should have would have
   - could not have [dnove] should not have would not have
@@ -154,7 +154,7 @@
 - basic***a***lly actually practically physically accidentally generally
 - veg***e***t***a***ble int***e***resting diff***e***rent
 - choc***o***late comf***o***rtable => rt变为tr
-- aspirin evening family beverage naturally Catholic miserable favorite extraordinary preference temperature broccoli diamond laboratory several opera camera 
+- aspirin evening family beverage饮料 naturally Catholic天主教 miserable痛苦的，郁闷的 favorite extraordinary非凡的，卓越的 preference temperature broccoli西兰花 diamond laboratory several opera camera 
 - difficult words
   - bomb climb debt subtle doubt
   - yacht
