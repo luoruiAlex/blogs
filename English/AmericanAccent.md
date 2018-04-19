@@ -164,3 +164,9 @@
   - receipt psychic cupboard
   - Arkansas island debris
   - answer
+
+## relaxed speech
+- have => a shoulda coulda
+- of => a outta frienda
+- to => a gotta wanna gonna a lotta money
+- let me = lemme give me = gimme
