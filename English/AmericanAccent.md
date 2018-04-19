@@ -144,3 +144,13 @@
 ## Reducing words
 - as on at to for or our and[n]
 - ***h***e ***h***is ***h***im ***h***er ***h***ers ***th***em
+- difficult contractions
+  - could have[dove] should have would have
+  - could not have [dnove] should not have would not have
+  - would you have[u ov]
+  
+## drop syllables
+- basic***a***lly actually practically physically accidentally generally
+- veg***e***t***a***ble int***e***resting diff***e***rent
+- choc***o***late comf***o***rtable => rt变为tr
+- aspirin evening family beverage naturally Catholic miserable favorite extraordinary preference temperature broccoli diamond laboratory several opera camera 
