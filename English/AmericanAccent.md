@@ -103,3 +103,43 @@
 - 前一个字母为t、d, 发音为ED，注意前一个T要浊化 waited painted attended
 - 前一个字母为voiceless，发音为T stopped parked cooked passed与past pushed
 - 前一个字母为voiced，发音为D robbed loved used called
+
+## linking
+- Linking does not mean speakig fast.
+- Stress the key words.
+- Don't link between thought groups.
+- build up = bill up
+- come over = ca mover
+- call up = ca lup
+- for a while = fo ra while
+- where is = whe ris
+- what if = wha dif
+
+## 两个相同辅音相连，只发后一个
+- Bill_likes_swimming
+- stop_practicing
+- next_time
+- wish_she
+- nine_nails
+- Bob_Barker
+- going_great
+
+## Link consonants that have the same point of articulation. 只发后一个音
+- used_to
+- five_friends
+- big_kitchen
+- help_me back_door
+
+## Linking vowel to vowel
+- [i] [aɪ] [eI] [ɔI]后要加[y]
+- see it
+- very interstring
+- carry on
+- boy is
+- [u] [o]后面加[w]
+- two hours 
+- do all
+
+
+## Reducing words
+- as on at to for or our and[n]
