@@ -157,12 +157,12 @@
 - aspirin evening family beverage饮料 naturally Catholic天主教 miserable痛苦的，郁闷的 favorite extraordinary非凡的，卓越的 preference temperature broccoli西兰花 diamond laboratory several opera camera 
 - difficult words
   - bomb climb debt subtle doubt
-  - yacht
-  - adjust adjective
+  - yacht[jɑ:t] 快艇，游艇
+  - adjust adjective
   - half walk talk could would should
-  - ballet bouquet buffet valet Chevrolet
-  - months
-  - receipt psychic cupboard
+  - ballet bouquet[bukeɪ]  a bouquet of一束(花) buffet[bəˈfeɪ]自助餐 valet['væleɪ]男佣人 Chevrolet[ˈʃevrəulei]雪佛兰
+  - months clothes
+  - receipt[rɪˈsit]发票 psychic[ˈsaɪkɪk]精神的; 超自然的; 灵魂的，心灵的; cupboard
   - Arkansas island debris
   - answer
 
