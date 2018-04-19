@@ -154,3 +154,13 @@
 - veg***e***t***a***ble int***e***resting diff***e***rent
 - choc***o***late comf***o***rtable => rt变为tr
 - aspirin evening family beverage naturally Catholic miserable favorite extraordinary preference temperature broccoli diamond laboratory several opera camera 
+- difficult words
+  - bomb climb debt subtle doubt
+  - yacht
+  - adjust adjective
+  - half walk talk could would should
+  - ballet bouquet buffet valet Chevrolet
+  - months
+  - receipt psychic cupboard
+  - Arkansas island debris
+  - answer
