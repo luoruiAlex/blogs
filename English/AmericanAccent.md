@@ -143,3 +143,4 @@
 
 ## Reducing words
 - as on at to for or our and[n]
+- ***h***e ***h***is ***h***im ***h***er ***h***ers ***th***em
