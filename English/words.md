@@ -1,0 +1,3 @@
+- student Tuesday
+- eaten
+- acutal actually
