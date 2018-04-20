@@ -205,3 +205,53 @@
 - XoXo 'o'clock d'octor phot'ograhpy
 - lesson lessen atom Adam caller collar profit prophet seller celler
 - ec'onomy m'emory contr'ol cont'ain dev'elop 'Europe inform'ation comm'ercial[oul]
+
+## words within sentences
+- content words: verb noun adverbs adjective
+- function words are not stressed.
+- I will be ***driving*** to the ***market*** to ***buy*** something to ***eat***
+
+## Focus Words and Thought Groups
+- FOCUS WORD = most important word of a thought group, usually the last content word of the thought group
+
+## stress noun more than adjective
+- It's a hot day. It's hot.
+- I had a older brother.
+
+## compound noun
+- stress first word of a compound noun
+- credit card
+- eye brow
+- fore head
+- ear ring
+- hair style
+
+## Rules for Stress Phrasal Verbs
+- stress the second word
+- pick up
+- break down
+
+## Names of Places and People
+- stress the last word
+- South America
+- United Kingdom
+
+## Abbreviations and Numbers
+- stess the last letter of an abbreviation
+  - CNN PhD ASAP(as soon as possible) LA
+- stress the last number
+  - 9:15 507
+
+## Stress for Special Emphasis for special reason
+
+## Rising and Falling Intonation
+- STATEMENT = pitch goes down
+- QUESTION = pitch goes up
+  - yes/no UP
+  - WH when/where/why/what/how DOWM
+  - Are you angry? Why are you angry at me?
+  - Is it hot in there? Why is it so in there?
+  - Did you get there late? Why did you get there late?
+  
+## Chaning Intonation
+- Items in a serial UP UP and DOWN
