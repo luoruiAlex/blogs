@@ -163,11 +163,45 @@
   - ballet bouquet[bukeɪ]  a bouquet of一束(花) buffet[bəˈfeɪ]自助餐 valet['væleɪ]男佣人 Chevrolet[ˈʃevrəulei]雪佛兰
   - months clothes
   - receipt[rɪˈsit]发票 psychic[ˈsaɪkɪk]精神的; 超自然的; 灵魂的，心灵的; cupboard
-  - Arkansas island debris
-  - answer
+  - Arkansas[ˈɑrkənˌsɔ]阿肯色州 Illinois[ˌɪlə'nɔɪ]伊利诺斯州 island debris[dəˈbri:]残片
+  - answer
+  - definetly
 
 ## relaxed speech
-- have => a shoulda coulda
-- of => a outta frienda
-- to => a gotta wanna gonna a lotta money
+- have => [a] shoulda coulda 
+- of => [a] outta frienda sorta
+- to => [a] gotta wanna gonna a lotta money
 - let me = lemme give me = gimme
+
+## stress a word
+- louder, longer and higher in pitch
+- _ _ _ - _ It's nice to meet you.
+
+## basically stressed syllables
+- 'decade 'colleague 'female
+- Ja'pan Ir'an 'urban
+- 'locate lo'cation 'detail par'enthesis 'necessary ne'cessity
+
+## two syllables
+- noun stress first syllable 
+- verb stress second syllable
+- record object progress insult辱骂 conflict present insert
+
+## 'ATE' words
+- graduate estimate articulate negoate donate delicate chocolate accurate exaggerate approximate appreciate
+- verb [eit]
+- adjective noun [It et]
+
+## StressRules for Suffixes
+- stress suffix
+  - -ESE Chinese Japanese
+  - -EER pioneer volunteer engineer
+  - -IQUE antique boutique[[buˈtik] 精品店; （女士） 时装店 technique critique
+- stess the syllable immediately before the suffix
+  - -IC realistic [ˌriəˈlɪstɪk] electric strategic optimistic terrific
+  
+## Unstress
+- -Xm madam problem symptom[ˈsɪmtəm]症状 album
+- XoXo 'o'clock d'octor phot'ograhpy
+- lesson lessen atom Adam caller collar profit prophet seller celler
+- ec'onomy m'emory contr'ol cont'ain dev'elop 'Europe inform'ation comm'ercial[oul]
