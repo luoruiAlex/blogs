@@ -36,10 +36,17 @@
 - 绝对定位
 - inline-block table-cell table-caption grid inline-grid flex inline-flex
 #### 特点
-- 子元素的css不影响BFC元素外部
+- 子元素的css不影响BFC元素外部  
+  - 普通块级元素，子元素的margin-top不会隔开自身与父元素，但会作用到父元素外部
+  - BFC元素，子元素的margin-top会隔开自身与父元素
+![image](https://github.com/luoruiAlex/blogs/blob/master/CSS/images/layout_bfc1.png)
 - 浮动子元素也会参与BFC父元素的高度计算
-  - 利用此原理： clearfix解决父元素高度塌陷
+  - 普通块级元素，不能识别浮动子元素，会出现"高度塌陷"的问题
+  - BFC元素能识别浮动子元素
+  - 利用此原理： clearfix能解决父元素高度塌陷
 - 占据文档流的BFC元素能识别浮动的兄弟元素
-  - BFC元素与浮动兄弟元素同行而不被覆盖
-- 站数据文档流的BFC元素，`width:auto`时，占据当前行的剩余宽度
+  - 普通块级元素，会被浮动的兄弟元素覆盖部分内容
+  - BFC元素与浮动兄弟元素同行而不被覆盖，与浮动兄弟元素同行显示  
+  ![image](https://github.com/luoruiAlex/blogs/blob/master/CSS/images/layout_bfc2.png)
+- 占据数据文档流的BFC元素，`width:auto`时，占据当前行的剩余宽度，`width:100%`时，宽度为父元素宽度，即换行。
 - 同一个BFC内上下相邻box的margin会重叠
