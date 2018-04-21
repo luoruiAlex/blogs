@@ -17,6 +17,7 @@
 - `<img><input><textarea><video><embed>`
 - `<audio><canvas><object>`在特殊情况下为可置换元素
 - 通过css的content属性来插入的对象为匿名可置换元素
+- 行内可置换元素的布局特性与inline-block-level元素相同
 #### 特性
 - 水平方向的对齐方式受text-align控制，默认左对齐
 - 垂直方向的对齐方式受vertical-align控制，默认baseline
@@ -33,7 +34,7 @@
 - overflow不为visible
 - float
 - 绝对定位
-- inline-block table-cell table-caption
+- inline-block table-cell table-caption grid inline-grid flex inline-flex
 #### 特点
 - 子元素的css不影响BFC元素外部
 - 浮动子元素也会参与BFC父元素的高度计算
