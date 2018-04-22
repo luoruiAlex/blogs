@@ -1,0 +1,4 @@
+- 测试包 spring-test
+- @RunWith(SpringJunit4ClassRunner.class)
+- ContextConfiguration(class={xxConfig.class @Configuration})
+- ActiveProfiles("prod")
