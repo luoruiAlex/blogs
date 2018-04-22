@@ -27,3 +27,6 @@
 - 常规属性配置 `@value("${key}")`
 - 类型安全的配置
   - @Component @ConfigurationProperties(prefix="xx")可选location中类型安全的Bean
+
+## SpringMvc
+- 页面放到src/main/resources/下，运行时编译到/WEB-INF/classes/vies/下
