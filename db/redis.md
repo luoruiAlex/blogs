@@ -21,6 +21,72 @@
 - APPEND key value 返回追加后的字符串长度
 - DBSIZE
   - `(integer): size值`
+### hash
+- HSET key field value
+- HGET key field
+- HSETNX key field value只有key不存在的时候成功，返回1，否则返回0
+- HMSET HMSET
+- HGETALL key 返回field和value
+- HKEYS key
+- HVALS key
+- HEXISTS key field
+- HLEN key
+- HINCRBY key field increment
+  - HINCRBYFLOAT key field increment
+- HDEL key field[field2...]
+### list
+- 双向链表实现
+- LPUSH key value1[...value2] 在左侧插入
+  - RPUSH
+  - LPUSHX 只有当list存在的时候才插入
+  - RPUSHX
+- LPOP key 移除并返回左侧第一个元素
+  - RPOP
+- LLEN key 返回list长度，不存在返回0，不是list返回error
+- LRANGE key start stop
+- LREM 从存于 key 的列表里移除前 count 次出现的值为 value 的元素
+- LINDEX key index 返回对应位置上的元素
+- LSET key index value
+- LTRIM key start stop 修剪已存在的list
+- LINSERT key BEFORE|AFTER pivot value
+### set
+- 使用值为空的hash table实现，增删复杂度为O(1)
+- SADD key member[...member2]
+- SMEMBERS key 返回所有元素
+- SISMEMBER key member 是否包含
+- SREM key member[...member2]
+- SPOP key [count] 随机删除并返回
+- SRANDMEMBER key [count] 随机返回
+- SDIFF key [key2...] 差集
+  - SDIFFSTORE destination key [key2...] 不返回结果，而是将结果存放在destination中，如果destination已存在则覆盖
+- SINTER key [key2...] 交集
+  - SINTERSTORE
+- SUNION key [key2...] 并集
+  - SUNIONSTORE
+- SCARD key 返回元素个数
+- SMOVE source destination member
+### sorted set
+- hash table和skip list实现，比list更耗内存
+- ZADD key [NX|XX] [CH] [INCR] score member[... score2 member2]
+  - XX 仅更新已存在的成员，不新增
+  - NX 仅新增，不更新
+  - CH 返回changed的成员个数
+  - INCR 对成员的分数进行递增操作
+- ZSCORE key member 返回member的score值或者返回(nil)
+- ZRANGE key start stop [WITHSCORES] 按照元素的分数从小到大的顺序返回指定索引start到stop之间所有元素（包含两端）
+  - ZREVRANGE score从大到小排列
+  - ZRANGEBYSCORE key min max [WITHSCORES] [LIMIT offset count]
+  - ZREVRANGEBYSCORE
+- ZINCRBY key increment member 如果member不存在则增加一个，score为increment
+- ZCARD key 返回元素个数
+- ZCOUNT ZCOUNT key min max 默认包括score值等于min或max
+- ZREM key member [member ...]
+  - ZREMRANGEBYRANK key start stop
+  - ZREMRANGEBYSCORE
+- ZRANK key member 返回排名
+  - ZREVRANK key member
+- ZINTERSTORE
+  - ZUNIONSTORE
 ### KEY
 - KEYS pattern
 - EXISTS key[ke2...] 判断key是否存在，返回1表示存在，0表示不存在
@@ -37,19 +103,6 @@
 - DUMP key
   - RESTORE key[ttl serialized-value]
 - MOVE key db
-### hash
-- HSET key field value
-- HGET key field
-- HSETNX key field value只有key不存在的时候成功，返回1，否则返回0
-- HMSET HMSET
-- HGETALL key 返回field和value
-- HKEYS key
-- HVALS key
-- HEXISTS key field
-- HLEN key
-- HINCRBY key field increment
-  - HINCRBYFLOAT key field increment
-- HDEL key field[field2...]
 
 ## 配置
 ### 配置文件 redis.conf
