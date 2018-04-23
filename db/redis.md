@@ -26,6 +26,10 @@
   - `2) value2`
 - EXISTS key 判断key是否存在，返回1表示存在，0表示不存在
 - SELECT NUM 默认有16个数据库，默认连到0号数据库，select可切换数据
+### hash
+- HSET key field value
+- HGET key field
+- hsetnx key field value只有key不存在的时候成功，返回1，否则返回0
 
 ## 配置
 ### 配置文件 redis.conf
