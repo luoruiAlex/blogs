@@ -21,15 +21,35 @@
 - APPEND key value 返回追加后的字符串长度
 - DBSIZE
   - `(integer): size值`
-- KEYS *
-  - `1) value1`
-  - `2) value2`
-- EXISTS key 判断key是否存在，返回1表示存在，0表示不存在
+### KEY
+- KEYS pattern
+- EXISTS key[ke2...] 判断key是否存在，返回1表示存在，0表示不存在
 - SELECT NUM 默认有16个数据库，默认连到0号数据库，select可切换数据
+- TYPE key，返回string list set zset hash等不同类型，不存在的返回none
+- EXPIRE key seconds
+  - EXPIREAT key timestamp
+  - PEXPIRE key milliseconds
+- TTL key 返回剩余时间，单位是秒
+  - PTTL key 毫秒
+  - PERSIST key
+- DEL key
+- RENMAE key
+- DUMP key
+  - RESTORE key[ttl serialized-value]
+- MOVE key db
 ### hash
 - HSET key field value
 - HGET key field
-- hsetnx key field value只有key不存在的时候成功，返回1，否则返回0
+- HSETNX key field value只有key不存在的时候成功，返回1，否则返回0
+- HMSET HMSET
+- HGETALL key 返回field和value
+- HKEYS key
+- HVALS key
+- HEXISTS key field
+- HLEN key
+- HINCRBY key field increment
+  - HINCRBYFLOAT key field increment
+- HDEL key field[field2...]
 
 ## 配置
 ### 配置文件 redis.conf
