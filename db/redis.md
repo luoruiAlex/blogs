@@ -123,3 +123,9 @@
 - rdbcompression yes  //存储本地数据库是否启用LZF压缩，默认yes
 - dbfilename dump.rdb //指定本地数据库文件名，默认为dump.rdb
 - dir 设置持久化文件存放位置
+
+## 事务
+### 概念与原理
+- 一组命令的集合，要么都执行，要么都不执行
+- 先将属于一个事务的命令发送给Redis，然后在让Redis一次执行这些命令
+### 命令
