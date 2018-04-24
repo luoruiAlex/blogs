@@ -26,7 +26,7 @@
   - JSR注解
   - 默认按name，没有则用type，可同时指定name和type
   - 可以作用在变量、setter方法
-## Java配置
+### Java配置
 - @Configration 相当于XML中的`<beans>`
 - @Bean 相当于XML中的`<bean>`
 - @Bean作用的方法的代码中实现Bean注入
@@ -37,7 +37,7 @@
   - @Value("#{demoService.another}") 其他Bean属性
   - @Value("${book.name}") 配置文件，需要在类上加@PropertySource("xx.properties")指定配置文件
 
-## Bean实例化配置
+### Bean实例化配置
 - @Lazy(true)
 - @Primary 多个Bean候选者时用@Primary，否则报错
 - 初始化、销毁
@@ -49,3 +49,10 @@
   - Request
   - Session
   - GlobalSession 只在portal应用中有用
+
+### Profile
+- 在@Bean的同时增加@Profile("xx")
+- 激活
+  - jvm的spring.profiles.active参数
+  - Servlet的context parameter(web.xml中或WebApplicationInitializer.onStartup()方法中)
+
