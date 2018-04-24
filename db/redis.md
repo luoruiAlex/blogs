@@ -103,6 +103,26 @@
 - DUMP key
   - RESTORE key[ttl serialized-value]
 - MOVE key db
+### 连接命令
+- PING [echocontent]  测试连接是否可用或者测试连接的延时
+- ECHO messge 返回消息
+- QUIT 请求服务器关闭连接
+- AUTH 为请求带上密码
+  - CONFIG SET requirepass xxx后就需要带上密码
+  
+## SORT排序
+- 可对list、set、sorted set的key进行排序，并完成类似join查询的任务
+- SORT key [BY pattern] [LIMIT offset count] [GET pattern [GET pattern ...]] [ASC|DESC] [ALPHA] [STORE destination]
+  - 默认ASC
+  - ALPHA 按字母ASCII码大小排序
+  - LIMIT offset count offset偏移量，count是数目
+  - GET参数不影响排序，它的作用是使SORT命令返回的结果不再是元素自身，而是GET参数中指定的值
+  - BY只能有一个，而GET可以有很多个
+- 性能
+  - 时间复杂度 O(n + mlongm)
+  - 尽可能减少待排序键中的元素的数量（减小n）
+  - 使用LIMIT参数值获取需要的数据（减小m）
+  - 如果要排序的数据量较大，尽可能使用STORE参数将结果缓存
 
 ## 配置
 ### 配置文件 redis.conf
@@ -129,3 +149,19 @@
 - 一组命令的集合，要么都执行，要么都不执行
 - 先将属于一个事务的命令发送给Redis，然后在让Redis一次执行这些命令
 ### 命令
+- MULTI
+- EXEC 
+  - 执行事务中所有在排队等待的指令并将链接状态恢复到正常
+  - 当使用WATCH 时，只有当被监视的键没有被修改，且允许检查设定机制时，EXEC会被执行
+  - EXEC前如果客户端断线，事务队列会被情况，断线前已开始EXEC，则全部执行
+- WATCH key [key2...]
+  - 被监控的键一旦被修改或删除，之后的事务就不会执行
+  - 监控一直会持续到EXEC命令
+  - UNWATCH 如果执行EXEC 或者DISCARD， 则不需要手动执行UNWATCH
+- DISCARD
+  - 取消一个事务中所有在排队等待的指令，并且将连接状态恢复到正常
+  - 如果已使用WATCH，DISCARD将释放所有被WATCH的key
+### 容错
+- 有一个命令语法错误就直接返回，全部不执行
+- 一个命令运行错误，其他命令继续执行
+- 不支持回滚
