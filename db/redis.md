@@ -200,6 +200,11 @@
   - min-slaves-max-lag lagnum minnum个从节点的延迟(lag)值，大于或等于lagnum，主节点决绝写命令
 ### Sentinel
 - 解决从节点晋升为主节点后的操作问题
+- 每个Sentinel节点会对数据节点和其他Sentinel节点进行监控，发现节点不可达时就标记节点
+- 大多数Sentinel认为主节点不可达时，选举出一个Sentinel来完成自动故障转移，同时通知给Redis客户端
+- 启动的两种方法
+  - redis-sentinel sentinel-26379.conf
+  - redis-server sentinel-26379.conf --sentinel
 
 ## Redis Cluster
 - 解决主节点写能力和存储能力受到的单机的限制
