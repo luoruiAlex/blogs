@@ -6,10 +6,17 @@
 
 ## 注解
 ### 声明Bean
+#### 类路径自动扫描
 - @Component
 - @Service
 - @Repository
 - @Controller
+#### 配置类(@Configration)中声明
+- @Bean
+  - 作用在方法上，在方法中new对象
+#### 其他
+- @Lazy(true)
+- @Primary 多个Bean候选者时用@Primary，否则报错
 ### 注入Bean
 - @Autowired
   - 按Type, 默认require为true
@@ -22,3 +29,13 @@
   - JSR注解
   - 默认按name，没有则用type，可同时指定name和type
   - 可以作用在变量、setter方法
+## Java配置
+- @Configration 相当于XML中的`<beans>`
+- @Bean 相当于XML中的`<bean>`
+- @Bean作用的方法的代码中实现Bean注入
+- @Value注入资源
+  - @Value("普通字符串")
+  - @Value("#{systemProperties['os.name']}") 操作系统属性
+  - @Value("#{ T(java.lang.Math).random() * 100.0 }") 表达式结果
+  - @Value("#{demoService.another}") 其他Bean属性
+  - @Value("${book.name}") 配置文件，需要在类上加@PropertySource("xx.properties")指定配置文件
