@@ -51,7 +51,7 @@
 - LINSERT key BEFORE|AFTER pivot value
 ### set
 - 使用值为空的hash table实现，增删复杂度为O(1)
-- SADD key member[...member2]
+- SADD key member[...memb：er2]
 - SMEMBERS key 返回所有元素
 - SISMEMBER key member 是否包含
 - SREM key member[...member2]
@@ -165,3 +165,36 @@
 - 有一个命令语法错误就直接返回，全部不执行
 - 一个命令运行错误，其他命令继续执行
 - 不支持回滚
+
+## 任务队列
+### 使用list
+- LPUSH
+- LPOP 为空则轮询
+- BLPOP key 为空时阻塞，不用轮询
+### 优先级队列
+- BRPOP key1 key2 ... 0 按照优先级取队列中的元素
+
+## 发布/订阅模式
+- PUBLISH channel message 返回收到消息的客户端数量
+- SUBSCRIBE channel 一旦客户端进入订阅状态，则客户端只能接受订阅相关的命令
+  - UNSUBSCRIBE
+  - PSUBSCRIBE 订阅给定的模式(patterns)
+  - PUNSUBSCRIBE 只能退订PSUBSCRIBE订阅的规则，必须严格的进行字符串匹配，比如`*`不能匹配`channel1.*`
+  
+## 基数统计HyperLogLog
+- 输入元素的数量或者体积非常非常大时，计算基数所需的空间总是固定的、并且是很小的
+- 应用在对准确性不是很重要的场景，例如：QQ同时在线人数，网站IP访问数量等等
+
+## 复制
+### 3种配置方式
+- redis.conf文件中配置`slaveof <masterip> <masterport>`
+- redis-server启动命令后加`--slaveof <masterip> <masterport>`
+- 直接使用`slaveof <masterip> <masterport>`命令在从节点执行生效
+### 命令与配置
+- INFO replication
+- slave_read_only：从节点默认只能读不能写
+- connected_slaves： 支持多层复制关系
+- SLAVEOF no one 断开复制，断开后，从节点变为主节点
+- 保证主节点安全地写
+  - min-slaves-to-write minnum 从节点少于minnum个时，主节点拒绝写命令
+  - min-slaves-max-lag lagnum minnum个从节点的延迟(lag)值，大于或等于lagnum，主节点决绝写命令
