@@ -14,9 +14,6 @@
 #### 配置类(@Configration)中声明
 - @Bean
   - 作用在方法上，在方法中new对象
-#### 其他
-- @Lazy(true)
-- @Primary 多个Bean候选者时用@Primary，否则报错
 ### 注入Bean
 - @Autowired
   - 按Type, 默认require为true
@@ -39,3 +36,16 @@
   - @Value("#{ T(java.lang.Math).random() * 100.0 }") 表达式结果
   - @Value("#{demoService.another}") 其他Bean属性
   - @Value("${book.name}") 配置文件，需要在类上加@PropertySource("xx.properties")指定配置文件
+
+## Bean实例化配置
+- @Lazy(true)
+- @Primary 多个Bean候选者时用@Primary，否则报错
+- 初始化、销毁
+  - @Bean的initMethod和destroyMethod属性指定方法
+  - @PostConstruct和@PreDestroy注解
+- @Scope
+  - Singleton
+  - Prototype
+  - Request
+  - Session
+  - GlobalSession 只在portal应用中有用
