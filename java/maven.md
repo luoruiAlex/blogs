@@ -9,13 +9,13 @@
 
 ## 插件
 - 执行真正的动作
-- <plugin>/<groupId><artifactId><version>
-- <plugin>/<executions>/<execution><id><phase><goals><goal>
+- `<plugin>/<groupId><artifactId><version>`
+- `<plugin>/<executions>/<execution><id><phase><goals><goal>`
 
 ## 版本规范
 - groupId:artifactId:packaging:version
 - 特殊字符串: RELEASE LATEST SNAPSHOT(UTC时间）
-- version组成 <major version>.<minor version>.<incremental-version>-<qualifier>
+- version组成 `<major version>.<minor version>.<incremental-version>-<qualifier>`
 
 ## 依赖
 - groupdId artifactId version packaging type(一般用于pom) scope
@@ -28,12 +28,12 @@
 - 冲突的解决
   - 短路径优先
   - 声明优先
-- 排除依赖 <exclusions>/<execlution>/<groupId><artifactId>
+- 排除依赖 `<exclusions>/<execlution>/<groupId><artifactId>`
   
 ## 多项目
-- 父项目 聚合<modules>/<module>
-- 子项目 继承<parent>/<groupId><artifactId><version>
-- 引用 <dependency>/...<type>pom</type>
+- 父项目 聚合`<modules>/<module>`
+- 子项目 继承`<parent>/<groupId><artifactId><version>`
+- 引用 `<dependency>/...<type>pom</type>`
 
 ## profile 多个profile用于不同场景，类似于spring中的profile
 
@@ -41,7 +41,7 @@
 - env ${env.M2_HOME} ${java.home}
 - setting.xml ${settings.localRepository}
 - 内置 ${basedir} ${version}
-- 自定义 <project>/<properties>/<xxname>/<xxvalue>
+- 自定义 `<project>/<properties>/<xxname>/<xxvalue>`
 
 ## 命令行
 - `mvn eclipse:eclipse` | `mvn idea:idea`
