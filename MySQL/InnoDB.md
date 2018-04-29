@@ -2,7 +2,7 @@
 - 以页为单位，默认为每页16KB
 
 ## 行格式
-- Compact、Redudant、Dynamic、Compressed
+- Compact、Redudant(MySQL5.0前的格式)、Dynamic(MySQL5.7)、Compressed
 - 语句 `CREATE TABLE ... CHARSET=utf8 ROW_FORMAT=COMPACT`
 - 行格式 = 记录的额外信息 + 记录的真实数据
 ### Compact
@@ -25,3 +25,31 @@
   - roll_pointer(7字节)
 - 不再重复存储NULL
 - Char(N)等定长的列不够长的用空格填充
+
+## 行溢出
+- 除了BLOB TEXT外其他所有的列(不含隐藏列和记录头信息)的长度加起来最多占用65535个字节
+- VARCHAR，长度需要2字节，NULL值标识1字节，所以最多为65532，如果非ascii编码，长度会更短
+- Compact、Redundant，对占用空间非常大的列，在记录的真实数据处存储 768字节数据 + 20字节其他页地址
+- 行溢出临界点，一个页中最少存放2行记录以及一些元信息
+- Dynamic和Compressed行格式行溢出时真实数据存储处智慧存其他页面的地址，Compressed还会把存到其他页面的数据进行压缩
+
+## 数据页
+- 申请页时，从Free Space部分开始，慢慢被User Records部分替换
+- 双链表，有上一页和下一页的编号
+
+## 记录头信息
+- delete_mask 默认并未真正删除，后续插入可能直接覆盖，彻底删除应用`optimize table tablename`使服务器重新规划存储方式
+- min_rec_mask
+- n_owned
+- heap_no表示记录在本页中的位置，通过比较主键的大小来比较记录的大小，每页中还有最大记录和最小记录两条伪记录(不在User Records部分)
+- record_type 包括普通记录、B+树非野节点记录、最小记录、最大记录
+- next_record 当前真实数据到下一条记录真实数据的地址偏移量(按主键从小到大)，即维护了一条记录的单链表
+
+## 根据主键查找
+- 生成页目录
+- 通过二分法确定该记录所在的槽
+- 通过记录的next_record组成的链表遍历查找记录
+
+## 没有索引的查找
+- 只能是遍历
+- 先定位到页，然后到页中遍历找记录
