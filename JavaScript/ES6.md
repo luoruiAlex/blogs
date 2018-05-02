@@ -21,6 +21,9 @@
 - 箭头函数
 	- 箭头函数没有自己的this值，this值继承自外围作用域
 	
+## Set和Map
+- Set中的比较类似于`===`，但是NaN只能加入1个
+	
 ## Symbols
 - `let s = Symbol();`，新的symbol值与任何职都不相等
 - Symbol.for(string)，访问symbol注册表，相同string返回相同的symbol
