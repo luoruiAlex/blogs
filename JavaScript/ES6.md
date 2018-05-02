@@ -1,3 +1,17 @@
+## 扩展
+### string
+- 模板字符串
+	- 对象默认调用toString()方法
+	- 模板可嵌套
+	- `\ $ {`必须用反斜杠转义
+- codePointAt() fromCodePoint()弥补了charCodeAt() fromCharCode()的不足
+- 部署了Iterator接口，可以用`from...of`循环遍历
+- includes()、startsWith()、endsWith()弥补了indexOf()的不足
+- repeat()
+- padStart()、padEnd()，默认用空格补全
+### 数组
+- forEach()不能使用break和return，可用`for...of`遍历
+
 ## let const
 - 块级作用域内有效
 - 不存在变量提升
@@ -31,6 +45,10 @@
 	- TypedArra
 	- 函数的arguments
 	- NodeList对象
+
+## 生成器
+- 定义: `function*` `yield`
+- 生成器是迭代器，所有生成器都有内建的`next()`和`[Symbol.iterator]()`方法的实现
 
 ## 解构Destructuring
 - let [var list
