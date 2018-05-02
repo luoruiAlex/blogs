@@ -18,6 +18,13 @@
 - 默认参数`(arg=xx)`
 	- 默认值表达式在函数调用时从左到右求值，因此默认值表达式可使用该参数之前已填充好的其他参数值，比如`func(arg1=1, arg2=(arg1===1) ?  2 : 3)`
 	- 传递undefined值等于不传值，没有默认值的参数隐式默认为undefined
+- 箭头函数
+	- 箭头函数没有自己的this值，this值继承自外围作用域
+	
+## Symbols
+- `let s = Symbol();`，新的symbol值与任何职都不相等
+- Symbol.for(string)，访问symbol注册表，相同string返回相同的symbol
+- 一些标准也定义了symbol，比如Symbol.iterator
 
 ## let const
 - 块级作用域内有效
@@ -58,4 +65,9 @@
 - 生成器是迭代器，所有生成器都有内建的`next()`和`[Symbol.iterator]()`方法的实现
 
 ## 解构Destructuring
-- let [var list
+- 可结构数组、对象或迭代器
+- 可迭代嵌套结构
+- 如果解构的对象是null或undefined，得到TypeError
+- 如果解构其他原始类型，得到undefined
+- 可与迭代器协同使用，比如 `for(var [key] of map)` `for(var[,value] of map)`
+- 可实现多重返回值
