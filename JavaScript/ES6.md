@@ -29,6 +29,16 @@
 - Symbol.for(string)，访问symbol注册表，相同string返回相同的symbol
 - 一些标准也定义了symbol，比如Symbol.iterator
 
+## Promise
+- 一个对象，保存着某个未来才会结束的时间的结果
+- Promise对象的状态不受外界的影响，只有异步操作的结果能决定当前的状态
+	- pending(进行中)
+	- fulfilled(已成功)
+	- rejected(已失败)
+- Promise对象的状态只能从pending变为fulfilled或者rejected，一旦改变，就不会再变，任何时候都能得到这个结果
+- 一旦创建就立即执行，无法中途取消
+- pending时，无法得知是刚刚开始还是即将完成
+
 ## let const
 - 块级作用域内有效
 - 不存在变量提升
