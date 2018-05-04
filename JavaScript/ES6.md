@@ -89,6 +89,15 @@
 ## 生成器
 - 定义: `function*` `yield`
 - 生成器是迭代器，所有生成器都有内建的`next()`和`[Symbol.iterator]()`方法的实现
+- 调用生成器返回一个内部指针对象，每次调用指针对象的`next()`方法返回{value, done}
+- yield表达式
+	- 必须用在`function*`里面
+	- 如果嵌入在表达式中使用，比如加括号，比如`'hello' + (yield)`
+	- 如果用作函数参数或放在赋值表达式的右边，可以不加括号，如`foo(yield 'a', yield 'b');`
+- generator可用于给对象部署Iterator接口 `obj[Symbol.iterator] = generator`
+- `next()`方法的参数就是yield表达式的返回值，所以第一次使用`next()`方法时，传递参数是无效的（第一次调用next是启动遍历器对象）
+- `for...of`可自动遍历Generator生成的Iterator对象，无需调用`next()`
+- 
 
 ## 解构Destructuring
 - 可结构数组、对象或迭代器
