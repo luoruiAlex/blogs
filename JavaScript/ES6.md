@@ -38,6 +38,19 @@
 - Promise对象的状态只能从pending变为fulfilled或者rejected，一旦改变，就不会再变，任何时候都能得到这个结果
 - 一旦创建就立即执行，无法中途取消
 - pending时，无法得知是刚刚开始还是即将完成
+- `new Promise((resolve, reject) =>{}).then(resolve1).then(resolve2).catch(reject).finally()`
+- new出来后，构造函数中传入的函数(函数中调用resovle和reject回调)立即执行，然后then指定回调，然后在所有同步任务执行完后执行回调。
+- `then(resolved, rejection)`返回一个新的Promise实例，所以可以连续调用`then()`方法
+- `catch()`相当于`then(null, rejection)`。Promise的错误有"冒泡"的性质，会一直传递，直到被捕获为止。如果未catch，错误也不会传递到外层代码。
+- `finally()`，无法知道前面的Promise的状态是fulfilled还是rejected
+- `all()`用于将多个Promise实例包装成一个Promise实例`Promise.all([p1, p2])`，所有成员Promise实例都变成fulfilled组合Promise才会变成fulfilled，否则只要有一个成员Promise变成rejected，组合Promise就会变成rejected
+- `race()` 率先改变的成员Promise实例的返回值，就传递给组合Promise的回调函数
+- `Promise.resolve()`，将现有对象转为Promise对象
+	- 参数是一个Promise实例对象，直接返回该对象
+	- 参数为有`then()`方法的对象，将该对象包装为Promise对象并立即执行该`then()`方法
+	- 其他参数，返回一个状态为resolved的Promise对象，`Promise.resolve(arg)`相当于`new Promise(resolve => resolve(arg))`
+	- 无参数，直接返回一个状态为resolved的Promise对象
+- `Promise.reject()`
 
 ## let const
 - 块级作用域内有效
