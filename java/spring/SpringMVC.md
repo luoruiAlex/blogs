@@ -8,6 +8,14 @@
 
 ## 基本配置
 - 配置类：@EnableWebMvc XxConfig extends WebMvcConfigurerAdapter
+- ViewResolver
+```
+InternalResourceViewResolver r = new InternalResourceViewResolver();
+r.setPrefix("/WEB-INF/classes/views/");
+r.setSuffix(".jsp");
+r.setViewClass(JstlView.class);
+return r;
+```
 - 静态资源映射
   - src/main/resources/assets/xx
   - 覆盖`addResourceHandlers`
