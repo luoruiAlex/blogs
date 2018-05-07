@@ -97,7 +97,78 @@
 - generator可用于给对象部署Iterator接口 `obj[Symbol.iterator] = generator`
 - `next()`方法的参数就是yield表达式的返回值，所以第一次使用`next()`方法时，传递参数是无效的（第一次调用next是启动遍历器对象）
 - `for...of`可自动遍历Generator生成的Iterator对象，无需调用`next()`
-- 
+-	`Iterator.thorw()`可在函数体外抛出错误，然后在Generator函数体内捕获
+	- catch一次就只能捕获一次
+	- `throw()`接收的参数会被catch接收
+	- `throw()`方法与全局的throw命令不同，后者只能被函数体外的catch语句捕获，而且两者无关。`throw()`可以使我们只用一个`try...catch`来处理多个yield表达式的错误
+	- `throw()`被捕获之后，会附带执行一次`next()`
+	- 内部错误如果没有被内部捕获，就不会再执行，`next()`返回`{value: undefined, done: true}`
+	```
+		var g = function* () {
+				try {
+						yield;
+				} catch(e) {
+						console.log('inter', e);
+				}
+		};
+		var i = g();
+		i.next();
+		try {
+				i.throw('a');
+				i.throw('b');
+		} catch(e) {
+				console.log('outer', e);
+		}
+	```
+- `Iterator.return()`
+	- 通过return(value)返回给定的值value，并结束遍历
+	- 如果generator函数内部有`try...finally`代码块，那么return调用后，会先执行finally，然后执行return
+- `next()``throw()``return()`
+	- 1.都是让generator恢复执行
+	- 2.使用不同的语句替换`yield`表达式，`next(value)`将`yield`表达式替换成value，`throw(value)`将`yield`表达式替换成`thorw value`，`return(value)`将`yield`表达式替换成`return value`
+- yield* 
+	- 一个generator内部调用另一个generator，`yield* generator2()`
+	- 被调用的generator有return语句，那么就可以向代理它的generator返回数据
+	- `yield*`可遍历所有部署了Iterator接口的数据结构，比如数组、字符串等，相当于调用了`for...of`
+	- `yield*`取出嵌套数组的所有成员
+	```
+	function* iterTree(tree) {
+    if (Array.isArray(tree)) {
+        for (let i = 0; i < tree.length; i++) {
+            yield* iterTree(tree[i]);
+        }
+    } else {
+        yield tree;
+    }
+	}
+	```
+- generator作为属性，可简写为 `{* attrname(){}}`
+- generator函数的this
+	- generator函数总是返回一个iterator，这个遍历器是generator函数的实例
+	- 默认情况下拿不到this和this中的属性
+- generator实现状态机
+```
+var clock = function* () {
+    while(true) {
+        console.log('Tick');
+        yield;
+        console.log('Tock');
+        yield;
+    }
+};
+```
+- 应用
+	- 异步操作的同步化表达
+	- 控制流管理
+	- 部署Iterator接口
+	- 作为数组结构，对任意表达式提供类似数组的接口
+### Generator的异步应用
+- 定义：一个不连续的任务(中间可以插入其他任务)
+- 传统异步编程方法
+	- 回调函数:为什么Node.js中回调的第一个单数，必须是err，因为分段执行第一段后，原来的上下文已无法捕捉，此时抛出的错误只能当参数传入第二段
+	- 事件监听
+	- 发布/订阅
+	- Promise对象，解决了多层回调之间的强耦合问题(callback hell)，但是带来了代码冗余，原来的语义都变成then而变得很不清楚
 
 ## 解构Destructuring
 - 可结构数组、对象或迭代器
