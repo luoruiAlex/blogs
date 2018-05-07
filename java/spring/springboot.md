@@ -78,14 +78,17 @@ return new ServletRegistrationBean(new XxServlet(), "xx/*");
   - `<dependency><exclusions><exclusion><groupId>org.springframework.boot<artifactId>spring-boot-starter-tomcat`
   - `<dependency><groupId>org.springframewokr.boot<artifactId>spring-boot-starter-jetty`
 - SSL配置
-  - 1.JDK中，`keytool -genkey -alias tomcat`，按提示一步一步生成`.keystore`证书文件
+  - 1.JDK中，`keytool -genkey -alias tomcat -keyalg RSA -keystore C:/.kestore -validity 365`，按提示一步一步生成`.keystore`服务器证书文件
   - 2.证书文件复制到项目根目录，在application.properties中做如下SSL配置
     - server.port=8443
     - server.ssl.key-store=.keystore
     - server.ssl.key-store-passowrd=xxx
     - server.ssl.keyStoreType=JKS
     - server.ssl.keyAlias=tomcat
-  - http转向https
+  - 3.生成客户端证书`keytool -genkey -v -alias clientkey -keyalg RSA -storetype PKCS12 -keystore C:/clientkey.p12`
+  - 4.服务器信任客户端证书
+  - 5.客户端导入
+  - 4.http转向https
   ```
   @Bean
   public EmbeddedServletContainerFactory servletContainer() {
