@@ -11,7 +11,7 @@
 - @Service
 - @Repository
 - @Controller
-#### 配置类(@Configration)中声明
+#### 配置类(@Configuration)中声明
 - @Bean
   - 作用在方法上，在方法中new对象
 ### 注入Bean
