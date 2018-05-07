@@ -45,3 +45,34 @@ registry.addViewController("/index").setViewName("/index");
   ```
   configurer.setUseSuffixPatternMatch(false)
   ```
+
+## 文件上传
+- `commons-fileupload.commons-fileupload.${version}`
+- `<form action="upload" enctype="multipart/form-data" method="post"><input type="file" name="file"/>`
+- 添加转向到upload的ViewController
+- 添加MultipartResolver(CommonsMultipartResolver)
+- MultipartFile接受上传的文件
+
+## HttpMessageConverter
+- extends AbstractHttpMessageConverter
+  - readInternal()处理请求的数据
+  - writeInternal()处理输出的数据到response
+- 重写extendMessageConverters()
+
+## 测试
+- 1.RunWith(SpringJUinit4ClassRunner.class)
+- 2.ContextConfiguration(classes={xxConfig.class})
+- 3.@WebAppConfiguration("src/main/resources")
+- 4.@Autowired WebApplicationContext wac;
+- 5.private MockMvc mockMvc;@Before this.mockMvc = MockMvcBuilders.webAppContext(this.wac).build()
+- 6.可以@Autowired来模拟MockHttpSession和MockHttpServletRequest
+- 7.预期
+```
+mockMvc.perform(get("/normal"))
+      .andExpect(status().isOk())预期返回状态
+      .andExpect(view().name("page")预期view的名称
+      .andExpect(content().contentType("text/plain;charset=UTF-8"))预期返回值的媒体类型
+      .andExpect(content().string("xx"))预期返回值的内容
+      .andExpect(forwardedUrl("/WEB-INF/classes/view/page.jsp"))预期页面转向的真正路径
+      .andExpect(model().attribute("key", expectValue))预期model里的值
+```
