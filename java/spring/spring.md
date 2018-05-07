@@ -48,7 +48,7 @@
   - Prototype
   - Request
   - Session
-  - GlobalSession 只在portal应用中有用
+  - GlobalSession 只在portal应用中有用
 
 ### Profile
 - 在@Bean的同时增加@Profile("xx")
