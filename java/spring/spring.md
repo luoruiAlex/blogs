@@ -33,7 +33,7 @@
 - @Value注入资源
   - @Value("普通字符串")
   - @Value("#{systemProperties['os.name']}") 操作系统属性
-  - @Value("#{ T(java.lang.Math).random() * 100.0 }") 表达式结果
+  - @Value("#{ T(java.lang.Math).random() * 100.0 }") 表达式结果
   - @Value("#{demoService.another}") 其他Bean属性
   - @Value("${book.name}") 配置文件，需要在类上加@PropertySource("xx.properties")指定配置文件
 
