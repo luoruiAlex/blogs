@@ -48,9 +48,9 @@ return r;
   ```
 - @ControllerAdvice
   - 把@ControllerAdvice注解内部使用@ExceptionHandler、@InitBinder、@ModelAttribute注解的方法应用到所有的@RequestMapping注解的方法
-  - @ExceptionHandler最有用，全局处理Controller中的异常
-  - @ModelAttribute注解设置键值对到全局`model.addAttribute(key, value)`，全局中的@RequestMapping都能获得(@ModelAttribute(key))
-  - @InitBinder设置WebDataBinder，WebDataBinder用于自动绑定前台请求参数到Model中
+  - @ExceptionHandler最有用，全局处理Controller中的异常
+  - @ModelAttribute注解设置键值对到全局`model.addAttribute(key, value)`，全局中的@RequestMapping都能获得(@ModelAttribute(key))
+  - @InitBinder设置WebDataBinder，WebDataBinder用于自动绑定前台请求参数到Model中
 
 - 页面转发，重写addViewControllers()方法
 ```
