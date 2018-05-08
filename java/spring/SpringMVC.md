@@ -24,6 +24,11 @@
 ## 获取上下文
 - `WebApplicationContext wctx = WebApplicationContextUtils.getWebApplicationContext(servletContext)`
 
+## 无web.xml配置
+- 集成AbstractAnnotationConfigDispatcherServletInitializer
+- Servlet3.0环境中，容器会在classpath中查找ServletContainerInitializer的实现类，如果有，就用它来配置Servlet容器
+- Spring中提供了SpringServletContainerInitializer实现类，这个类会查找WebApplicationInitializer的实现类，即AbstractAnnotationConfigDispatcherServletInitializer
+
 ## Java配置
 - 配置类：@EnableWebMvc XxConfig extends WebMvcConfigurerAdapter
 - ViewResolver
