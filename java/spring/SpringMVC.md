@@ -6,7 +6,22 @@
 - @RequestBody 运行request参数在request体中，而不是直接在链接地址后面
 - @PathVariable 放在方法参数前接收路径参数
 
-## 基本配置
+## 配置文件
+- `<context-param>contextConfigLocation`
+  - 使用ContextLoaderListener配置时，告诉它spring配置文件applicationContext.xml的位置
+  - 一般用于加载除了Web层的Bean，比如DAO、Service，以便与其他Web框架集成
+  - contextClass默认为WebApplicationContext，创建完成后会将该context放在ServletContext
+- DispatcherServlet
+  - 必须`<load-on-startup>1</load-on-startup>`
+  - contextClass 默认XmlWebApplicationContext
+  - contextConfigLocation 传递给contextClass的初始化字符串
+  - namespace 默认`[server-name]-serverlet`
+- `<listener>ContextLoaderListener`在启动Web容器时，自动装配Spring applicationContext.xml的配置信息
+- 配置HandlerMapping HandlerAdapter ViewResolver
+- 其他
+  - POST中文乱码 CharacterEncodingFilter
+
+## Java配置
 - 配置类：@EnableWebMvc XxConfig extends WebMvcConfigurerAdapter
 - ViewResolver
 ```
@@ -76,3 +91,13 @@ mockMvc.perform(get("/normal"))
       .andExpect(forwardedUrl("/WEB-INF/classes/view/page.jsp"))预期页面转向的真正路径
       .andExpect(model().attribute("key", expectValue))预期model里的值
 ```
+## 原理
+### 请求处理
+- 检测是否为multipart，如果是则通过MultipartResolver解析
+- 1.request => 前端控制器DispatcherServlet(web.xml中配置)
+- 2.DispatcherServlet查询一个或多个处理器映射HandlerMapping
+- 3.HandlerMapping将请求映射为HandlerExecutionChain(1个Handler处理器(controller) + 多个HandlerInterceptor)
+- 4.将Handler处理器包装成HandlerAdapter
+- 5.HandlerAdapter进行逻辑处理后返回ModelView给DispatcherServlet
+- 6.DispatcherServlet使用视图解析器(view resolver)来将逻辑视图匹配为一个特定的视图实现
+- 7.视图使用模型数据渲染输出
