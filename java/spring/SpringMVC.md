@@ -7,19 +7,22 @@
 - @PathVariable 放在方法参数前接收路径参数
 
 ## 配置文件
+- DispatcherServlet，会加载配置文件
+  - 必须`<load-on-startup>1</load-on-startup>`
+  - contextClass 默认**XmlWebApplicationContext**
+  - contextConfigLocation 传递给contextClass的初始化字符串支持逗号分割
+  - namespace 默认WEB-INF/`[servlet-name]-serverlet`
 - `<context-param>contextConfigLocation`
   - 使用ContextLoaderListener配置时，告诉它spring配置文件applicationContext.xml的位置
-  - 一般用于加载除了Web层的Bean，比如DAO、Service，以便与其他Web框架集成
-  - contextClass默认为WebApplicationContext，创建完成后会将该context放在ServletContext
-- DispatcherServlet
-  - 必须`<load-on-startup>1</load-on-startup>`
-  - contextClass 默认XmlWebApplicationContext
-  - contextConfigLocation 传递给contextClass的初始化字符串
-  - namespace 默认`[server-name]-serverlet`
+  - 一般用于加载除了Web层的Bean，比如DAO、Service，以便与其他Web框架集成
+  - contextClass默认为WebApplicationContext，创建完成后会将该context放在ServletContext
 - `<listener>ContextLoaderListener`在启动Web容器时，自动装配Spring applicationContext.xml的配置信息
 - 配置HandlerMapping HandlerAdapter ViewResolver
 - 其他
   - POST中文乱码 CharacterEncodingFilter
+  
+## 获取上下文
+- `WebApplicationContext wctx = WebApplicationContextUtils.getWebApplicationContext(servletContext)`
 
 ## Java配置
 - 配置类：@EnableWebMvc XxConfig extends WebMvcConfigurerAdapter
@@ -101,3 +104,15 @@ mockMvc.perform(get("/normal"))
 - 5.HandlerAdapter进行逻辑处理后返回ModelView给DispatcherServlet
 - 6.DispatcherServlet使用视图解析器(view resolver)来将逻辑视图匹配为一个特定的视图实现
 - 7.视图使用模型数据渲染输出
+
+### DispatcherServlet初始化
+- DispatcherServlet extends FrameworkServlet
+- FrameworkServlet extends HttpServletBean implements ApplicationContextAware
+- HttpServletBean extends HttpServlet implements EnvironmentCapable, EnvironmentAware
+- 1.HttpServletBean实现HttpServlet.init()方法，将Servlet的初始化参数设置到该组件上，留下initServletBean()扩展点
+- 2.FrameworkServlet实现initServletBean()方法
+  - 初始化WebApplicationContext
+  - 如果ContextLoaderListener加载了上下文，则该上下文作为根上下文
+  - 初始化上下文时留下onRefresh()扩展点
+  - 留下initFrameworkServlet()给用户扩展
+- 3.DispatcherServlet实现onRefresh()，初始化默认的策略，比如HandlerMapping HandlerAdapter等
