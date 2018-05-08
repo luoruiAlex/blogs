@@ -41,11 +41,12 @@ return r;
   registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/assets/");
   ```
 - 拦截器配置
-  - 1.XxInterceptor extends HandlerInterceptorAdapter(或实现HandlerInterceptor接口)，重写preHandle()和postHandle()方法
-  - 2.重写WebMvcConfigurerAdapter.addInterceptors
+- 1.XxInterceptor extends HandlerInterceptorAdapter(或实现HandlerInterceptor接口)，重写preHandle()和postHandle()、afterCompletion()方法
+- 2.重写WebMvcConfigurerAdapter.addInterceptors
   ```
   registry.addInterceptor(xxInterceptor());
   ```
+ 
 - @ControllerAdvice
   - 把@ControllerAdvice注解内部使用@ExceptionHandler、@InitBinder、@ModelAttribute注解的方法应用到所有的@RequestMapping注解的方法
   - @ExceptionHandler最有用，全局处理Controller中的异常
@@ -101,9 +102,13 @@ mockMvc.perform(get("/normal"))
 - 2.DispatcherServlet查询一个或多个处理器映射HandlerMapping
 - 3.HandlerMapping将请求映射为HandlerExecutionChain(1个Handler处理器(controller) + 多个HandlerInterceptor)
 - 4.将Handler处理器包装成HandlerAdapter
+- 304 Not Modified缓存支持
+- 拦截器的preHandle()
 - 5.HandlerAdapter进行逻辑处理后返回ModelView给DispatcherServlet
+- 拦截器的postHandle()
 - 6.DispatcherServlet使用视图解析器(view resolver)来将逻辑视图匹配为一个特定的视图实现
 - 7.视图使用模型数据渲染输出
+- 拦截器的afterCompletion()
 
 ### DispatcherServlet初始化
 - DispatcherServlet extends FrameworkServlet
