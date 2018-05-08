@@ -31,6 +31,7 @@
 
 ## Java配置
 - 配置类：@EnableWebMvc XxConfig extends WebMvcConfigurerAdapter
+- WebMvcConfigurerAdapter在Spring5中已废弃，因为Java8支持接口的默认方法，推荐直接用WebMvcConfigurer
 - ViewResolver
 ```
 InternalResourceViewResolver r = new InternalResourceViewResolver();
