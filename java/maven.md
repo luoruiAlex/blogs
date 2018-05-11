@@ -39,8 +39,11 @@
 
 ## 版本规范
 - groupId:artifactId:packaging:version
-- 特殊字符串: RELEASE LATEST SNAPSHOT(UTC时间）
-- version组成 `<major version>.<minor version>.<incremental-version>-<qualifier>`
+- version组成 `<major version>.<minor version>.<incremental version>-<qualifier>`
+  - qualifier用字符串比较，注意用`alpha-01`代替`alpha-1`
+  - SNAPSHOT 展开为一个日期和时间值并转为UTC时间，比如`1.0-SNAPSHOT`变为`1.0-20180511-143100-1`
+  - LATEST 最新发布的发布版或者SNAPSHOT版
+  - RELEASE 最后一个发布版
 
 ## 依赖
 - groupdId artifactId version packaging type(一般用于pom) scope
