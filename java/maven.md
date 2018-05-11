@@ -3,8 +3,33 @@
 
 ##　生命周期
 - clean
+  - pre-clean
+  - clean
+  - post-clean
 - default
+  - validate
+  - initialize
+  - generate-sources
+  - process-resources
+  - **compile**
+  - process-classes
+  - generate-test-sources
+  - process-test-sources
+  - test-compile
+  - **test**
+  - prepare-package
+  - **package**
+  - pre-integration-test
+  - integration-test
+  - post-integration
+  - verify
+  - **install**
+  - **deploy**
 - site
+  - pre-site
+  - site
+  - post-site
+  - site-deploy
 - 生命周期由phase组成，phase可绑定多个goal
 
 ## 插件
