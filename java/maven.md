@@ -91,3 +91,9 @@
 - `mvn install` 将打包结果放入本地库中
 - `mvn build` eclipse插件创造的概念，可自定义生命周期
 - `mvn package` 打包，默认打jar包
+
+##　搭建maven仓库
+- nexus服务器
+- 安装库文件到maven库中
+  - 本地仓库 `mvn install:install-file -DgroupId= -DartifactId -Dversion= -Dpackaging=jar -Dfile=`
+  - 公司的仓库 `mvn deploy:deploy-file -DgroupId= -DartifactId -Dversion= -Dpackaging=jar -Dfile= -Durl=http://xxx/sss.xxx -DrepositoryId=release-repo`
