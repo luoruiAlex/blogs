@@ -51,8 +51,9 @@
   - LATEST 最新发布的发布版或者SNAPSHOT版
   - RELEASE 最后一个发布版
 
-## 依赖
+## 依赖管理
 - groupdId artifactId version packaging type(一般用于pom) scope
+- version 可用区间来表示，比如`(2.0,)` `[2.0, 3.0)`，多个区间可用逗号隔开
 - scope
   - compile
   - test
