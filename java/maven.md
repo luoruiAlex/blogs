@@ -66,9 +66,12 @@
 - 排除依赖 `<exclusions>/<execlution>/<groupId><artifactId>`
   
 ## 多项目
-- 父项目 聚合`<modules>/<module>`
-- 子项目 继承`<parent>/<groupId><artifactId><version>`
-- 引用 `<dependency>/...<type>pom</type>`
+- 继承关系
+  - 同一个工程所有子项目放到同一个目录下，即总项目文件夹下面pom.xml + 各子项目文件夹
+  - 总项目 聚合`<modules>/<module>`，module是目录名，而不是子工程的artifactId
+  - 子项目 继承`<parent>/<groupId><artifactId><version>`
+  - 如果不用层次递进的目录结构来实现继承，可在parent中加入`<relativePath>`
+- 引用关系 `<dependency>/...<type>pom</type>`
 
 ## profile 多个profile用于不同场景，类似于spring中的profile
 
@@ -77,6 +80,11 @@
 - setting.xml ${settings.localRepository}
 - 内置 ${basedir} ${version}
 - 自定义 `<project>/<properties>/<xxname>/<xxvalue>`
+
+## profile
+- 定义： `<profiles>/<profile>/<id><properties>/<profiles.activation>`
+- 使用： `${profiles.activation}`
+- 激活： `mvn install -P{profile}`
 
 ## 命令行
 - `mvn eclipse:eclipse` | `mvn idea:idea`
