@@ -66,11 +66,16 @@
 - 排除依赖 `<exclusions>/<execlution>/<groupId><artifactId>`
   
 ## 多项目
+- 聚合关系
+  - 有一个聚合模块，打包方式必须为pom
+  - `<modules>/<module>`，module是目录名，而不是子模块的artifactId
+  - 聚合模块和被聚合模块的版本一致
+  - relative path：每个module的值都是一个当前POM的相对目录
 - 继承关系
-  - 同一个工程所有子项目放到同一个目录下，即总项目文件夹下面pom.xml + 各子项目文件夹
-  - 总项目 聚合`<modules>/<module>`，module是目录名，而不是子工程的artifactId
-  - 子项目 继承`<parent>/<groupId><artifactId><version>`
-  - 如果不用层次递进的目录结构来实现继承，可在parent中加入`<relativePath>`
+  - 同一个工程所有子模块放到同一个目录下，即总项目文件夹下面pom.xml + 各子项目文件夹
+  - 父模块打包方式必须为pom，仅用于消除重复，所以不需要src/main/java src/test/java等目录
+  - 子模块 继承`<parent>/<groupId><artifactId><version>`
+  - `<relativePath>`属性表示父模块POM的相对路径，relativePath默认值为`../pom.xml`
 - 引用关系 `<dependency>/...<type>pom</type>`
 
 ## profile 多个profile用于不同场景，类似于spring中的profile
