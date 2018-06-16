@@ -17,3 +17,25 @@ struct pos p1 = {0};
 struct pos p1 = {.y=4.0};　//C99新特性
 struct pos p1;p1 = {3.0, 4.0};// {}不是表达式，这里报错
 ```
+- struct的成员名和变量名不在同一个命名空间中
+- 可使用数据类型标志使得struct中的同一个成员在不同类型下表示不同值
+```
+struct pos{
+  enum coordinate_type t;
+  double a, b;
+}
+```
+- 嵌套struct
+```
+struct s1 { struct s2 start; struct s2 end;};
+struct s1 a = {.start.x=1.0,.end.y=2.0};
+struct s1 b = {{..},{...}};
+```
+
+
+## 枚举
+- 定义
+```
+enum coordinate_type {RECTANGULAR = 1, POLAR};
+```
+- 枚举的成员名和变量名在同一个命名空间中，枚举变量的命名空间中不能出现和成员名相同的变量
