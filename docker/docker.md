@@ -1,10 +1,22 @@
 ## 三大组件
-- image，静态
-- container为image的实例
+- image，为Docker容器运行的静态模板
+  - Docker使用unionFS来将一系列的层组合为单个镜像
+  - 从基础镜像通过一系列指令构建，每条指令会在镜像中创建一个新的层
+  - 指令
+    - 放在Dockerfile文本文件中
+    - 包括 运行一个命令、添加文件或者文件夹、创建环境变量、从该镜像启动容器时运行哪个程序
+- container为image的实例，通过run启动
+  - 拉取镜像
+  - 创建容器
+  - 分配一个文件系统并将其挂载为一个可读写层
+  - 分配网桥/网卡
+  - 分配一个IP地址
+  - 执行指定的进程
+  - 捕获并提供应用的输出
 - registry
 
 ## 使用
-- **docker run** container-name
+- **docker run** container-name[:version] [COMMAND]
   - 客户端连到守护进程
   - 如果本地没有该镜像，则从registry拉取
   - 守护进程从镜像创建容器，执行COMMAND
@@ -27,3 +39,19 @@
   - -f表示强制删除，一般建议先停止容器
   - -v表示删除关联的数据卷
   
+## 制作自己的镜像
+- 1.docker pull ubuntu:16.04 这里不从srcatch镜像而是从系统镜像开始
+- mkdir baseos 该目录作为镜像的上下文
+- cd baseos
+- touch Dockerfile
+```
+# Base os image
+FROM ubuntu:16.04
+MAINTAINER your_name <your_email_address>
+LABEL Description="This image is the base os images."  Version="1.0"
+# reconfig timezone
+RUN echo "Asia/Shanghai" > /etc/timezone \
+    && dpkg-reconfigure -f noninteractive tzdata
+```
+- docker build -t example.com/baseos:1.0 .
+
