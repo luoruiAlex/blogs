@@ -20,6 +20,10 @@
 - 容器存储层声明周期和容器一样
 - 最佳实践：容器存储层应无状态化，文件写入应使用数据卷(Volumn)或者绑定宿主目录
 
+## Dockerfile
+- 第一条指令必须为 FROM，比如FROM redis FROM scratch
+- RUN 
+
 ## 使用
 - **docker run** container-name[:version] [COMMAND]
   - 客户端连到守护进程
