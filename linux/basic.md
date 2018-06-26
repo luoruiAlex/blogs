@@ -1,0 +1,18 @@
+## 硬盘
+- 磁盘、扇区(sector 512B或4KB)、磁道(track)
+- 接口种类
+  - IDE /dev/hd[a-d]
+  - SATA SCSI USB硬盘光盘 /dev/sd[a-p]
+  - VirtI/O /dev/vd[a-p]
+- MBR分区
+  - Main Boot Recorder主引导区(446B)，存放引导程序和磁盘分区表(64B)
+  - 最多4个分区，其中最多一个Extend(扩展分区)，其余必须为Primary(主分区)
+  - 扩展分区可指向额外分区表，扩展分区必须分层逻辑分区才能使用————用于分区超过4个，比如hda1 hda2 hda4(hda5 hda6 hda7)，1~4号已被预留
+- GPT分区
+  - GUID partition table
+  - 没有主分区、扩展分区、逻辑分区的概念了
+  - 使用LBA(Logical Block Address 512B)来分区，前面34个LBA都可以用来分区，磁盘最后的34个LBA可用于备份
+  - LBA0 引导程序 + GPT格式标记
+  - LBA1 分布表本身的位置与大小 + 备份GPT分区位置 + CRC32校验码
+  - LBA2-33 每个LBA科记录4个分区，所以默认可记录128个分区
+  - 每个LBA使用64bit记录扇区位置，分区最大为1ZB
