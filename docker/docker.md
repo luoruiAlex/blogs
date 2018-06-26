@@ -15,6 +15,11 @@
   - 捕获并提供应用的输出
 - registry
 
+## 容器存储层
+- 镜像是分层存储，容器也是，为容器运行时读写准备的存储层为容器存储层
+- 容器存储层声明周期和容器一样
+- 最佳实践：容器存储层应无状态化，文件写入应使用数据卷(Volumn)或者绑定宿主目录
+
 ## 使用
 - **docker run** container-name[:version] [COMMAND]
   - 客户端连到守护进程
@@ -25,10 +30,12 @@
   - docker ps -l 查看最后创建的一个容器
 - docker images
 - docker search image-keyword
-- docker pull [repository/][image-name][:/tag]
-  - repository默认为Docker Hub
+- docker pull [[user-name/]registry[:port]/][image-name][:/tag]
+  - Docker Hub的user-name默认为library，即官方镜像
+  - registry默认为Docker Hub
   - tag默认为latest
 - 创建容器 docker run -d --name tomcat001 -p 8081:8080 tomcat:7
+  - -it 进入交互式终端
   - -d指定容器在后台运行
   - -name指定容器的名称，不能重复
   - -p 用于将容器内的8080端口映射到本机的8081端口，本机端口不能重复
