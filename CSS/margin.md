@@ -36,6 +36,9 @@
   - 除第一个item外的margin-left为负值
 - 自适应左右布局
   - 左侧图片，右侧为文本，文本div的margin-top为图片的高度的负值
-- 双飞翼布局
-  - 内容在前面，优先渲染；中间自适应，两边固定宽度
+- 圣杯布局与双飞翼布局
+  - 1.content在前面,width:100%;left right均为float:left，指定width
+  - 2.left right都跑到content同一行，且分别最左最右：left的margin-left:-100%;right的margin-left:-right-width;//float元素的margin-left为负，会往左移动，覆盖左边的float元素
+  - 3.1双飞翼布局：在content中增加一个div存放内容，设置该div的左右margin分别为left right的width
+  - 3.2圣杯布局：父元素增加padding-left：left-width，padding-right:right-width;left right分别通过relative left/right的负数值让它们回到它们各自的位置上。
   
