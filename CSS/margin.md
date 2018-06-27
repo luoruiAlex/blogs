@@ -10,6 +10,11 @@
   - right/bottom以自身的border的右/下为参考线往右/下进行位移
   - 总结：**margin的top left为负数时元素自身移动，bottom right为负值时后面跟着的元素移动**
 ## 负margin
+### **margin的top left为负数时元素自身移动，bottom right为负值时后面跟着的元素移动**
+- **元素无float，position:static**：bottom right负值时后面元素会移动并且覆盖前面的
+- **元素无float，position:relative**：bottom right负值时后面元素会移动并且被该元素覆盖
+- **元素无float，position:absolute**：bottom right负值时后面元素不会移动
+- **元素float，position:static/relative**：如果margin方向与float方向一致，则元素往float方向移动；如果方向相反，margin方向的相邻元素往float方向移动并覆盖
 ### 对元素自身宽度的影响
 - 未设置width(或者为auto)的元素，负数的左右margin会增加宽度
 ### 对浮动元素的影响
