@@ -34,7 +34,9 @@
 - docker volume create my-vol
 - docker volume ls
 - docker volume inspect my-vol
-
+- docker run 
+  - -v 本地主机目录:容器目录\[:ro, consistent, delegated, cached, z, Z] 用于独立的容器，本地目录必须是绝对路径，如果本地目录不存在会创建
+  - --mount type=bind,source=/src/webapp,target=/opt/webapp\[,readonly] 用于swarm容器，17.06之后也可用于独立容器，如果可以本地目录如果不存在则报错
 
 ## Dockerfile
 - 第一条指令必须为 FROM，比如FROM redis FROM scratch
@@ -59,6 +61,7 @@
   - -d指定容器在后台运行
   - -name指定容器的名称，不能重复
   - -p 用于将容器内的8080端口映射到本机的8081端口，本机端口不能重复
+  - -P 随机映射49000~49900 的端口到内部容器开放的网络端口
 - docker logs -f container-name
   - -f表示实时输出最新日志
 - 停止/启动容器 docker stop/start container-name
