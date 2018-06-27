@@ -15,10 +15,26 @@
   - 捕获并提供应用的输出
 - registry
 
-## 容器存储层
+## 分层文件系统
+- linux至少有２个文件系统，boot file system(只和内核版本有关，启动后卸载释放) root file system(与linux发行版本有关，启动后由只读模式改为读写模式)
+- ＡUFS unionFS是指将不同物理位置的目录合并mount到同一个目录中
+- Docker 中，基础镜像中的 roofs 会一直保持只读模式，Docker 会利用 union mount 来在这个 rootfs 上增加更多的只读文件系统，最后它们看起来就像一个文件系统即容器的 rootfs
+- 在一个Linux 系统之中
+  - 所有 Docker 容器都共享主机系统的 bootfs 即 Linux 内核
+  - 每个容器有自己的 rootfs，它来自不同的 Linux 发行版的基础镜像，包括 Ubuntu，Debian 和 SUSE 等
+  - 所有基于一种基础镜像的容器都共享这种 rootfs
+- Docker 采用 AFUS 分层文件系统时，文件系统的改动都是发生在最上面的容器层
+
+## Volume
+- Data Volume 本质上是 Docker Host 文件系统中的目录或文件，能够直接被 mount 到容器的文件系统中
+- Data Volume 是目录或文件，而非没有格式化的磁盘（块设备）
 - 镜像是分层存储，容器也是，为容器运行时读写准备的存储层为容器存储层
 - 容器存储层声明周期和容器一样
 - 最佳实践：容器存储层应无状态化，文件写入应使用数据卷(Volumn)或者绑定宿主目录
+- docker volume create my-vol
+- docker volume ls
+- docker volume inspect my-vol
+
 
 ## Dockerfile
 - 第一条指令必须为 FROM，比如FROM redis FROM scratch
