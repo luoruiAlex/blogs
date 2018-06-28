@@ -40,6 +40,20 @@
 - docker run 
   - -v 本地主机目录:容器目录\[:ro, consistent, delegated, cached, z, Z] 用于独立的容器，本地目录必须是绝对路径，如果本地目录不存在会创建
   - --mount type=bind,source=/src/webapp,target=/opt/webapp\[,readonly] 用于swarm容器，17.06之后也可用于独立容器，如果可以本地目录如果不存在则报错
+  
+## 外部访问容器
+- docker run -d -P...
+- -p ip:hostPort:containerPort | ip::containerPort | hostPort:containerPort
+  - ip:hostPort:containerPort绑定指定本地地址的指定端口
+  - ip::containerPort绑定任意端口到容器的containerPort端口
+  - hostPort:containerPort会绑定本地所有接口上的所有IP地址
+  - 可多次使用来绑定多个端口
+- docker port container-name \[port]查看映射的端口配置和绑定的地址
+
+## 容器互联
+- docker network create -d bridge my-net 创建docker网络，-d指定网络类型为bridge活overlay
+- docker run -it --rm --name container1 **--network my-net**...运行时加入网络，同一个网络中的容器互联
+- 多个容器之间互联使用Docker Compose
 
 ## Dockerfile
 - 第一条指令必须为 FROM，比如FROM redis FROM scratch
