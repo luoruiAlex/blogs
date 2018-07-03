@@ -56,6 +56,9 @@
 - 多个容器之间互联使用Docker Compose
 
 ## Dockerfile
+- ｀docker build -t nginx:v3 .｀
+  - 最后的｀.｀指的是镜像的构建上下文
+  - docker运行时分为引擎(服务端守护进程)和客户端工具，指定上下文可以使引擎可以获得构建镜像所需的一切文件
 - 第一条指令必须为 FROM，比如FROM redis FROM scratch
 - RUN 
 
