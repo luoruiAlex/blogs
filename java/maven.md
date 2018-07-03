@@ -39,9 +39,33 @@
 - 生命周期由phase组成，phase可绑定多个goal
 
 ## 插件
-- 执行真正的动作
-- `<plugin>/<groupId><artifactId><version>`
-- `<plugin>/<executions>/<execution><id><phase><goals><goal>`
+- 执行真正的动作，Maven 是一个执行插件的框架，每一个任务实际上是由插件完成的
+- 一个插件通常提供一组目标(goal)，执行命令为`mvn [plugin-name]:[goal-name]`
+```
+    <build>
+        <plugins>
+            <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-antrun-plugin</artifactId>
+                 <version>1.1</version>
+                 <executions>
+                    <execution>
+                       <id>id.clean</id>
+                       <phase>clean</phase><!-- 要绑定到的生命周期的阶段 -->
+                       <goals>
+                          <goal>run</goal><!-- 要绑定的插件的目标 -->
+                       </goals>
+                       <configuration><!-- 设置execution下列表的goals的设置，而不是plugin所有的goals的设置 -->
+                          <tasks>
+                             <echo>clean phase</echo>
+                          </tasks>
+                       </configuration>
+                    </execution>     
+                 </executions>
+            </plugin>
+        </plugins>
+    </build>
+```
 
 ## 版本规范
 - groupId:artifactId:packaging:version
