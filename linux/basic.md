@@ -2,8 +2,8 @@
 - 磁盘、扇区(sector 512B或4KB)、磁道(track)
 - 接口种类
   - IDE /dev/hd[a-d]
-  - SATA SCSI USB硬盘光盘 /dev/sd[a-p]
-  - VirtI/O /dev/vd[a-p]
+  - SATA SCSI USB硬盘光盘 /dev/sd\[a-p]
+  - VirtI/O /dev/vd\[a-p]
 - MBR分区
   - Main Boot Recorder主引导区(446B)，存放引导程序和磁盘分区表(64B)
   - 最多4个分区，其中最多一个Extend(扩展分区)，其余必须为Primary(主分区)
@@ -16,3 +16,59 @@
   - LBA1 分布表本身的位置与大小 + 备份GPT分区位置 + CRC32校验码
   - LBA2-33 每个LBA科记录4个分区，所以默认可记录128个分区
   - 每个LBA使用64bit记录扇区位置，分区最大为1ZB
+  
+## 寻求帮助
+- 指令 `xx --help`即可知道选项和参数
+- 其他 `man xx`
+- man page
+  - 第一行\[xx(1)] (1)中的数字表示xx的含义
+  
+    | 代号 | 代表内容
+    | ---- | -------
+    | **1** | **shell中可操作的指令或可执行文件**
+    | 2 | 系统核心可呼叫的函数与工具
+    | 3 | 常用的function lib
+    | 4 | 设备文件，通常在/dev下
+    | **5** | **配置文件或某些文件的格式**
+    | 6 | games
+    | 7 | 惯例与协议
+    | **8** | **系统管理员可使用的管理指令**
+    | 9 | 跟kernal有关的文件
+  - NAME 简短指令
+  - SYNOPSIS 简短的指令下达语法
+  - DESCRIPTION 完整说明
+  - OPTIONS 针对SYNOPSIS中的选项的说明
+  - COMMANDS 程序执行中可下达的指令
+  - FILES 使用、参考或连接到的文件
+  - SEE ALSO 相关说明
+  - EXAMPLE
+- 操作快捷键
+  - 空格键
+  - Page Up/Page Down/Home/End
+  - /string 向下搜索 ?string向上搜索，n/N：下一个/前一个
+  - q 退出
+- `whatis` `apropos` 需要执行`mandb`建立whatis数据库
+- `man -f xx` 搜索完整的指令/数据名称，相当于`whatis`
+- `man -k xx` 搜索关键字，相当于`apropos`
+- `info xx` 分页之后的说明
+- `/usr/share/doc` 其他说明文件
+
+## 关机
+- `who`查看谁在线
+- `netstat` -a查看
+- `ps -aux`查看后台程序
+- 过去，关机前多执行几次`sync`将内存数据写入硬盘
+- tty1~tty7中登入系统时，可使用任意账号关机(都要输入root密码)，远程工具登录只能用root关机
+- `shutdown`
+  - `-k` 只发送警告讯息
+  - `-r` 停掉系统服务后立即重启
+  - `-h` 停掉系统服务后立即关机
+  - `-c` 取消
+  - `shutdown -h now`
+  - `shutdown -h 20:25`
+  - `shutdown -h +10`过10分钟
+  - `shutdown -r +30 'The system will reboot'`
+- `halt` `poweroff` `reboot` `shutdown`都是呼叫systemctl指令
+  - `systemctl reboot`
+  - `systemctl poweroff`
+  
