@@ -72,3 +72,24 @@
   - `systemctl reboot`
   - `systemctl poweroff`
   
+## 权限
+- 记录
+  - 账号在/etc/passwd文件中
+  - 密码在/etc/shadow文件中
+  - 组名在/ect/group文件中
+### 文件的权限
+- `ls -l`
+  - 第一栏：文件的类型与权限(10个字符)
+    - 1: d表示目录，-表示文件，l表示link file，b表示存储设备，c表示串口设备
+    - 2-4: 文件拥有者的权限
+    - 5-7: 群组账号的权限
+    - 8-10: 其他群组其他账号的权限
+  - 第二栏：有多少文件名连接到此节点(i-node)
+  - 第三栏： 拥有者账号
+  - 第四栏： 文件所属群组
+  - 第五栏： 文件大小，默认单位为bytes
+  - 第六栏： 文件创建时间或最近修改时间
+  - 第七栏： 文件名
+  - 纯文本终端显示中文：export LC_ALL=en_US.utf8
+- `chgrp groupname [-R] dirname/filename` groupname必须已存在，-R表示递归修改文件的群组
+- `chown`
