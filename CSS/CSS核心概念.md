@@ -9,3 +9,20 @@
 - 使用值：有些值只能在使用之后才能计算出来，比如宽度被设置为包含块的百分比
 - 实际值：有些值无法精确计算
 - inherit：属性不管是否可继承，如果值设置为inherit，则 继承父元素的计算值
+
+## 包含块
+- 创建
+  - fixed：包含块由viewport创建
+  - relative、static或未设置position：包含块由最近的父元素或祖先元素创建
+  - absolute：由最近的relative、absolute、fixed创建或者为初始包含块
+  - 祖先元素为inline时，包含块取决于父元素或祖先元素的direction属性。direction:ltr则右边补空白，direction:rtl则左边补空白
+  
+## 控制框
+### 块级元素和块框
+- diaplay:block list-item run-in table
+- 除了table外都会形成一个主块框，里面要么是快框，要么是行框。主块框参与BFC
+- 某些块级元素会在主块框外生成额外的框，比如list-item生成额外的框来放置li元素前面的标识
+### 匿名块框
+- div中同时包含文本(行内框)和块框，则所有的行内框包含在一个匿名块框之中
+- 匿名快框属性值继承自最近的非匿名组件盒，不可集成属性值取其初始值
+### 行内元素和行内框
