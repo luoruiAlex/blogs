@@ -89,7 +89,7 @@
   - ZUNIONSTORE
 ### KEY
 - KEYS pattern
-- EXISTS key[ke2...] 判断key是否存在，返回1表示存在，0表示不存在
+- EXISTS key\[ke2...] 判断key是否存在，返回1表示存在，0表示不存在
 - SELECT NUM 默认有16个数据库，默认连到0号数据库，select可切换数据
 - TYPE key，返回string list set zset hash等不同类型，不存在的返回none
 - EXPIRE key seconds
@@ -101,10 +101,10 @@
 - DEL key
 - RENMAE key
 - DUMP key
-  - RESTORE key[ttl serialized-value]
+  - RESTORE key\[ttl serialized-value]
 - MOVE key db
 ### 连接命令
-- PING [echocontent]  测试连接是否可用或者测试连接的延时
+- PING \[echocontent]  测试连接是否可用或者测试连接的延时
 - ECHO messge 返回消息
 - QUIT 请求服务器关闭连接
 - AUTH 为请求带上密码
@@ -112,12 +112,12 @@
   
 ## SORT排序
 - 可对list、set、sorted set的key进行排序，并完成类似join查询的任务
-- SORT key [BY pattern] [LIMIT offset count] [GET pattern [GET pattern ...]] [ASC|DESC] [ALPHA] [STORE destination]
-  - 默认ASC
-  - ALPHA 按字母ASCII码大小排序
+- SORT key \[BY pattern] \[LIMIT offset count] \[GET pattern [GET pattern ...]] \[ASC|DESC] \[ALPHA] \[STORE destination]
+  - 默认ASC，只能排序数字
+  - ALPHA 按字母ASCII码大小排序
   - LIMIT offset count offset偏移量，count是数目
   - GET参数不影响排序，它的作用是使SORT命令返回的结果不再是元素自身，而是GET参数中指定的值
-  - BY只能有一个，而GET可以有很多个
+  - BY只能有一个，而GET可以有很多个
 - 性能
   - 时间复杂度 O(n + mlongm)
   - 尽可能减少待排序键中的元素的数量（减小n）
