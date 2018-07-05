@@ -92,4 +92,51 @@
   - 第七栏： 文件名
   - 纯文本终端显示中文：export LC_ALL=en_US.utf8
 - `chgrp groupname [-R] dirname/filename` groupname必须已存在，-R表示递归修改文件的群组
-- `chown`
+- `chown username[:groupname] [-R] dirname/filename`
+- `chmod [-R] r:4,w:2,x:1 dirname/filename`
+- `chmod [-R] u/g/o/a +/-/= r/w/x dirname/filename`
+### 文件类型
+- regular file `-` 
+- directory `d`
+- link file `l`
+- block `b`
+- character `c`
+- sockets `s`
+- FIFO,pipe `p` 解决多个程序同时存取一个文件造成的错误
+
+## 目录
+### 目录的权限
+- r: ls dir
+- w: 在dir中操作文件名(增、删、改)
+- x: cd dir
+- 一般r与x同时存在
+### FHS(Filesystem Hierarchy Standard)
+- 概念 static/variable shareable/unshareable
+- 定义了3层目录
+  - / 与开机系统有关，所在分区越小越不容易发生问题
+  - /usr 与软件安装/执行有关
+  - /var 与系统运行有关
+- 要求必须存在的目录
+  - /bin 单人维护模式下还能被执行的指令
+  - /boot 开机会用到的文件，包括Linux核心文件及开机的配置文件，比如linux kernal文件vmlinuz，/boot/grub2
+  - /dev 比如/dev/null /dev/zero /dev/tty /dev/loop* /dev/sd*
+  - /etc 系统的主要配置文件
+  - /lib 开机时会用的函数库和/bin /sbin下的指令会调用的函数库 /lib/modules放驱动
+  - /media 可移除的设备，比如/media/floppy /media/cdrom
+  - /mnt 暂时挂载额外设备的目录
+  - /opt 第三方软件
+  - /run 开机后产生的信息
+  - /sbin 开机过程中需要的的指令，包括开机、修复、还原系统需要的指令，比如fdisk,fsck,ipconfig,mkfs等
+  - /srv 服务的数据目录，比如www服务
+  - /tmp 正在执行的程序暂时存放文件的地方，建议开机时清除
+  - /usr
+  - /var
+- 建议可以存在的目录
+  - /home ~代表当前用户的home目录，~user代表user的home目录
+  - /lib<equal> 与/lib不同的格式的函数
+  - /root
+- 未定义的目录
+  - /lost+found ext2/ext3/ext4文件系统格式才会产生的一个目录
+  - /proc 虚拟文件系统，数据都在内存中，比如/proc/cpuinfo /proc/dma /proc/interrupts /proc/net/* /proc/ioports
+  - /sys 虚拟文件系统，记载核心与系统硬件信息
+  
