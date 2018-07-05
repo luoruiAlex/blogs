@@ -14,8 +14,8 @@
 - MSET key1 value1 [key2 ... ]
 - STRLEN key 获取value的长度，如果不含key则返回0
 - INCR 将value的值递增1，如果key不存在则设置为0
-  - INCRBY INT
-  - INCRBYFLOAT FLOAT
+  - INCRBY INT
+  - INCRBYFLOAT FLOAT
   - DECR
   - DECRBY
 - APPEND key value 返回追加后的字符串长度
