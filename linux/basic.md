@@ -156,4 +156,8 @@
   - /lost+found ext2/ext3/ext4文件系统格式才会产生的一个目录
   - /proc 虚拟文件系统，数据都在内存中，比如/proc/cpuinfo /proc/dma /proc/interrupts /proc/net/* /proc/ioports
   - /sys 虚拟文件系统，记载核心与系统硬件信息
-  
+  ### 目录操作
+  - `pwd[ -P]` 加上-P之后显示实际的工作目录，而非链接文件本身的目录名
+  - `mkdir[ -mp]` -p 表示递归建立目录，-m abc表示直接设置权限
+  - `rmdir[ -p]` -p递归删除上层空目录
+  - `cp src dst` -p 连同文件的属性(权限、用户、时间)一起负责 -r 递归持续复制
