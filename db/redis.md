@@ -2,7 +2,7 @@
 
 ## 命令行
 ### string
-- SET key value [EX seconds] [PX milliseconds] [NX|XX]
+- SET key value \[EX seconds] \[PX milliseconds] \[NX|XX]
   - NX只有键不存在的时候才可以设置成功
   - XX：只有键在已经存在的时候才可以设置成功
   - SETRANGE key offset value，如果value比原来的value要短，用`\x00`来补充
@@ -10,8 +10,8 @@
   - GETRANGE key start end 
   - `(nil)`表示没有值
 - GETSET key value 设置值并返回旧值或`(nil)`
-- MGET key1 [key2 ... ]
-- MSET key1 value1 [key2 ... ]
+- MGET key1 \[key2 ... ]
+- MSET key1 value1 \[key2 ... ]
 - STRLEN key 获取value的长度，如果不含key则返回0
 - INCR 将value的值递增1，如果key不存在则设置为0
   - INCRBY INT
@@ -33,15 +33,15 @@
 - HLEN key
 - HINCRBY key field increment
   - HINCRBYFLOAT key field increment
-- HDEL key field[field2...]
+- HDEL key field\[field2...]
 ### list
 - 双向链表实现
-- LPUSH key value1[...value2] 在左侧插入
-  - RPUSH
-  - LPUSHX 只有当list存在的时候才插入
-  - RPUSHX
+- LPUSH key value1\[...value2] 在左侧插
+  - RPUSH
+  - LPUSHX 只有当list存在的时候才插入
+  - RPUSHX
 - LPOP key 移除并返回左侧第一个元素
-  - RPOP
+  - RPOP
 - LLEN key 返回list长度，不存在返回0，不是list返回error
 - LRANGE key start stop
 - LREM 从存于 key 的列表里移除前 count 次出现的值为 value 的元素
@@ -51,40 +51,40 @@
 - LINSERT key BEFORE|AFTER pivot value
 ### set
 - 使用值为空的hash table实现，增删复杂度为O(1)
-- SADD key member[...memb：er2]
+- SADD key member\[...memb：er2]
 - SMEMBERS key 返回所有元素
 - SISMEMBER key member 是否包含
-- SREM key member[...member2]
-- SPOP key [count] 随机删除并返回
-- SRANDMEMBER key [count] 随机返回
-- SDIFF key [key2...] 差集
-  - SDIFFSTORE destination key [key2...] 不返回结果，而是将结果存放在destination中，如果destination已存在则覆盖
-- SINTER key [key2...] 交集
-  - SINTERSTORE
-- SUNION key [key2...] 并集
-  - SUNIONSTORE
+- SREM key member\[...member2]
+- SPOP key \[count] 随机删除并返回
+- SRANDMEMBER key \[count] 随机返回
+- SDIFF key \[key2...] 差集
+  - SDIFFSTORE destination key \[key2...] 不返回结果，而是将结果存放在destination中，如果destination已存在则覆盖
+- SINTER key \[key2...] 交集
+  - SINTERSTORE
+- SUNION key \[key2...] 并集
+  - SUNIONSTORE
 - SCARD key 返回元素个数
 - SMOVE source destination member
 ### sorted set
 - hash table和skip list实现，比list更耗内存
-- ZADD key [NX|XX] [CH] [INCR] score member[... score2 member2]
-  - XX 仅更新已存在的成员，不新增
-  - NX 仅新增，不更新
-  - CH 返回changed的成员个数
-  - INCR 对成员的分数进行递增操作
+- ZADD key \[NX|XX] \[CH] \[INCR] score member\[... score2 member2]
+  - XX 仅更新已存在的成员，不新增
+  - NX 仅新增，不更新
+  - CH 返回changed的成员个数
+  - INCR 对成员的分数进行递增操作
 - ZSCORE key member 返回member的score值或者返回(nil)
-- ZRANGE key start stop [WITHSCORES] 按照元素的分数从小到大的顺序返回指定索引start到stop之间所有元素（包含两端）
-  - ZREVRANGE score从大到小排列
-  - ZRANGEBYSCORE key min max [WITHSCORES] [LIMIT offset count]
-  - ZREVRANGEBYSCORE
+- ZRANGE key start stop \[WITHSCORES] 按照元素的分数从小到大的顺序返回指定索引start到stop之间所有元素（包含两端）
+  - ZREVRANGE score从大到小排列
+  - ZRANGEBYSCORE key min max \[WITHSCORES] \[LIMIT offset count]
+  - ZREVRANGEBYSCORE
 - ZINCRBY key increment member 如果member不存在则增加一个，score为increment
 - ZCARD key 返回元素个数
 - ZCOUNT ZCOUNT key min max 默认包括score值等于min或max
-- ZREM key member [member ...]
+- ZREM key member \[member ...]
   - ZREMRANGEBYRANK key start stop
   - ZREMRANGEBYSCORE
 - ZRANK key member 返回排名
-  - ZREVRANK key member
+  - ZREVRANK key member
 - ZINTERSTORE
   - ZUNIONSTORE
 ### KEY
@@ -101,14 +101,14 @@
 - DEL key
 - RENMAE key
 - DUMP key
-  - RESTORE key[ttl serialized-value]
+  - RESTORE key[ttl serialized-value]
 - MOVE key db
 ### 连接命令
 - PING [echocontent]  测试连接是否可用或者测试连接的延时
 - ECHO messge 返回消息
 - QUIT 请求服务器关闭连接
 - AUTH 为请求带上密码
-  - CONFIG SET requirepass xxx后就需要带上密码
+  - CONFIG SET requirepass xxx后就需要带上密码
   
 ## SORT排序
 - 可对list、set、sorted set的key进行排序，并完成类似join查询的任务
@@ -119,10 +119,10 @@
   - GET参数不影响排序，它的作用是使SORT命令返回的结果不再是元素自身，而是GET参数中指定的值
   - BY只能有一个，而GET可以有很多个
 - 性能
-  - 时间复杂度 O(n + mlongm)
-  - 尽可能减少待排序键中的元素的数量（减小n）
-  - 使用LIMIT参数值获取需要的数据（减小m）
-  - 如果要排序的数据量较大，尽可能使用STORE参数将结果缓存
+  - 时间复杂度 O(n + mlongm)
+  - 尽可能减少待排序键中的元素的数量（减小n）
+  - 使用LIMIT参数值获取需要的数据（减小m）
+  - 如果要排序的数据量较大，尽可能使用STORE参数将结果缓存
 
 ## 配置
 ### 配置文件 redis.conf
