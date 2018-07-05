@@ -113,7 +113,7 @@
 ### FHS(Filesystem Hierarchy Standard)
 - 概念 static/variable shareable/unshareable
 - 定义了3层目录
-  - / 与开机系统有关，所在分区越小越不容易发生问题
+  - / 与开机系统有关，所在分区越小越不容易发生问题，/etc /bin /dev /lib /sbin必须与根目录一起，否则无法使用救援模式
   - /usr 与软件安装/执行有关
   - /var 与系统运行有关
 - 要求必须存在的目录
@@ -129,11 +129,28 @@
   - /sbin 开机过程中需要的的指令，包括开机、修复、还原系统需要的指令，比如fdisk,fsck,ipconfig,mkfs等
   - /srv 服务的数据目录，比如www服务
   - /tmp 正在执行的程序暂时存放文件的地方，建议开机时清除
-  - /usr
+  - /usr Unix Software Resource现在很多Linux distributions已将很多非必要的文件移出/usr，/usr被建议为即使挂载为只读，系统仍然可以正常运作
+    - 必须存在：/usr/bin 部分Linux使用link将/bin链接至此，即/bin和/usr/bin完全相同
+    - 必须存在：/usr/lib /lib链接至此
+    - 必须存在：/usr/local 管理员在本机下载安装的软件
+    - 必须存在：/usr/sbin /sbin链接至此
+    - 必须存在：/usr/share 只读架构的文件，比如 /sur/share/man /usr/share/doc
+    - 建议存在：/usr/games
+    - 建议存在：/usr/include c/c++的header
+    - 建议存在：/usr/libexec 不被一般使用者惯用的程序脚本等
+    - 建议存在：/usr/lib\<qual> /lib\<qual>链接至此
+    - 建议存在：/usr/src 一般原始代码建议放到这里，核心原始代码建议放到/usr/src/linux
   - /var
+    - 必须存在：/var/cache 存放程序运行中产生的临时文件
+    - 必须存在：/var/lib 存放程序运行时需要用到的数据文件，每个软件要有自己的目录，比如MySQL数据放到/var/lib/mysql中去
+    - 必须存在：/var/lock 给设备或文件上锁，使其一次只能被一个程序访问，已挪到/run/lock
+    - 必须存在：/var/log 登录文件的放置目录，比如/var/log/messages /var/log/wtmp
+    - 必须存在：/var/email 放置个人邮件信箱，已被挪到/var/spool/email，这两个目录互为链接文件
+    - 必须存在：/var/run 防止程序的PID，链接到/run了
+    - 必须存在：/var/spool 放置队列数据，排队等待其他程序使用，使用后就会被删除
 - 建议可以存在的目录
   - /home ~代表当前用户的home目录，~user代表user的home目录
-  - /lib<equal> 与/lib不同的格式的函数
+  - /lib\<equal> 与/lib不同的格式的函数
   - /root
 - 未定义的目录
   - /lost+found ext2/ext3/ext4文件系统格式才会产生的一个目录
