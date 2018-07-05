@@ -190,6 +190,10 @@
 - redis.conf文件中配置`slaveof <masterip> <masterport>`
 - redis-server启动命令后加`--slaveof <masterip> <masterport>`
 - 直接使用`slaveof <masterip> <masterport>`命令在从节点执行生效
+- docker 启动　｀docker exec -it redis-slave redis-cli -p 6380｀
+｀｀｀
+docker run -d --name redis-slave --link redis-master redis redis-server --port 6380 --slaveof redis-master 6379
+｀｀｀
 ### 命令与配置
 - INFO replication
 - slave_read_only：从节点默认只能读不能写
@@ -203,8 +207,9 @@
 - 每个Sentinel节点会对数据节点和其他Sentinel节点进行监控，发现节点不可达时就标记节点
 - 大多数Sentinel认为主节点不可达时，选举出一个Sentinel来完成自动故障转移，同时通知给Redis客户端
 - 启动的两种方法
-  - redis-sentinel sentinel-26379.conf
-  - redis-server sentinel-26379.conf --sentinel
+  - redis-sentinel sentinel-26379.conf
+  - redis-server sentinel-26379.conf --sentinel
+
 
 ## Redis Cluster
 - 解决主节点写能力和存储能力受到的单机的限制
