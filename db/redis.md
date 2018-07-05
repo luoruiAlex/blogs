@@ -20,7 +20,7 @@
   - DECRBY
 - APPEND key value 返回追加后的字符串长度
 - DBSIZE
-  - `(integer): size值`
+  - `(integer): size值` 返回当前数据库的key的数量
 ### hash
 - HSET key field value
 - HGET key field
