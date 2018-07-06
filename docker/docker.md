@@ -50,6 +50,11 @@
   - 可多次使用来绑定多个端口
 - docker port container-name \[port]查看映射的端口配置和绑定的地址
 
+## 进入容器
+- 需求： 使用`-d`时，容器启动后会进入后台，比如启动redis-server后，进入容器执行redis-cli
+- `docker attach containerId/containerName` 从这个stdin中exit，会导致容器停止
+- `docker exec -it containerId/containerName cmd`  从这个stdin中exit，容器不会停止
+
 ## 容器互联
 - docker network create -d bridge my-net 创建docker网络，-d指定网络类型为bridge活overlay
 - docker run -it --rm --name container1 **--network my-net**...运行时加入网络，同一个网络中的容器互联
