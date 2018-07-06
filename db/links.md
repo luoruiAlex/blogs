@@ -1,1 +1,2 @@
 - [Redis学习笔记](https://blog.csdn.net/men_wen/article/category/6769467/3)
+- [Redis高级应用](http://www.cnblogs.com/lori/p/3435483.html)
