@@ -143,3 +143,51 @@ db.blog.find({"$where": function() {
   - 避免使用skip略过大量结果
     - 分页时不用skip：使用上次的查询结果作为条件，可实现分页
     - 随机选取文档不用skip：插入时加一个额外的随机key，查询的时候也生成随机值作为条件
+
+## 索引
+- 几乎与MySQL的索引一样
+- `db.blog.ensureIndex({"username": 1, "age": -1}， {"name": "xxx", "unique": true, "dropDups": true})` 1表示升序，-1表示降序，索引有多个键的的时候要注意方向， 1 1 对1 -1没有帮助
+- 每个集合最大索引个数为64
+- unique为true时可确保每个文档的指定键都有唯一的值
+- dropDups表示创建的时候将值重复的文档删掉
+- `db.runCommand({"dropIndexes": "foo", "index": "*"})` 删除所有索引
+- `db.runCommand({"dropIndexes": "foo", "index": "indexname"})` 删除指定索引
+
+## 聚合
+- `db.foo.count({"x":1})`
+- `db.runCommand({"distinct": "people", "key": "age"})`
+- group
+- MapReduce能完成count、distinct、group的所有功能
+
+## 命令
+- db.test.drop()相当于`db.runCommand({"drop": "test"})`
+- 返回一个文档，文档中总是有 "ok"，true表示执行成功，否则表示失败
+- 本质上是查询$cmd集合 `db.$cmd.findOne({"drop": "test"})`，改查询不是由普通查询代码，而是由特殊逻辑来处理的
+- 常用命令
+  - db.listCommands()
+  - buildInfo
+  - collStats
+  - distinct
+  - drop
+  - dropDatabase
+  - dropIndexes
+  - findAndModify
+  - listDatabases
+  - ping
+  - renameCollection
+  - serverStatus
+  - repairDatabase
+  
+## 固定集合
+- 需要事先创建，且大小固定，容量满了之后淘汰前面插入的数据，来满足后面所有数据的插入
+- 使用场景：日志文件，聊天记录，通话信息记录等只需保留最近某段时间内的应用场景
+
+## GridFS
+- MongoDB中用于存储大二进制文件的机制,是基于mongodb存储引擎是实现的“分布式文件系统”，底层基于mongodb存储机制
+- 对于mongodb而言，每个document最大尺寸为16M，如果想存储一条数据（比如一个文件）超过16M，那么只能使用GridFS支持；GridFS可以支持单个文件尺寸达到数G，读取文件时可以分段读取
+- 原理：将大文件分层很多chunk，每个chunk作为一个document存储，文件的metadata放到fs.files集合中，这个集合中的每个文档就代表一个文件
+  - \_id
+  - length
+  - chunkSize
+  - uploadDate
+  - md5
