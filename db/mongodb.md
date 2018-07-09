@@ -49,7 +49,7 @@
 - 默认连接到MongoDB服务器的test数据库，并将连接赋值给全局变量db
 - 非JavaScript的扩展
   - use db_name 切换数据库
-  - db.collect_name.insert(jsObj)，有一个额外的键`_id`
+  - db.collect_name.insert(jsObj)，有一个额外的键`_id`
   - db.collect_name.find()
   - db.collect_name.findOne()
   - db.collect_name.update({key: value}, obj) {key, value}为限定条件，obj的键值对会加入文档
@@ -79,7 +79,11 @@
 
 ## `_id`
 - 默认是ObjectId类型
-- 建议由客户端生成
+- 建议在客户端由驱动程序生成
+- 12字节，时间戳(4) + 机器标识符(3) + PID(2) + 计数器(3)
+- 前面9字节提供了秒级别的唯一性
+- 时间戳在前，ObjectId大致会按照插入的顺序排序，前面4个字节还可以获取时间信息
+- 时间戳的实际值不重要，因为总是不停增加，所以无需同步服务器时间
 
 ## 增删改
 - 插入先转换成BSON格式，最大16MB，建议批量插入
