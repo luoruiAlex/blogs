@@ -51,7 +51,7 @@
   - use db_name 切换数据库
   - db.collect_name.insert(jsObj)，有一个额外的键`_id`
   - db.collect_name.find()
-  - db.collect_name.findOne()
+  - var xx = db.collect_name.findOne()
   - db.collect_name.update({key: value}, obj) {key, value}为限定条件，obj的键值对会加入文档
   - db.collect_name.remove({key: value}) 如果不加限定条件则会删除所有
   - help
@@ -88,6 +88,6 @@
 ## 增删改
 - 插入先转换成BSON格式，最大16MB，建议批量插入
 - db.collect_name.remove()不会删除集合本身和索引
-- db.drop_collection(collect_name)删除所有数据会更快，同时会删除集合本身和索引
+- db.collect_name.drop()删除所有数据会更快，同时会删除集合本身和索引
 - 更新
-  - 多个更新同时发生，最后的更新为准
+  - 更新操作是原子的，多个更新同时发生，最后的更新为准
