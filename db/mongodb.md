@@ -91,3 +91,30 @@
 - db.collect_name.drop()删除所有数据会更快，同时会删除集合本身和索引
 - 更新
   - 更新操作是原子的，多个更新同时发生，最后的更新为准
+- 修改器
+  - $inc `db.blog.update({"url": "aaa"}, {"$inc": {"page": 1}})` 只能用于数字类型
+  - $set $unset
+  - $push 往数组中添加 $pop 
+  - $ne 判断值是否在数组中`db.blog.update({"authors": {"$ne": "Michael"}}, XX)`
+  - $addToSet添加可避免重复
+  - 查询修改数组 `db.blog.update({"comments.author": "John"}, {"$set": {"comments.$.author": "Jim"}})`
+  - 修改速度：如果不改变文档的大小，则非常快，否则性能下降
+- upsert 为upadte函数的第3个参数，为true时表示如果没有匹配的则创建新的
+  - db.blog.save为一个shell函数，可以在文档不存在时创建
+- multi  为update函数的第4个参数，为true表示更新符合条件的所有文档，否则只更新第一个
+- 返回已更新的文档
+- 连接和请求 每个连接有一个请求队列，队列中的请求都处理完才会执行后续的请求
+
+## 查询
+- 第1个参数为查询条件
+- 第2个参数指定返回的键
+  - 永远返回 _id
+  - `db.blog.find({}, {"username": 1, "email": 1})` 指定返回username和email
+  - `db.blog.find({}, {"username": 0)` 指定不返回username
+- 值必须是常量，不能引用文档中的其他键的值
+- 查询条件
+  - $lt $lte $gt $gte $ne db.users.find({"age" {“gte": 18, "$lte": 30}})
+  - $in \[] $nin
+  - $or `{"sort": [{"ticket_no": 725}, {"winner": true}]}`
+  - $not
+- 特定于类型的查询
