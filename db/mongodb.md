@@ -108,7 +108,7 @@
 ## 查询
 - 第1个参数为查询条件
 - 第2个参数指定返回的键
-  - 永远返回 _id
+  - 永远返回 \_id
   - `db.blog.find({}, {"username": 1, "email": 1})` 指定返回username和email
   - `db.blog.find({}, {"username": 0)` 指定不返回username
 - 值必须是常量，不能引用文档中的其他键的值
@@ -118,3 +118,28 @@
   - $or `{"sort": [{"ticket_no": 725}, {"winner": true}]}`
   - $not
 - 特定于类型的查询
+- where
+```
+db.blog.find({"$where": function() {
+ for (var current in this) {
+  for (var other in this) {
+    if (current != other && this[current] == this[other] {
+      return true;
+    }
+  }
+ }
+ return false;
+}});
+```
+- 游标
+  - `var cursor = db.collection.find()`
+  - `while (cursor.hasNext()) { obj = cursor.next();}`
+  - `cursor.forEach(function(x){});
+  - 几乎所有的游标对象的方法都返回游标本身，在find的时候，不会立即查询数据库，如下几个是等价的
+    - `var cursor = db.collection.find().sort({"x": 1}).limit(1).skip(10);`
+    - `var cursor = db.collection.find().skip(10).sort({"x": 1}).limit(1);`
+    - `var cursor = db.collection.find().limit(1).sort({"x": 1}).skip(10);`
+  - hasNext()时，会查询前100个或者前4MB数据(两者中取小)
+  - 避免使用skip略过大量结果
+    - 分页时不用skip：使用上次的查询结果作为条件，可实现分页
+    - 随机选取文档不用skip：插入时加一个额外的随机key，查询的时候也生成随机值作为条件
