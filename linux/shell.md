@@ -35,10 +35,10 @@
 - `$?`表示最后命令的退出状态，0表示没有错误，其他表示有
 - `$-`表示shell使用的当前选项，与set命令功能相同
 
-## expr
+## 运算符
 - var=\`expr 1 + 2\` 注意空格不能省
 - 算数运算符`+ - * / % == != ` 注意乘号`*`前必须加反斜杠`\`
-- 关系运算符只支持数字或纯数字字符串 `-eq -ne -gt -lt -ge -le`
+- 关系运算符只支持数字或纯数字字符串 `-eq -ne -gt -lt -ge -le` `if test $n1 -eq $n2`
 - 布尔运算符 `! -o -a`
 - 逻辑预算符 `&& ||`
 - 字符串运算符 `= != -z(长度为0) -n(长度不为0) str(字符变量名本身，表示是否为空)`
@@ -49,3 +49,54 @@
   - `-r -w -x` 是否可读、写、执行
   - `-s` 是否为空(文件大小为0)
   - `-g -k -p -u`
+
+## 流程控制
+- if 
+  - 一行 `if [ $(ps -ef | grep -c "ssh") -gt 1]; then echo "true"; fi`
+  - 多行
+  ```
+  if condition
+  then
+    command1
+    command2
+    ...
+  fi
+  ```
+- for
+  - 一行 `for var in item1 item2 ...; do command1; command2.... done;`
+  - 多行
+  ```
+    for var  in item1 item2 ...
+    do
+      command1
+      command2
+      ...
+    done
+  ```
+- while
+```
+while condition
+do
+  command
+  ...
+done 
+```
+- until
+```
+until condition
+do
+  command
+done
+```
+- case
+```
+case 值 in
+模式1)
+  commands
+  ;;
+模式2)
+  commands
+  ;;
+esac
+```
+- break continue可用于所有循环
