@@ -100,3 +100,33 @@ case 值 in
 esac
 ```
 - break continue可用于所有循环
+
+## 函数
+- 定义
+```
+[function] funName[()]
+{
+  ...
+  [return xx]
+}
+```
+- 调用 `funName arg1 arg2`
+- 内部使用`$n`获取参数，外部使用`$?`获取返回值
+
+## 重定向
+- `command>file`输出重定向到文件 `command>>file`以追加方式
+- `n>file`文件描述符为n的文件重定向到file，文件描述符：0为STDIN，1为STDOUT，2为STDERR
+- `n>&m`将输出文件m和n合并
+- `<<tag`将开始标记tag和结束标记tag之间的内容作为输入
+- 执行命令但不显示输出结果 `command > /dev/null`
+- 屏蔽stdout stderr，`command > /dev/null 2>&1` 2>&1表示将stderr重定向到文件描述符为1的文件`/dev/stdout`中
+
+## 文件包含
+- `. filename`或者`source filename`
+- 被包含的文件不需要可执行权限
+
+## let与expr
+- shell中默认是字符串操作，let和expr可执行整数的数学运算
+- `let var+=1`运算符间不能有空格
+- var=\`expr $var + 1\`保证参数和运算符中间有空格
+- 支持浮点预算用bc或者awk
