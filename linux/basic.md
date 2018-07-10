@@ -172,3 +172,10 @@
   - s 只找source来源文件
   - u 不在上述三个项目中的其他特殊文件
   - l 列出whereis回去查询的主要目录
+- `locate -ir keyword` 根据关键字查找，i表示忽略大小写，r表示支持正则表达式。需要系统每天自动更新数据库或者手动`updatedb`来更
+- `find [PATH] [option] [action]`
+
+## 时间
+- atime 文件中的数据最后被访问的时间
+- mtime 文件内容被修改的最后时间
+- ctime 文件状态被修改的最后时间，比如权限、所属组、inode数
