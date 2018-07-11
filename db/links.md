@@ -1,2 +1,3 @@
 - [Redis学习笔记](https://blog.csdn.net/men_wen/article/category/6769467/3)
 - [Redis高级应用](http://www.cnblogs.com/lori/p/3435483.html)
+- [一篇看成高手](https://blog.csdn.net/hjm4702192/article/category/7299857)
