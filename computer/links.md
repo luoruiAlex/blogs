@@ -1,0 +1,2 @@
+- [操作系统](https://www.cnblogs.com/leesf456/p/5375198.html)
+- [彻底理解字符编码](https://leesf.github.io/technique/2017/08/19/understand-character-encoding/)
