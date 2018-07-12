@@ -1,3 +1,4 @@
 - [写给大数据开发初学者的话](http://lxw1234.com/archives/2016/11/779.htm)
 - [hadoop教程](https://www.w3cschool.cn/hadoop/)
-- [zookeepr选举](http://www.cnblogs.com/leesf456/p/6107600.html)
+- [zookeeper选举](http://www.cnblogs.com/leesf456/p/6107600.html)
+- [zookeeper实例代码](https://blog.csdn.net/arnold_lee_yc/article/details/76851239)
