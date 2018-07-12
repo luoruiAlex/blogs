@@ -78,14 +78,16 @@
   - OBSERVING 观察状态，同步leader状态，不参与投票
   - LEADING 领导者状态
 - 选举消息
-  - 服务器ID
-  - 数据ID
-  - 逻辑时钟
+  - id 被选举的leader的SID
+  - zxid 被选举的leader的事务ID
+  - electionEpoch 逻辑时钟，用来判断多个投票是否在同一轮选举周期中
+  - peerEpoch 被选举的leader的epoch
+  - state 当前服务器的状态
   - 选举状态
 - 启动时期的leader选举
   - 每个Server将做起作为leader来发起投票，每次投票会包含所推举的server的myid和ZXID，使用(myid, ZXID)来表示，发给集群中的其他server
   - 接收来自各个server的投票，收到后，先判断投票的有效性(是否为本轮投票，是否来自LOOKING状态的服务器)
-  - 处理投票，将自己的投票和别人的投票进行PK：ZXID较大的服务器优先作为leader，ZXID相同的选择myid大的作为leader。比较完后重新投票。
+  - 处理投票，将自己的投票和别人的投票进行PK：ZXID较大的服务器优先作为leader(ZXID越大，数据越新，成为Leader的可能性越大，也就越能够保证数据的恢复)，ZXID相同的选择myid大的作为leader。比较完后重新投票。
   - 统计投票，判断是否有过半的的机器收到相同的投票信息，如果有，则认为选出了leader
   - 改变server状态，Follwer改为FOLLOWING，Leader改为LEADING
 - 运行时期的leader选举
