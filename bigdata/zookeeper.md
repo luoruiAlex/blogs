@@ -61,14 +61,18 @@
   - ，大多数Server完成了和 Leader的状态同步以后，恢复模式就结束了
 - 广播模式(同步)
   - Leader节点与Follower节点使用心跳检测来感知对方的存在
-### Server的四种状态
-### 选举流程
-  - 启动、Leader崩溃或Leader失去大多数的Follower之后进入
-  - 两种算法：basic paxos; fast paxos(默认)
-  - fast paxos
-    
+### QuorumCnxManager
+- 每台服务器在启动的过程中，会启动一个QuorumPeerManager，负责各台服务器之间的底层Leader选举过程中的网络通信
+- 消息队列
+  -  recvQueue：消息接收队列，用于存放那些从其他服务器接收到的消息
+  - queueSendMap：消息发送队列，用于保存那些待发送的消息，按照SID进行分组
+  - senderWorkerMap：发送器集合，每个SenderWorker消息发送器，都对应一台远程Zookeeper服务器，负责消息的发送，也按照SID进行分组
+  -  lastMessageSent：最近发送过的消息，为每个SID保留最近发送过的一个消息
+- 建立连接
+  - Zookeeper集群中的所有机器都需要两两建立起网络连接
 
 ## 选举机制
+- 3.4.0
 - 服务器ID：每个服务器有个编号，编号越大在选择算法中的权重越大
 - 数据ID：服务器中存放的最大数据ID，值越大说明数据越新，权重越大
 - 逻辑时钟(投票次数)：同一轮投票过程中的逻辑时钟值是相同的。每投完一次票这个数据就会增加，然后与接收到的其它服务器返回的投票信息中的数值相比，根据不同的值做出不同的判断
