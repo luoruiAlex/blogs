@@ -66,7 +66,7 @@
   - 启动、Leader崩溃或Leader失去大多数的Follower之后进入
   - 两种算法：basic paxos; fast paxos(默认)
   - fast paxos
-    - 某Server首先向所有Server提议自己要成为Leader
+    
 
 ## 选举机制
 - 服务器ID：每个服务器有个编号，编号越大在选择算法中的权重越大
@@ -82,3 +82,12 @@
   - 数据ID
   - 逻辑时钟
   - 选举状态
+- 启动时期的leader选举
+  - 每个Server将做起作为leader来发起投票，每次投票会包含所推举的server的myid和ZXID，使用(myid, ZXID)来表示，发给集群中的其他server
+  - 接收来自各个server的投票，收到后，先判断投票的有效性(是否为本轮投票，是否来自LOOKING状态的服务器)
+  - 处理投票，将自己的投票和别人的投票进行PK：ZXID较大的服务器优先作为leader，ZXID相同的选择myid大的作为leader。比较完后重新投票。
+  - 统计投票，判断是否有过半的的机器收到相同的投票信息，如果有，则认为选出了leader
+  - 改变server状态，Follwer改为FOLLOWING，Leader改为LEADING
+- 运行时期的leader选举
+  - 变更状态，Leader挂机后，剩余的非Observer服务器将自己的状态改为LOOKING，然后进入leader选举过程
+  - 剩余基本与启动时期一致。启动时期的ZXID都是0，主要比较myid，而运行时期的ZXID可能不同
