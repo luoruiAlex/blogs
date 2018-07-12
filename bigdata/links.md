@@ -1,2 +1,3 @@
 - [写给大数据开发初学者的话](http://lxw1234.com/archives/2016/11/779.htm)
-- [教程](https://www.w3cschool.cn/hadoop/)
+- [hadoop教程](https://www.w3cschool.cn/hadoop/)
+- [zookeepr选举](http://www.cnblogs.com/leesf456/p/6107600.html)
