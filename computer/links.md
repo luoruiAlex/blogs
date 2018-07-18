@@ -1,2 +1,4 @@
 - [操作系统](https://www.cnblogs.com/leesf456/p/5375198.html)
 - [彻底理解字符编码](https://leesf.github.io/technique/2017/08/19/understand-character-encoding/)
+- [图解SSH原理](https://www.jianshu.com/p/33461b619d53)
+- [linux中伪终端的创建](https://www.cnblogs.com/zzdyyy/p/7538077.html)
