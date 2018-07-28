@@ -1,2 +1,3 @@
 - [深入浅出Mybatis系列](https://www.cnblogs.com/dongying/category/620960.html)
 - [JVM9](https://www.cnblogs.com/haitaofeiyang/category/1097778.html)
+- [成为Java顶尖程序员 ，看这10本书就够了](http://www.cnblogs.com/love-jishu/p/5113485.html?_t_t_t=0.9507748708128929)
