@@ -12,3 +12,17 @@
 ### principal
   - 一个Subject可以有许多个相关身份，每个身份都由一个Principal对象表示
   - Principal不是持久性的，所以每次用户登录时都必须将它们添加到Subject
+
+
+## Spring Security的核心类
+- AuthenticationManager
+  - ProviderManager为AUthenticationManager的实现了，内部维护List<AuthenticationProvider>，只要有一个通过认证即可
+- SecurityContextHolder 身份信息的存放容器(存放时去掉密码，保留是否验证通过)
+- AuthenticationProvider　每个AuthenticationProvider代表一种认证方式，比如邮箱加密码认证
+    - DaoAuthenticationProvider getCredentials() 用户提交的密码凭证
+- Authentication
+  - Authentication中的getAuthorities()实际是由UserDetails的getAuthorities()传递而形成的
+- UserDetail 代表最详细的用户信息
+   - getPassword() 户正确的密码
+  - UserDetailService只负责从特定的地方加载用户信息
+  
