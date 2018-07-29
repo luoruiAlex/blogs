@@ -15,16 +15,18 @@
           <sec:intercept-url pattern="/index.jsp" access="ROLE_user"/>
           <!-- 无访问权限后跳转的页面 -->
           <sec:access-denied-handler error-page="/error.jsp"/>
-        </sec:http>
-  ```
-  - ```<sec:authentication-manager>
-          <sec:authentication-provider>
-          <!-- 配置用户以及相关的权限 -->
-          <sec:user-service>
-          <sec:user name="TOM" authorities="ROLE_user" password="TOM"/>
-          <sec:user name="jack" authorities="ROLE_Manger" password="jack"/>
-          </sec:user-service>
-          </sec:authentication-provider>
-       </sec:authentication-manager>
-     ```
+        </sec:http>```
+  - 
+    ```<http auto-config='true'>
+        <intercept-url pattern="/admin.jsp" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+    </http>
+	<authentication-manager alias="authenticationManager">  
+	    <authentication-provider ref="authenticationProvider" />  
+	</authentication-manager>  
+	<beans:bean id="authenticationProvider"  
+	    class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">  
+	    <beans:property name="userDetailsService" ref="myUserDetailsService" />  
+	    <beans:property name="hideUserNotFoundExceptions" value="false" />   
+	</beans:bean>```
   
