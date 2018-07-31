@@ -43,3 +43,29 @@
   - 1.Resource定位(ResourceLoader)
   - 2.BeanDefinition的载入和解析
   - 3.向IoC容器注册BeanDefinition(BeanDefinitionRegistry)
+  - 4.BeanDefinitionRegistry中的BeanDefinition，使用Java的反射机制自动识别出Bean工厂处理器（实现BeanFactoryPostProcessor接口）的Bean，然后调用这些Bean工厂后处理器对BeanDefinitionRegistry中的BeanDefinition进行加工处理
+  - 5.从BeanDefinitionRegistry中取出加工后的BeanDefinition，并调用InstantiationStrategy着手进行Bean实例化工作
+  - 6.在实例化Bean时，Spring容器使用BeanWrapper对Bean进行封装，BeanWrapper提供了很多以Java反射机制操作Bean的方法，它将结合该Bean的BeanDefinition以及容器中属性编辑器，完成Bean属性的设置工作
+  - 7.利用容器中注册的Bean后处理器（实现BeanPostProcessor接口的Bean）对已经完成属性设置工作的Bean进行后续加工，直接装配出一个准备就绪的Bean
+
+## 依赖注入
+- getBean() 启动
+- AbstractBeanFactory.doGetBean() 依次从缓存->parentBeanFactory->createBean获取Bean
+- AbstractAutoWireCapableBeanFactory.createBean()
+  - 如果配置了postProcessor，返回proxy
+  - 否则调用子方法doCreateBean()
+- AbstractAutoWireCapableBeanFactory.doCreateBean()
+  - createBeanInstance()
+    - 使用构造或autowireConstructor(构造函数的参数使用了Autowire)
+    - 使用instantiateBean()方法实例化
+  - populateBean() 通过BeanDefinition注入属性
+    - applyPropertyValues()
+    - resolveValueIfNecessary()，包括resolveReference()，根据value的类型，进行不同的解析
+    - setPropertyValue()
+  - initializeBean
+  
+## 循环依赖的解决
+- 依次从三层缓存 singletonObjects earlySingletonObjects singletonFactories 中获取
+- doCreateBean()将类A曝光到singletonFactories中
+- 类B从singletonFactories中获取到类A的一个引用，将自己放到 singletonObjects 中
+- 类A获取到B对象，填充属性
