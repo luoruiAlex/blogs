@@ -2,3 +2,5 @@
 - [JVM9](https://www.cnblogs.com/haitaofeiyang/category/1097778.html)
 - [成为Java顶尖程序员 ，看这10本书就够了](http://www.cnblogs.com/love-jishu/p/5113485.html?_t_t_t=0.9507748708128929)
 - [spring专栏](https://blog.csdn.net/fly_leopard/article/category/7278511)
+- [java-concurrency-in-practice/details](https://hzy38324.gitbooks.io/java-concurrency-in-practice/content/)
+- [Java修炼手册](https://zhuanlan.zhihu.com/beautifuljava)
