@@ -40,3 +40,6 @@
   - 1.将Resource路径参数解析成Context需要的路径
   - 2.refresh()
 - refresh()启动容器
+  - 1.Resource定位(ResourceLoader)
+  - 2.BeanDefinition的载入和解析
+  - 3.向IoC容器注册BeanDefinition(BeanDefinitionRegistry)
