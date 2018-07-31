@@ -65,7 +65,7 @@
   - initializeBean
   
 ## 循环依赖的解决
-- 依次从三层缓存 singletonObjects earlySingletonObjects singletonFactories 中获取
+- 依次从三层缓存 singletonObjects earlySingletonObjects singletonFactories(因为有些Bean是需要被代理的，总不能把代理前的暴露出去那就毫无意义了) 中获取
 - doCreateBean()将类A曝光到singletonFactories中
 - 类B从singletonFactories中获取到类A的一个引用，将自己放到 singletonObjects 中
 - 类A获取到B对象，填充属性
