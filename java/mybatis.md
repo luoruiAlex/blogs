@@ -17,11 +17,20 @@
 - 支持缓存、日志、级联
 - 需要提供映射规则和SQL，开发工作量比Hibernate略大
 
+## 执行流程
+- SqlSessionFactoryBuilder读取配置文件，生成 SqlSessionFactory
+- SqlSessionFactory获取SqlSession对象
+
+## 配置文件
+- configuration节点为根节点
+- 10个子节点
+- properties、typeAliases、plugins、objectFactory、objectWrapperFactory、settings、environments、databaseIdProvider、typeHandlers、mappers
+
 ## 插入后返回主键
-- 修改<insert>标签的属性
+- 修改`<insert>`标签的属性
   - useGeneratedKeys="true"(给主键设置自增长)
   - keyProperty="userId"(表示将自增长后的Id赋值给实体类中的userId字段)
-- <insert>标签中增加<selectKey>标签 
+- `<insert>`标签中增加`<selectKey>`标签 
   - resultType="java.lang.Long"
   - order="AFTER"
   - keyProperty="productId"
@@ -37,6 +46,7 @@
 
 ## ResultMap
 - type、id
+- <id>用于表示javavean对象的唯一性，不一定是数据库的逐渐
 - collection
 ```
 <collection property="courseList" column="stu_course_id" ofType="Course">
@@ -45,7 +55,17 @@
     <result property="deleteFlag" column="course_delete_flg"/>
 </collection>
 ```
-- select resultMap="mapId"
+- select resultMap="mapId" fetchType可以为lazy或者eager
 ```
 SELECT s.*, c.* FROM t_student s LEFT JOIN t_course c ON s.stu_course_id=c.course_id WHERE s.stu_id_card=#{idCard}
 ```
+- association fetchType="lazy"延迟加载，真正用到的时候才发出SQL查询
+
+## 动态语句
+- `<if test="xx">`
+- `<foreach item="item" index="index" collection="list" open="(" seperator=", close=")"> #{item}</foreach>`
+- `<choose><when></when><otherwise></otherwise></choose>`
+
+## TypeHandler处理枚举
+- EnumTypeHandler: 用于保存枚举名
+- EnumOrdinalTypeHandler: 用于保存枚举的序号
