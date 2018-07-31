@@ -16,3 +16,21 @@
 - 支持存储过程
 - 支持缓存、日志、级联
 - 需要提供映射规则和SQL，开发工作量比Hibernate略大
+
+## 插入后返回主键
+- 修改<insert>标签的属性
+  - useGeneratedKeys="true"(给主键设置自增长)
+  - keyProperty="userId"(表示将自增长后的Id赋值给实体类中的userId字段)
+- <insert>标签中增加<selectKey>标签 
+  - resultType="java.lang.Long"
+  - order="AFTER"
+  - keyProperty="productId"
+  - 语句为SELECT LAST_INSERT_ID()
+- 注意，插入没有返回值
+  
+## select
+- resultType与resultMap二选一
+- flushCache="true"的语句调用后会导致本地缓存和二级缓存被清空
+- useCache="true"使本语句的结构被二级缓存
+- statementType="PREPARED"默认为PREPARED，也可为STATEMENT或者CALLABLE
+- timeout、fetchSize、resultSetType 默认为unset
