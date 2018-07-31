@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="treestyles.css" type="text/css"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!--This file has been created with toxhtml.xsl--><head><meta content="text/html; charset=UTF-8" http-equiv="Content-Type" /><title>JVM</title><link rel="stylesheet" href="JVM.html_files//treestyles.css" type="text/css" /><script type="text/javascript" src="JVM.html_files//marktree.js"> 
+	</script></head><body><div class="basetop"><a onclick="expandAll(document.getElementById('base'))" href="#">Expand</a> -
+<a onclick="collapseAll(document.getElementById('base'))" href="#">Collapse</a></div><div class="basetext" id="base"><ul>
+	<li class="col" id="FMID_426043262FM"><div class="nodecontent" style="font-size:233%;">JVM</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_1475324601FM"><div class="nodecontent" style="font-size:200%;">参数设置</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_191604985FM"><div class="nodecontent" style="font-size:117%;">java [-options] class [args...]</div></li>
+	<li class="col" id="FMID_1854833094FM"><div class="nodecontent" style="font-size:167%;">打印GC</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1593375666FM"><div class="nodecontent" style="font-size:117%;">-XX:+PrintGC</div></li>
+	<li class="basic" id="FMID_1966093275FM"><div class="nodecontent" style="font-size:117%;">-XX:+PrintGCDetails</div></li>
+	<li class="basic" id="FMID_1621281190FM"><div class="nodecontent">-XX:+PrintHeapAtGC</div></li></ul></li></ul></li>
+	<li class="col" id="FMID_1113676289FM"><div class="nodecontent" style="font-size:200%;">结构</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_319470157FM"><div class="nodecontent" style="font-size:167%;">类加载子系统</div></li>
+	<li class="col" id="FMID_404048787FM"><div class="nodecontent" style="font-size:167%;">内存区</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_950318190FM"><div class="nodecontent" style="font-size:150%;">方法区</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_253889758FM"><div class="nodecontent" style="font-size:117%;">又叫永久区(Perm)</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_878970565FM"><div class="nodecontent">-xx:PermSize=128M，默认为物理内存的1/64</div></li>
+	<li class="basic" id="FMID_1484879796FM"><div class="nodecontent">-XX:MaxPermSize=128M，默认为物理内存的1/4</div></li></ul></li>
+	<li class="basic" id="FMID_762307230FM"><div class="nodecontent" style="font-size:133%;">1.8开始，迁移到MetaSpace</div></li></ul></li>
+	<li class="col" id="FMID_1097846493FM"><div class="nodecontent" style="font-size:150%;">直接内存</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_574742065FM"><div class="nodecontent" style="font-size:133%;">NIO允许JAVA使用直接内存，不受Xmx限制，适用于读写频繁的场合</div></li>
+	<li class="basic" id="FMID_614494458FM"><div class="nodecontent">-XX:MaxDirectMemorySize可设置最大直接内存，默认为最大堆空间</div></li>
+	<li class="col" id="FMID_171157806FM"><div class="nodecontent">对比</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_641058668FM"><div class="nodecontent">直接内存适合申请次数少、访问频繁的场合(申请空间慢，访问快)</div></li>
+	<li class="basic" id="FMID_887451127FM"><div class="nodecontent">对空间适合频繁申请的场合(申请快、访问慢)</div></li></ul></li></ul></li>
+	<li class="col" id="FMID_1921917661FM"><div class="nodecontent" style="font-size:150%;">堆</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_944535616FM"><div class="nodecontent">-Xms128M<br />-Xmx512M </div></li>
+	<li class="col" id="FMID_784512552FM"><div class="nodecontent">新生代</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_316461449FM"><div class="nodecontent">-Xmn</div></li>
+	<li class="basic" id="FMID_731496053FM"><div class="nodecontent">-XX:SurvivorRatio</div></li></ul></li>
+	<li class="basic" id="FMID_1097719649FM"><div class="nodecontent">-XX:NewRatio=老年代/新生代</div></li>
+	<li class="basic" id="FMID_1827411630FM"><div class="nodecontent">-XX:HeapDumpOnOutOfMemoryError</div></li>
+	<li class="basic" id="FMID_471292131FM"><div class="nodecontent">-XX:HeapDumpPath=/var/tmp/a.dump</div></li>
+	<li class="col" id="FMID_1432440237FM"><div class="nodecontent">"-XX:OnOutOfMemoryError=xxx.sh args"</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1954445718FM"><div class="nodecontent">发生错误时执行脚本，比如jstack -F %1 &gt; a.txt将虚拟机的线程信息保存到文件中</div></li></ul></li></ul></li>
+	<li class="col" id="FMID_198185802FM"><div class="nodecontent" style="font-size:150%;">Java栈</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_649404225FM"><div class="nodecontent" style="font-size:133%;">栈帧</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_1061332852FM"><div class="nodecontent" style="font-size:117%;">局部变量表</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_604613433FM"><div class="nodecontent" style="font-size:117%;">保存参数和局部变量</div></li>
+	<li class="col" id="FMID_454485118FM"><div class="nodecontent" style="font-size:117%;">槽位可复用</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1109728049FM"><div class="nodecontent" style="font-size:117%;">栈帧中的变量在出了作用域之后也不会马上弹出，除非后面有新的局部变量复用该槽位</div></li></ul></li></ul></li>
+	<li class="col" id="FMID_330764475FM"><div class="nodecontent" style="font-size:117%;">操作数栈</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_99619745FM"><div class="nodecontent" style="font-size:117%;">保存计算的中间结果，用于字节码指令的参数传递</div></li></ul></li>
+	<li class="col" id="FMID_185543773FM"><div class="nodecontent" style="font-size:117%;">帧数据区</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_805223400FM"><div class="nodecontent" style="font-size:117%;">保存访问常量池的指针</div></li>
+	<li class="basic" id="FMID_1539900164FM"><div class="nodecontent" style="font-size:117%;">正常方法返回</div></li>
+	<li class="basic" id="FMID_1707724378FM"><div class="nodecontent" style="font-size:117%;">异常处理表</div></li></ul></li>
+	<li class="basic" id="FMID_1850161714FM"><div class="nodecontent" style="font-size:117%;">非逃逸小对象的栈上分配</div></li></ul></li>
+	<li class="basic" id="FMID_1096580549FM"><div class="nodecontent" style="font-size:133%;">-Xss128K指定栈大小</div></li></ul></li>
+	<li class="basic" id="FMID_1035645524FM"><div class="nodecontent" style="font-size:150%;">本地方法栈</div></li>
+	<li class="col" id="FMID_1541735871FM"><div class="nodecontent" style="font-size:150%;">PC寄存器</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1236097865FM"><div class="nodecontent" style="font-size:133%;">指向当前执行的指令</div></li></ul></li></ul></li>
+	<li class="col" id="FMID_1787027524FM"><div class="nodecontent" style="font-size:167%;">GC</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_1205122127FM"><div class="nodecontent" style="font-size:150%;">日志读取</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_299729967FM"><div class="nodecontent">停顿类型</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_1133314479FM"><div class="nodecontent">GC/Full GC(发生了Stop THe World)</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1633207412FM"><div class="nodecontent">Minor GC发生在老年代</div></li>
+	<li class="basic" id="FMID_760214251FM"><div class="nodecontent">Full GC发生在老年代，并行GC(UseParallelOldGC UseParallelGC)至少伴随一次Minor GC，除非Parallel Scavenge中使用了直接Major GC的收集策略(-XX:-ScavengeBeforeFullGC去除Full GC前的Minor GC)</div></li></ul></li></ul></li>
+	<li class="col" id="FMID_307166200FM"><div class="nodecontent">GC发生的区域</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_472993169FM"><div class="nodecontent">分别为新生代New、老年代Old/Tenured、永久代Perm，名称与GC收集器有关</div></li>
+	<li class="basic" id="FMID_1093601901FM"><div class="nodecontent">DefNew:Serial收集新生代</div></li>
+	<li class="basic" id="FMID_1709347945FM"><div class="nodecontent">ParNew:ParNew收集新生的</div></li>
+	<li class="basic" id="FMID_1007444784FM"><div class="nodecontent">PSYoungGen/PSOldGen/PSPermGen:Paralled Scavenge收集新生代/老年代/永久代</div></li></ul></li>
+	<li class="col" id="FMID_176493798FM"><div class="nodecontent">方括号内</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_480205796FM"><div class="nodecontent">GC前该内存区域已使用容量-&gt;GC后该内存区已使用容量(该内存区总容量)</div></li></ul></li>
+	<li class="col" id="FMID_612716150FM"><div class="nodecontent">方括号外</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_903064551FM"><div class="nodecontent">GC前Java堆已使用容量-&gt;GC后Java堆已使用容量(Java堆总容量)</div></li></ul></li>
+	<li class="col" id="FMID_1179124185FM"><div class="nodecontent">具体时间</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1683210665FM"><div class="nodecontent">user 用户态消耗的CPU时间</div></li>
+	<li class="basic" id="FMID_1688989413FM"><div class="nodecontent">sys　内核态消耗的CPU时间</div></li>
+	<li class="basic" id="FMID_122009149FM"><div class="nodecontent">real 操作从开始到介绍经过的墙钟时间(Wall Clock TIme，包括等待磁盘IO等非计算的等待耗时，CPU时间不含这些)</div></li>
+	<li class="basic" id="FMID_468444521FM"><div class="nodecontent">系统有多CPU或者多核的话，多线程操作会叠加这些CPU时间，所以读者看到user或sys时间超过real时间是完全正常的</div></li></ul></li></ul></li>
+	<li class="col" id="FMID_1540359875FM"><div class="nodecontent" style="font-size:150%;">垃圾回收算法</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_538746677FM"><div class="nodecontent">引用计数法</div></li>
+	<li class="col" id="FMID_1437088578FM"><div class="nodecontent">可达性算法</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_846431043FM"><div class="nodecontent">可触及</div></li>
+	<li class="col" id="FMID_1932635643FM"><div class="nodecontent">可复活</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_44603912FM"><div class="nodecontent">对象的所有引用都被释放，但可能在finalize()函数中复活</div></li></ul></li>
+	<li class="basic" id="FMID_1498899085FM"><div class="nodecontent">不可触及</div></li></ul></li>
+	<li class="basic" id="FMID_1463890594FM"><div class="nodecontent">标记清除(Mark-Sweep)</div></li>
+	<li class="col" id="FMID_1962860556FM"><div class="nodecontent">复制算法(Copying)</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_910021FM"><div class="nodecontent">新生代(eden+from -&gt; to)</div></li></ul></li>
+	<li class="basic" id="FMID_1736822891FM"><div class="nodecontent">标记压缩算法(Mark-Compact)</div></li>
+	<li class="col" id="FMID_1973228637FM"><div class="nodecontent">分代算法(Generational Collecting)</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_354515697FM"><div class="nodecontent">Card Table:比特位集合，表示老年代的某一分页中的对象是否持有新生代对象的引用，新生代GC时只需扫描值为１对应的老年代空间</div></li></ul></li>
+	<li class="basic" id="FMID_1868615092FM"><div class="nodecontent">分区算法(Region)</div></li></ul></li>
+	<li class="col" id="FMID_1137094972FM"><div class="nodecontent" style="font-size:150%;">引用</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_1117180595FM"><div class="nodecontent">强引用</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1090508296FM"><div class="nodecontent">决不会被回收</div></li></ul></li>
+	<li class="col" id="FMID_1449114238FM"><div class="nodecontent">软引用</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_1459061546FM"><div class="nodecontent">堆空间不足时回收</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_802474421FM"><div class="nodecontent">内存溢出前，把软引用的对象列入回收范围并二次回收，如果还是没有足够内存，则报内存溢出</div></li></ul></li></ul></li>
+	<li class="col" id="FMID_1402744108FM"><div class="nodecontent">弱引用</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_1788559070FM"><div class="nodecontent">发现即回收</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_665288617FM"><div class="nodecontent">被引用的对象只能生存到下一次GC之前</div></li>
+	<li class="basic" id="FMID_599919999FM"><div class="nodecontent">比如ThreadLocal中的Entry就继承了WeakReference</div></li></ul></li></ul></li>
+	<li class="col" id="FMID_429029486FM"><div class="nodecontent">虚引用</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1262264216FM"><div class="nodecontent">唯一的用处：能在对象被GC时收到系统通知</div></li></ul></li></ul></li>
+	<li class="exp" id="FMID_1301450634FM"><div class="nodecontent" style="font-size:150%;">垃圾回收器</div>
+		<ul class="sub">
+	<li class="col" id="FMID_1085632246FM"><div class="nodecontent">新生代</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1116206634FM"><div class="nodecontent">-XX:+UseSerialGC 新生代、老年代都为serial</div></li>
+	<li class="basic" id="FMID_1990774343FM"><div class="nodecontent">-XX:+UseParNewGC</div></li>
+	<li class="basic" id="FMID_1542722883FM"><div class="nodecontent">-XX:+UseParallelGC</div></li></ul></li>
+	<li class="col" id="FMID_768477844FM"><div class="nodecontent">老年代</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_1615457594FM"><div class="nodecontent">-XX:+UseComcMarkSweepGC</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1625432522FM"><div class="nodecontent">关注系统停顿时间，标记清除算法</div></li>
+	<li class="basic" id="FMID_800373615FM"><div class="nodecontent">初始标记-&gt;并发标记－&gt;预清除-&gt;重新标记-&gt;并发清理-&gt;并发重置</div></li>
+	<li class="basic" id="FMID_1531399343FM"><div class="nodecontent">为确保回收时还有足够内存运行应用程序，不会等堆内存饱和才开始回收</div></li>
+	<li class="basic" id="FMID_923302633FM"><div class="nodecontent">回收阈值默认为68，可使用-XX:CMSInitiatingOccupancyFraction来制定</div></li>
+	<li class="basic" id="FMID_1945669690FM"><div class="nodecontent">如果阈值不够，回收失败，使用老年代serial回收器进行垃圾回收。应用程序内存增长快时，赢降低阈值，以避免频繁触发老年代serial收集器</div></li>
+	<li class="col" id="FMID_1765751673FM"><div class="nodecontent">开启碎片整理</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1312676219FM"><div class="nodecontent">-XX:+UseCMSCompactAtFullCollection</div></li>
+	<li class="basic" id="FMID_1029741815FM"><div class="nodecontent">-XX:CMSFullGCsBeforeCompaction指定进行多少次CMS之后，进行内存压缩</div></li></ul></li>
+	<li class="col" id="FMID_1277475201FM"><div class="nodecontent">Perm区的回收</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1340307792FM"><div class="nodecontent">CMS回收时，如果需要回收Perm区，则默认触发一次Full GC</div></li>
+	<li class="basic" id="FMID_349927499FM"><div class="nodecontent">-XX:+CMSClassUnloadingEanbled</div></li></ul></li></ul></li>
+	<li class="basic" id="FMID_1865613964FM"><div class="nodecontent">-XX:+UseParallelOldGC</div></li></ul></li>
+	<li class="col" id="FMID_890426072FM"><div class="nodecontent">并发收集</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1099935045FM"><div class="nodecontent">-XX:ParallelGCThreads</div></li></ul></li>
+	<li class="col" id="FMID_1912950677FM"><div class="nodecontent">吞吐量</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_1625980332FM"><div class="nodecontent">-XX:+UseParallelGC</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1987520636FM"><div class="nodecontent">复制算法</div></li></ul></li>
+	<li class="col" id="FMID_1849395796FM"><div class="nodecontent">-XX:+UseParallelOldGC</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_906282553FM"><div class="nodecontent">标记压缩算法</div></li></ul></li>
+	<li class="basic" id="FMID_1741360446FM"><div class="nodecontent">运行时调整堆大小或其他参数来保证吞吐量</div></li>
+	<li class="col" id="FMID_980457300FM"><div class="nodecontent">+XX:MaxGCPauseMillis</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1541521197FM"><div class="nodecontent">最大垃圾收集停顿时间(大于０的整数)，值越小堆会调整地越小，垃圾回收越频繁</div></li></ul></li>
+	<li class="col" id="FMID_1707665531FM"><div class="nodecontent">+XX:GCTimeRatio</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1941649741FM"><div class="nodecontent">值为1-100之间的整数(默认99，1/(1+n)的时间用于垃圾收集）</div></li></ul></li>
+	<li class="col" id="FMID_1373550692FM"><div class="nodecontent">+XX:+UseAdaptiveSizePolicy</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_386260767FM"><div class="nodecontent">开启自适应GC策略，新生代大小、eden和survivor的比例、晋升老年代的对象年龄等参数会被自动调整</div></li></ul></li></ul></li>
+	<li class="col" id="FMID_1085517110FM"><div class="nodecontent">G1</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1418043662FM"><div class="nodecontent">用于取代CMS，推荐内存是６G</div></li>
+	<li class="basic" id="FMID_1250469837FM"><div class="nodecontent">+XX:+UseG1GC</div></li>
+	<li class="col" id="FMID_1423368571FM"><div class="nodecontent">分区、分代算法</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_170846207FM"><div class="nodecontent">不要求eden/年轻代、老年代都连续</div></li>
+	<li class="basic" id="FMID_666374912FM"><div class="nodecontent">多线程收集、可与应用程序交替执行</div></li>
+	<li class="basic" id="FMID_1396435739FM"><div class="nodecontent">每次回收都会复制对象，而CMS在若干次GC后才整理碎片</div></li>
+	<li class="basic" id="FMID_1485836029FM"><div class="nodecontent">分区后缩小了回收的范围，可预见停顿</div></li>
+	<li class="basic" id="FMID_1018226317FM"><div class="nodecontent">每次收集只收集其中部分分区</div></li></ul></li>
+	<li class="col" id="FMID_954222015FM"><div class="nodecontent">过程</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_1191891783FM"><div class="nodecontent">新生代GC</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1499461188FM"><div class="nodecontent">回收eden和survivor区</div></li></ul></li>
+	<li class="col" id="FMID_1460269252FM"><div class="nodecontent">并发标记周期</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1606629674FM"><div class="nodecontent">初始标记(有一次STW)-&gt;根区域扫描(有可能被新生代GC中断)-&gt;并发标记-&gt;重新标记(STW)-&gt;独占清理(STW)-&gt;并发清理</div></li>
+	<li class="basic" id="FMID_178851696FM"><div class="nodecontent">回收比例很低</div></li></ul></li>
+	<li class="col" id="FMID_1607176931FM"><div class="nodecontent">混合收集</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1935993594FM"><div class="nodecontent">选取垃圾比例最高的区域(Garbage First)</div></li>
+	<li class="basic" id="FMID_539113428FM"><div class="nodecontent">即收集新生代又收集老年代</div></li></ul></li>
+	<li class="basic" id="FMID_1607716717FM"><div class="nodecontent">如果需要，则进行Full GC</div></li></ul></li></ul></li></ul></li>
+	<li class="col" id="FMID_1237366853FM"><div class="nodecontent" style="font-size:150%;">System.gc()</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1892582551FM"><div class="nodecontent">大部分情况下会得到响应　</div></li>
+	<li class="basic" id="FMID_1903730770FM"><div class="nodecontent">不推荐使用，-XX:+DisableExplictGC可禁用</div></li>
+	<li class="col" id="FMID_769914627FM"><div class="nodecontent">使用传统的Full GC，而忽视UseG1GC和UseConcMarkSweepGC</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_375225790FM"><div class="nodecontent">使用-XX:+ExplicitGCInvokersConcurrent可强制使用并发回收</div></li></ul></li></ul></li>
+	<li class="col" id="FMID_1954927594FM"><div class="nodecontent" style="font-size:150%;">finalize()</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_420108313FM"><div class="nodecontent">由FInalizerThread线程处理</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_157727022FM"><div class="nodecontent">每个即将被回收的对象在回收前会加入FinalizerThread的执行队列(ReferenceQueue应用队列，链表结构)，对象中每个item都为FinalReference的子类Finalizer的实例</div></li></ul></li>
+	<li class="col" id="FMID_711032308FM"><div class="nodecontent">不推荐使用</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_565048384FM"><div class="nodecontent">MySQL的JDBC驱动中ConnectinImpl实现了该方法，用于防止开发人员忘记关闭连接</div></li></ul></li></ul></li>
+	<li class="col" id="FMID_1844293299FM"><div class="nodecontent" style="font-size:150%;">内存分配</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_584220884FM"><div class="nodecontent">进入老年代</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_282264642FM"><div class="nodecontent">老对象默认经历１５次GC进入老年代，使用MaxTenuringThreshold来设置</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1887542780FM"><div class="nodecontent">充分非必要条件，不一定要求达到１５次</div></li></ul></li>
+	<li class="col" id="FMID_1008523916FM"><div class="nodecontent">大对象直接进入老年代，只对Serial和ParNew有效，默认值为０，表示由JVM决定</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1046113211FM"><div class="nodecontent">-XX:PretenureSizeThreshold=1000</div></li>
+	<li class="basic" id="FMID_235521535FM"><div class="nodecontent">对于不大的对象，有可能优先在TLAB上分配，Pretenure有可能不起作用</div></li></ul></li></ul></li>
+	<li class="col" id="FMID_1810683031FM"><div class="nodecontent">TLAB(Thread Local Allocation Buffer)线程本地分配缓存</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1458121306FM"><div class="nodecontent">虚拟机给每个线程预先分配一个TLAB空间以减少对象分配线程冲突</div></li>
+	<li class="basic" id="FMID_783741040FM"><div class="nodecontent">-XX:-UseTLAB禁用TLAB</div></li>
+	<li class="basic" id="FMID_1972393606FM"><div class="nodecontent">-XX:TLABSize=102400制定TLAB大小</div></li>
+	<li class="basic" id="FMID_1675790626FM"><div class="nodecontent">-xx:+PrintTLAB打印使用情况</div></li></ul></li>
+	<li class="basic" id="FMID_1420461426FM"><div class="nodecontent">总的分配顺序:运行栈-&gt;TLAB-&gt;老年代-&gt;eden分配</div></li></ul></li></ul></li>
+	<li class="basic" id="FMID_1577464506FM"><div class="nodecontent" style="font-size:167%;">执行引擎</div></li></ul></li>
+	<li class="col" id="FMID_1265347634FM"><div class="nodecontent" style="font-size:200%;">字节码</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_247834283FM"><div class="nodecontent" style="font-size:167%;">编译步骤</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_117475995FM"><div class="nodecontent">词法分析</div></li>
+	<li class="basic" id="FMID_788884432FM"><div class="nodecontent">语法分析</div></li>
+	<li class="basic" id="FMID_1020031373FM"><div class="nodecontent">语义分析</div></li>
+	<li class="basic" id="FMID_447558061FM"><div class="nodecontent">生成字节码</div></li></ul></li>
+	<li class="col" id="FMID_1925369010FM"><div class="nodecontent" style="font-size:167%;">组成</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_33839387FM"><div class="nodecontent">概述</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_881391836FM"><div class="nodecontent">由无符号数和表组成</div></li>
+	<li class="col" id="FMID_1136539350FM"><div class="nodecontent">无符号数(u1 u2 u4 u8)</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_136135403FM"><div class="nodecontent">可用于描述数字、索引引用、数量值和UTF-8编码组成的字符串</div></li></ul></li>
+	<li class="col" id="FMID_1672690681FM"><div class="nodecontent">表</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1639781184FM"><div class="nodecontent">复合结构，以"_info"结尾</div></li></ul></li></ul></li>
+	<li class="col" id="FMID_252507471FM"><div class="nodecontent" style="font-size:150%;">文件头部</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_804438402FM"><div class="nodecontent">magic(u4)</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_518722481FM"><div class="nodecontent">0xCAFEBABE</div></li></ul></li>
+	<li class="basic" id="FMID_1951724522FM"><div class="nodecontent">minor version(u2)</div></li>
+	<li class="basic" id="FMID_888883185FM"><div class="nodecontent">major version(u2)</div></li></ul></li>
+	<li class="col" id="FMID_1008670191FM"><div class="nodecontent" style="font-size:150%;">常量池</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_304190479FM"><div class="nodecontent">constant_pool_count(u2)</div></li>
+	<li class="col" id="FMID_16231768FM"><div class="nodecontent">constant_pool[contant_pool_count -1](cp_info)</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_246562745FM"><div class="nodecontent">存放字面量literal和符号引用symbolic references</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1927020652FM"><div class="nodecontent">符号引用在类创建或者运行时转换为具体的内存地址</div></li>
+	<li class="basic" id="FMID_356159704FM"><div class="nodecontent">全限定名</div></li>
+	<li class="col" id="FMID_775571513FM"><div class="nodecontent">简单名称</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1074200674FM"><div class="nodecontent">类和接口中的字段名和方法名使用简单名称存储</div></li></ul></li>
+	<li class="col" id="FMID_54200644FM"><div class="nodecontent">描述符</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_141741760FM"><div class="nodecontent">字段描述符</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1921992119FM"><div class="nodecontent">B C D F I J(long) S Z(boolean) L(obj reference) [(arr reference)</div></li></ul></li>
+	<li class="col" id="FMID_103556999FM"><div class="nodecontent">方法描述符</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_38951827FM"><div class="nodecontent">返回值为void的描述符为Ｖ</div></li></ul></li></ul></li></ul></li>
+	<li class="basic" id="FMID_1922634457FM"><div class="nodecontent">从１开始计数，０用于</div></li></ul></li>
+	<li class="col" id="FMID_943621653FM"><div class="nodecontent">常量</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1322836340FM"><div class="nodecontent">每一个常量都是一个表</div></li>
+	<li class="basic" id="FMID_1633674481FM"><div class="nodecontent">每个表的第一位为u1类型的标志位(14种类型)</div></li></ul></li></ul></li>
+	<li class="col" id="FMID_739133669FM"><div class="nodecontent" style="font-size:150%;">类信息</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_936091591FM"><div class="nodecontent">access_flags(u2)</div></li>
+	<li class="col" id="FMID_985603564FM"><div class="nodecontent">this_class(u2)</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_1029040158FM"><div class="nodecontent">指向CONSTANT_Class_info常量</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_668336324FM"><div class="nodecontent">该常量指向CONSTANT_Utf8-info类型的常量，值为全限定名字符串</div></li></ul></li></ul></li>
+	<li class="basic" id="FMID_790047285FM"><div class="nodecontent">super_class(u2)</div></li>
+	<li class="basic" id="FMID_1503287503FM"><div class="nodecontent">interfaces_count(u2)</div></li>
+	<li class="basic" id="FMID_209280325FM"><div class="nodecontent">interfaces[interface_count](u2)</div></li></ul></li>
+	<li class="col" id="FMID_1214525583FM"><div class="nodecontent" style="font-size:150%;">字段列表</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_842195745FM"><div class="nodecontent">fields_count(u2)</div></li>
+	<li class="basic" id="FMID_836963218FM"><div class="nodecontent">fields[fileds_count](field_info)</div></li></ul></li>
+	<li class="col" id="FMID_898867241FM"><div class="nodecontent" style="font-size:150%;">方法列表</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1412499246FM"><div class="nodecontent">methods_count(u2)</div></li>
+	<li class="basic" id="FMID_1987896648FM"><div class="nodecontent">methods[methods_count](method_info)</div></li></ul></li>
+	<li class="col" id="FMID_1267251966FM"><div class="nodecontent" style="font-size:150%;">属性表</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_220164920FM"><div class="nodecontent">attributes_count(u2)</div></li>
+	<li class="col" id="FMID_1234275605FM"><div class="nodecontent">attributes[attributes_count](attribute_info)</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_529958417FM"><div class="nodecontent">attribute_info = u2 attribute_name_index + u4 attribute_length + u1 info[attribute_length]</div></li>
+	<li class="col" id="FMID_1411361684FM"><div class="nodecontent">Code_attribute</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_949951470FM"><div class="nodecontent">存放方法的字节码指令和其他辅助信息(局部变量表长度、操作数长度、异常表)</div></li>
+	<li class="basic" id="FMID_741513265FM"><div class="nodecontent">abastract方法和native方法不含Code属性</div></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></div></body></html>
