@@ -34,3 +34,18 @@
 - useCache="true"使本语句的结构被二级缓存
 - statementType="PREPARED"默认为PREPARED，也可为STATEMENT或者CALLABLE
 - timeout、fetchSize、resultSetType 默认为unset
+
+## ResultMap
+- type、id
+- collection
+```
+<collection property="courseList" column="stu_course_id" ofType="Course">
+    <id property="id" column="course_id"/>
+    <result property="name" column="course_name"/>
+    <result property="deleteFlag" column="course_delete_flg"/>
+</collection>
+```
+- select resultMap="mapId"
+```
+SELECT s.*, c.* FROM t_student s LEFT JOIN t_course c ON s.stu_course_id=c.course_id WHERE s.stu_id_card=#{idCard}
+```
