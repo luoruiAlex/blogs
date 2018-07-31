@@ -69,3 +69,7 @@
 - doCreateBean()将类A曝光到singletonFactories中
 - 类B从singletonFactories中获取到类A的一个引用，将自己放到 singletonObjects 中
 - 类A获取到B对象，填充属性
+
+
+### Bean的生命周期
+- [Bean的生命周期](https://blog.csdn.net/hotdust/article/details/53485770)
