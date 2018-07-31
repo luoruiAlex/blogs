@@ -69,3 +69,5 @@ SELECT s.*, c.* FROM t_student s LEFT JOIN t_course c ON s.stu_course_id=c.cours
 ## TypeHandler处理枚举
 - EnumTypeHandler: 用于保存枚举名
 - EnumOrdinalTypeHandler: 用于保存枚举的序号
+- 自定义 extends BaseTypeHandler
+- 使用 `<result typeHandler="xxTypeHandler" />`
