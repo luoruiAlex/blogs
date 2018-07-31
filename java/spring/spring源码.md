@@ -1,0 +1,19 @@
+## 继承体系
+- 0.BeanFactory
+  - 查找是否包含Bean，取得单个Bean，Bean是Singleton还是Prototype的等操作
+- 1.1HierarchicalBeanFactory
+  - containsLocalBean(String name)，getParentBeanFactory()
+  - ConfigurableBeanFactory
+    - 可以添加一些自定义配置
+    - setParentBeanFactory(BeanFactory parentBeanFactory) addBeanPostProcessor()
+- 1.2ListableBeanFactory
+  - 取得所有Bean，和所有BeanName，以及所有BeanDefinition的方法
+  - containsBeanDefinition， getBeanDefinitionNames， getBeanDefinitionCount等
+  - getBeanNamesForAnnotation，getBeanNamesForType
+  - getBeansOfType，getBeansWithAnnotation
+- 2.1ConfigurableListableBeanFactory
+- AutowireCapableBeanFactory
+  - 在BeanFactory基础上实现对已存在实例的管理，可以使用这个接口集成其它框架,捆绑并填充并不由Spring管理生命周期并已存在的实例
+  - createBean configureBean destroyBean
+  - AbstractAutowireCapableBeanFactory
+- 3.DefaultListableBeanFactory
