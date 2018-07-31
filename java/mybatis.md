@@ -73,4 +73,6 @@ SELECT s.*, c.* FROM t_student s LEFT JOIN t_course c ON s.stu_course_id=c.cours
   - @MappedJdbcTypes定义的是JdbcType类型，这里的类型不可自己随意定义，必须要是枚举类org.apache.ibatis.type.JdbcType所枚举的数据类型
   - @MappedTypes定义的是JavaType的数据类型，描述了哪些Java类型可被拦截
   - 在setNonNullParameter方法中，我们重新定义要写往数据库的数据，在另外三个方法中我们将从数据库读出的数据类型进行转换
-- 使用 `<result typeHandler="xxTypeHandler" />`
+- 注册：`<typeHandlers>`中配置`<typeHandler handler="xxx.xxx.MyDateTypeHandler">`或者`<package name="org.xx">`
+- 查询使用 resultMap中`<result typeHandler="xxTypeHandler" />`
+- 插入使用 `#{regTime,javaType=Date,jdbcType=VARCHAR,typeHandler=org.sang.db.MyDateTypeHandler}`，可只用typeHandler，或者同时用javaType和jdbcType
