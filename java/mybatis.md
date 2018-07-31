@@ -70,4 +70,7 @@ SELECT s.*, c.* FROM t_student s LEFT JOIN t_course c ON s.stu_course_id=c.cours
 - EnumTypeHandler: 用于保存枚举名
 - EnumOrdinalTypeHandler: 用于保存枚举的序号
 - 自定义 extends BaseTypeHandler
+  - @MappedJdbcTypes定义的是JdbcType类型，这里的类型不可自己随意定义，必须要是枚举类org.apache.ibatis.type.JdbcType所枚举的数据类型
+  - @MappedTypes定义的是JavaType的数据类型，描述了哪些Java类型可被拦截
+  - 在setNonNullParameter方法中，我们重新定义要写往数据库的数据，在另外三个方法中我们将从数据库读出的数据类型进行转换
 - 使用 `<result typeHandler="xxTypeHandler" />`
