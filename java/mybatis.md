@@ -21,6 +21,19 @@
 - SqlSessionFactoryBuilder读取配置文件，生成 SqlSessionFactory
 - SqlSessionFactory获取SqlSession对象
 
+## 架构
+- 1.配置：通过配置文件或者配置类生成Configuration
+- 2.通过Configuration生成SqlSessionFactory(一般全局单例，对应一个数据库连接池)，默认为SqlSessionFactory的默认实现类DefaultSqlSessionFactory。使用了Builder模式
+- 3.生成SqlSession
+  - Executor：执行器，调用另外3个对象
+    - SIMPLE：默认
+    - REUSE：重用预处理
+    - BATCH：执行重用语句和批量更新
+  - StatementHandler.prepare()/parameterize()：使用市局哭的Statement(PreparedStatement)
+  - ParameterHandler.setparameters()：处理参数
+  - ResultHandler.handlerResult()：封装ResultSet并返回，ObjectFactory提供结果对象的生成规则，TypeHandler提供参数设置和结果类型转换规则
+- 4.动态生成Mapper代理类
+
 ## 配置文件
 - configuration节点为根节点
 - 10个子节点
