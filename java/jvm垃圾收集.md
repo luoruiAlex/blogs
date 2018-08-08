@@ -37,15 +37,20 @@
   - 标记整理算法
   - \-XX:+UseParallelOldGC
 - CMS
-  - 标记清除算法，关注停顿时间
-  - \-XX:+UseConcMarkSweepGC
+  - 标记清除算法，关注停顿时间，建议内存3G以上
+  - \-XX:+UseConcMarkSweepGC：启用CMS \+ ParNew Serial \+ Old
+  - \-XX:CMSInitiatingOccupancyFraction决定老年代内存占用多少开始垃圾收集，否则根据统计数据决定
   - \-XX:+ UseCMSCompactAtFullCollection 在Full GC后，进行一次碎片整理
+  - \-XX:CMSFullGCBeforeCompaction设置多少次Full GC之后整理碎片
   - `初始标记(STW)->并发标记->重新标记(STW)->并发清除`
+  - 触发Full GC
+    - concurrent-mode-failure：并发清除时对象进入老年代空间不够(没有大空间或者老年代已用完)
+    - promotion-failed：minor gc时，survivor放不下的对象需要进入老年代，此时老年代空间不足
   - 三大缺点
     - 对CPU资源非常敏感，并发阶段会降低吞吐量，默认启动的回收线程数是：(CPU数量+3)/4。（建议CPU个数最少4个）
-    - 无法处理浮动垃圾：-XX:CMSInitiatingOccupancyFraction设置预留多少空间开始GC，如果在垃圾回收的过程中，剩余空间不足仍然满足不了用户线程生成对象所需要的空间，就会出现"Concurrent Mode Failure"失败，此时启动Serial Old来收集
-    - 空间碎片化，可能提前触发Full GC \-XX:UseCMSCompactAtFullCollection开启Full GC后整理碎片，\-XX:CMSFullGCBeforeCompaction设置多少次Full GC之后整理碎片
+    - 无法处理浮动垃圾，启动Serial Old来收集
+    - 空间碎片化，可能提前触发Full GC
 - G1
   - 分region(一个region有可能属于Eden，Survivor或者Tenured内存区域)，还有Humongous内存区块存储超过region 50%的大对象
-  - 并行收集。年轻代使用复制算法
+  - 并行收集。年轻代使用复制算法。建议内存6G以上。
   - `Initial Mark(触发minor gc时顺便进行) -> Concurrent Mark(同时清除对象存活率小或者没有的Tenured region) -> Remark(算法为SATB) -> Clean up/Copy(挑选对象存活率低的region回收，也是和minor gc一起进行)`
