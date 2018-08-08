@@ -1,10 +1,62 @@
-## 分类
-- 标准参数`-`：所有的JVM实现都必须实现这些参数的功能，而且向后兼容
-  - `-client` `-server`
-  - `-classpath / -cp`多路径用分号';'隔开，使用后，JVM不再搜索环境变量中定义的CLASSPATH，JVM搜索路径的顺序为：
-    - 先搜索JVM自带的jar或zip包（Bootstrat，搜索路径可以用System.getProperty("sun.boot.class.path")获得）
-    - 搜索JRE_HOME/lib/ext下的jar包（Extension，搜索路径可以用System.getProperty("java.ext.dirs")获得）
-    - 搜索用户自定义目录，顺序为：当前目录（.），CLASSPATH，-cp；（搜索路径用System.getProperty("java.class.path")获得）
-- 非标准参数`-X`：默认jvm实现这些参数的功能，但是并不保证所有jvm实现都满足，且不保证向后兼容
-- 非Stable参数`-XX`：此类参数各个jvm实现会有所不同，将来可能会随时取消，需要慎重使用（但是，这些参数往往是非常有用的）
-- `-D`设置环境变量，和JVM无关
+## 标准参数`-`
+- 所有的JVM实现都必须实现这些参数的功能，而且向后兼容
+- `-client` `-server`
+- `-classpath / -cp`多路径用分号';'隔开，使用后，JVM不再搜索环境变量中定义的CLASSPATH，JVM搜索路径的顺序为：
+  - 先搜索JVM自带的jar或zip包（Bootstrat，搜索路径可以用System.getProperty("sun.boot.class.path")获得）
+  - 搜索JRE_HOME/lib/ext下的jar包（Extension，搜索路径可以用System.getProperty("java.ext.dirs")获得）
+  - 搜索用户自定义目录，顺序为：当前目录（.），CLASSPATH，-cp；（搜索路径用System.getProperty("java.class.path")获得）
+- `-DpropertyName=value`：定义系统的全局属性值，如配置文件地址等，如果value有空格，可以用-Dname="space string"这样的形式来定义，用System.getProperty("propertyName")可以获得这些定义的属性值，在代码中也可以用System.setProperty("propertyName","value")的形式来定义属性。
+- `-verbose` 查询GC问题最常用的命令之一，具体参数如下：
+  - `-verbose:class`：输出jvm载入类的相关信息，当jvm报告说找不到类或者类冲突时可此进行诊断
+  - `-verbose:gc`：输出每次GC的相关情况
+  - `-verbose:jni`：输出native方法调用的相关情况，一般用于诊断jni调用错误信息
+  
+## 非标准参数`-X`：
+- 默认jvm实现这些参数的功能，但是并不保证所有jvm实现都满足，且不保证向后兼容
+- `-Xmn`新生代内存大小的最大值，包括E区和两个S区的总和，可指定单位.在开发环境下，可以用`-XX:NewSize`和`XX:MaxNewSize`来设置新生代的大小（`-XX:NewSize<=-XX:MaxNewSize`），在生产环境，建议只设置`-Xmn`，一般`-Xmn`的大小是`-Xms`的1/2左右，不要设置的过大或过小，过大导致老年代变小，频繁Full GC，过小导致minor GC频繁。如果不设置`-Xmn`，可以采用`-XX:NewRatio=2`来设置，也是一样的效果
+- `-Xms` `-Xmx`设置堆大小
+- `-Xss`设置栈大小
+- `-Xnoclassgc` 关闭针对class的gc功能；因为其阻止内存回收，所以可能会导致OutOfMemoryError错误，慎用
+- `-Xloggc:file` 与`-verbose:gc`功能类似，只是将每次GC事件的相关情况记录到一个文件中，文件的位置最好在本地。覆盖verbose
+
+## 非Stable参数`-XX`
+- 此类参数各个jvm实现会有所不同，将来可能会随时取消，需要慎重使用（但是，这些参数往往是非常有用的）
+- 分类
+  - 性能参数（ Performance Options）：用于JVM的性能调优和内存分配控制，如初始化内存大小的设置
+    - `-XX:NewSize=2.125m`新生代对象生成时占用内存的默认值
+    - `-XX:MaxNewSize=size`新生成对象能占用内存的最大值
+    - `-XX:MaxPermSize=size`方法区所能占用的最大内存（非堆内存）`-XX:PermSize=size` 
+    - `-XX:MaxTenuringThreshold=15`。设置了`-XX:MaxTenuringThreshold`，并不代表着，对象一定在年轻代存活15次才被晋升进入老年代，它只是一个最大值，事实上，存在一个动态计算机制，计算每次晋入老年代的阈值，取阈值和MaxTenuringThreshold中较小的一个为准。
+    - `-XX:PretenureSizeThreshold=size`大于该值的对象直接晋升入老年代
+    - `-XX:MaxHeapFreeRatio/MinHeapFreeRatio=num`GC后java堆中空闲量占的最大/小比例，大/小于该值，则堆内存会减少/增加
+    - `-XX:NewRatio=num`新生代内存容量与老生代内存容量的比例
+    - `-XX:SurvivorRatio=8`Eden区域Survivor区的容量比值，如默认值为8，代表Eden：Survivor1：Survivor2=8:1:1。如果XX:SurvivorRatio设置的太小，会导致本来能通过minor回收掉的对象提前进入老年代，产生不必要的full gc；如果XX:SurvivorRatio设置的太大，会导致Eden区相应的被压缩。
+  - 行为参数（Behavioral Options）：用于改变JVM的基础行为，如GC的方式和算法的选择
+    - `-XX:+UseSerialGC` Serial \+ Serial Old
+    - `-XX:+UseParNewGC` ParNew \+ Serial Old
+    - `-XX:+UseParallelGC` Parallel Scavenge \+ Serial Old
+    - `-XX:+UseParallelOldGC` Parallel Scavenge \+ Parallel Old
+    - `-XX:+UseConcMarkSweepGC` ParNew \+ CMS \+ Serial Old
+    - `-XX:GCTimeRatio=99` 设置用户执行时间占总时间的比例（默认值99，即1%的时间用于GC）
+    - `-XX:MaxGCPauseMillis=time` 设置GC的最大停顿时间（这个参数只对Parallel Scavenge有效）
+    - `-XX:ParallelGCThreads` 设置执行内存回收的线程数，在`+UseParNewGC`的情况下使用
+    - `-XX:-DisableExplicitGC` 禁止调用System.gc()；但jvm的gc仍然有效
+    - `-XX:+ScavengeBeforeFullGC` 新生代GC优先于Full GC执行
+  - 调试参数（Debugging Options）：用于监控、打印、输出等jvm参数，用于显示jvm更加详细的信息
+    - `-XX:-HeapDumpOnOutOfMemoryError`
+    - `-XX:HeapDumpPath=./java_pid<pid>.hprof`
+    - `-XX:ErrorFile=./hs_err_pid<pid>.log` 保存错误日志或者数据到文件中
+    - `-XX:OnError="<cmd args>;<cmd args>"` 出现致命ERROR之后运行自定义命令
+    - `-XX:OnOutOfMemoryError="<cmd args>;<cmd args>"` 当首次遭遇OOM时执行自定义命令
+    - `-XX:+PrintGC Details`  `-XX:-PrintGC` `-XX:-PrintGCTimeStamps`
+    - `-XX:-PrintConcurrentLocks` 遇到`Ctrl-Break`后打印并发锁的相关信息，与`jstack -l`功能相同
+    - `-XX:-PrintClassHistogram` 遇到`Ctrl-Break`后打印类实例的柱状信息，与`jmap -histo`功能相同
+    - `-XX:-TraceClassLoading` `-XX:-TraceClassUnloading`跟踪类的加载、卸载信息
+    - `-XX:-TraceClassLoadingPreorder` 跟踪被引用到的所有类的加载信息
+    - `-XX:-TraceLoaderConstraints` 跟踪类加载器约束的相关信息
+    - `-XX:-TraceClassResolution` 跟踪常量池
+- 使用方法
+  - `-XX:+<option>` 启用选项
+  - `-XX:-<option>` 不启用选项
+  - `-XX:<option>=<number>` 给选项设置一个数字类型值，可跟单位，例如 32k, 1024m, 2g
+  - `-XX:<option>=<string>` 给选项设置一个字符串值，例如`-XX:HeapDumpPath=./dump.core`
