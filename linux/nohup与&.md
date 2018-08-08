@@ -1,0 +1,6 @@
+- nohup
+  - 忽略SIGHUP信号
+  - 关闭shell，进程仍然存在
+- &
+  - 后台运行，对SIGINT信号免疫
+  - Ctrl \+ C后进程仍然存在
