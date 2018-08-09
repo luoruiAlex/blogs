@@ -12,6 +12,7 @@
   - 相当于 for select id from B (for select * from A where A.id = B.id)
 - select * from A where exists (select 1 from B where B.id = A.id)
   - 相当于 for select * from A (for select * from B where B.id = A.id)
+  - 只循环5次，即只判断5次，性能高
 - 当A表的数据集小于B表的数据集时，用exists优于in
 - not in 和not exists如果查询语句使用了not in 那么内外表都进行全表扫描，没有用到索引；而not extsts 的子查询依然能用到表上的索引。所以无论那个表大，用not exists都比not in要快。
 
