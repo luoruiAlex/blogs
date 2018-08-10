@@ -1,1 +1,2 @@
 - [explain sql优化](https://www.cnblogs.com/toSeeMyDream/p/7087221.html)
+- [系统存储](https://blog.csdn.net/column/details/12844.html?&page=2)
