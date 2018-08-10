@@ -1,2 +1,3 @@
 - [explain sql优化](https://www.cnblogs.com/toSeeMyDream/p/7087221.html)
 - [系统存储](https://blog.csdn.net/column/details/12844.html?&page=2)
+- [Mysql Explain 详解](http://www.cnitblog.com/aliyiyi08/archive/2008/09/09/48878.html)
