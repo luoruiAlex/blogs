@@ -26,3 +26,6 @@
 - 不允许存key、value为null：支持并发的HashMap导致两次调用间的改变使我们无法知道是不存在还是为值为空
 - Segment数组不能扩容
 - loadFactor是给每个Segment内部使用的
+- jdk8：摒弃了分段锁的方案，直接使用一个大数组
+  - put：null值的数组元素，CAS设置其值；非null的数组元素，synchronized加锁该元素然后操作
+  - get：value和next都是volatile，具有可见性
