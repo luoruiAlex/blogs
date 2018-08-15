@@ -1,12 +1,16 @@
 ## 三次握手
 - 过程
-  - A发送SYN=j，并进入SYN_SENDZHUANGT 
-  - B发送SYN=(j\+1)\+ACK=k包，确认SYN，进入SYN_RECV状态
-  - A发送ACK=(k\+1)，A B进入ESTABLISHED状态
+  - client发送SYN=j，并进入**SYN_SEND**状态
+  - server发送SYN=(j\+1)\+ACK=k包，确认SYN，进入**SYN_RECV**状态
+  - client检查ACK，发送ACK=(k\+1)，A B进入**ESTABLISHED**状态
 - 为什么是3次？
   - TCP要在不可靠的信道上进行可靠的传输；3次是理论上确认数据传输可靠的最小值
   - 第2次握手A知道B能收到A的消息
   - 第3次握手B知道了A知道B能收到A的消息，如果没有收到，则B不用无谓等待
+- SYN攻击
+  - 一种典型的DDOS攻击
+  - Client在**短时间内伪造大量不存在的IP地址**，并向Server不断地发送SYN包，Server回复确认包，并等待Client的确认，由于源地址是不存在的，因此，**Server需要不断重发直至超时**，这些伪造的SYN包将**长时间占用未连接队列**，导致正常的SYN请求因为队列满而被丢弃，从而引起网络堵塞甚至系统瘫痪。
+  - 检测：当Server上有大量半连接状态且源IP地址是随机的，则可以断定遭到SYN攻击了
   
 ## 四次挥手
 - 过程
