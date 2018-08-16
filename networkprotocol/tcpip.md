@@ -1,6 +1,6 @@
 ## 三次握手
 - 过程
-  - client发送SYN=j，并进入**SYN_SEND**状态
+  - client发送SYN=j，并进入**SYN_SENT**状态
   - server发送SYN=(j\+1)\+ACK=k包，确认SYN，进入**SYN_RECV**状态
   - client检查ACK，发送ACK=(k\+1)，A B进入**ESTABLISHED**状态
 - 为什么是3次？
