@@ -17,6 +17,7 @@
 - 过程
   - client向B发送FIN(状态位FIN=1,发送seq=J)，client进入**FIN_WAIT_1**
   - Server向client发送ACK(状态位ACK=1，发送ack=J+1)，Server进入**CLOSE_WAIT**状态
+  - Client收到ACK，进入**FIN_WAIT_2**。此时为**半连接**
   - Server向client发送FIN(状态位FIN=1,发送seq=K)，Server进入**LAST_ACK**状态
   - client向Server发送ACK，进入**TIME_WAIT**状态
   - Server收到ACK就关闭连接，client等待2MSL后仍然没有收到回复，也关闭连接(等待2MSL是为了防止server没有收到消息重发FIN)
@@ -27,6 +28,10 @@
     - 如果Client直接关闭，Server有可能没有收到Client最后回复的ACK而在超时后继续发送FIN，此时会收到RST而不是ACK，Server会认为是错误而向高层汇报
   - 保证这次连接的重复数据段从网络中消失
     - 如果Client直接关闭后又向Server发起新连接，如果前后两次端口相同，之前发送延迟的(还没到Server的)数据包会被当做新连接的数据，导致混淆。
+    
+ ## 半连接、半关闭
+ - TCP的半开连接是指TCP连接的一端异常崩溃，或者在未通知对端的情况下关闭连接，这种情况下不可以正常收发数据
+ - TCP连接只有一方发送了FIN，另一方没有发出FIN包，仍然可以在一个方向上正常发送数据
   
 ## TCP拥塞控制
 ### 发送窗口
