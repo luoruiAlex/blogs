@@ -19,7 +19,7 @@
   - Server向client发送ACK(状态位ACK=1，发送ack=J+1)，Server进入**CLOSE_WAIT**状态
   - Server向client发送FIN(状态位FIN=1,发送seq=K)，Server进入**LAST_ACK**状态
   - client向Server发送ACK，进入**TIME_WAIT**状态
-  - Server收到ACK就关闭连接，client等待2MSL后仍然没有收到回复，也关闭连接(等待2MSL是未来防止B没有收到消息重发FIN)
+  - Server收到ACK就关闭连接，client等待2MSL后仍然没有收到回复，也关闭连接(等待2MSL是为了防止server没有收到消息重发FIN)
 - 为什么是四次挥手？
   - TCP是双向传输，一边发送完毕不代表对方也发送完毕。
 - 为什么TIME_WAIT状态需要经过2MSL(最大报文段生存时间)才能返回到CLOSE状态?
