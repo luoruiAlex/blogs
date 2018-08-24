@@ -22,6 +22,11 @@
 - `sudo apt-get install google-chrome-stable`
 - /usr/bin/google-chrome-stable
 
+## wifi
+- `sudo gedit /etc/modprobe.d/iwlwifi.conf`
+- 添加options iwlwifi 11n_disable=1
+- reboot
+
 ### dokcer ce
 - `sudo apt-get remove docker docker-engine docker.io`卸载旧版本
 - `sudo apt-get install linux-image-extra-$(uname -r) linux-image-extra-virtual`安装AUFS内核驱动模块
