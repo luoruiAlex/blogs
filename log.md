@@ -1,0 +1,7 @@
+- 8.29
+  - MySQLACID 事务隔离级别
+  - Spring事务传播
+  - 加密算法
+  - base64
+  - TCP
+  - HTTP
