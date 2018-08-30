@@ -11,3 +11,5 @@
   - 对象分配流程(TLAB)
   - JVM参数
   - GC算法
+  - volatile
+  - happens\-before as\-if\-serial
