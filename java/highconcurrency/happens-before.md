@@ -16,4 +16,4 @@
 - 线程中断规则：对线程interrupt()方法的调用happens-before于被中断线程的代码检测到中断事件的发生
 - 线程终结规则：线程中所有的操作都happens-before于线程的终止检测，我们可以通过Thread.join()方法结束、Thread.isAlive()的返回值手段检测到线程已经终止执行
   - 假定线程A在执行的过程中，通过制定ThreadB.join()等待线程B终止，那么线程B在终止之前对共享变量的修改在线程A等待返回后可见
-- 对象终结规则：一个对象的初始化完成**happens-before**于他的**finalize()**方法的开始
+- 对象终结规则：一个对象的初始化完成**happens-before**于他的**finalize**方法的开始
