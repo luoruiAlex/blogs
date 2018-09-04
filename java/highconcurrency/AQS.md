@@ -2,7 +2,15 @@
 - AQS(AbstractQueuedSynchronizer)是JUC并发包中的核心基础组件
 - 解决了子类实现同步时涉及的大量细节问题，比如获取同步状态、FIFO同步队列
 
+### 节点
+- 新加入的节点的前置节点必须状态为SIGNAL，因为只有前置及诶点为SIGNAL时当前节点才可能被唤醒
+- CANCELLED表示节点被取消，该节点不再被唤醒
+- setHeadAndPropagate：将当前节点设置为头结点，并无条件传播，以确保后续节点能被正常唤醒
+- shouldParkAfterFailedAcquire：在获取资源失败后将节点所持有的线程阻塞，阻塞过程中需要确保节点的前置节点为SIGNAL，以确保节点能被正常唤醒
+- unparkSuccessor(h)：唤醒该节点的后继线程，有可能该线程的next指向的节点被中断，此时会从尾部开始往前查找，找到一个可以唤醒的节点
+
 ### 同步状态
+- 该整数可以表现任何状态。比如， Semaphore 用它来表现剩余的许可数，ReentrantLock 用它来表现拥有它的线程已经请求了多少次锁；FutureTask 用它来表现任务的状态(尚未开始、运行、完成和取消)
 - int类型的成员变量**state**来表示同步状态，state>0表示已获取锁，state=0表示已释放锁
 - getState()、setState(int newState)、compareAndSetState(int expect,int update)
 - 自定义子类使用AQS提供的模板方法就可以实现自己的同步语义
