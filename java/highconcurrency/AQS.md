@@ -30,8 +30,8 @@ if (!tryAcquire(arg) &&
 ```
 - addWaiter(Node)在tryAcquire失败后调用，返回了最终要写入的node节点，作为acquireQueued()方法的入参
 ```
-Node node = new Node(Thread.currentThread(), mode);     // 创建新节点：包含当前线程和同步为共享同步还是排他同步这两个信息
-// Try the fast path of enq; backup to full enq on failure
+// 创建新节点：包含当前线程和同步为共享同步还是排他同步这两个信息
+Node node = new Node(Thread.currentThread(), mode);   
 Node pred = tail;
 if (pred != null) {
     node.prev = pred;
@@ -59,21 +59,23 @@ for (;;) { // 死循环保证成功，CAS保证多线程竞争时一次只有一
             }
         }
 ```
-- acquireQueued(Node)
+- acquireQueued(Node) 排他非响应中断模式下获取状态，也用于等待condition情况
 ```
 boolean failed = true;
 try {
     boolean interrupted = false;
     for (;;) {
         final Node p = node.predecessor();
-        if (p == head && tryAcquire(arg)) { // 死循环只有在这个条件下推出：前前驱节点是head(第一次为傀儡结点)，而且tryAcquire(arg)成功
+        // 死循环只有在这个条件下推出：前前驱节点是head(第一次为傀儡结点)，而且tryAcquire(arg)成功
+        if (p == head && tryAcquire(arg)) { 
             setHead(node);                  // addWaiter加入CLH的结点
             p.next = null; // help GC       // 执行完的结点
             failed = false;
             return interrupted;
         }
         if (shouldParkAfterFailedAcquire(p, node) &&
-            parkAndCheckInterrupt())        // 将当前线程挂起为WAITING状态，需要中断或者unpark()来唤醒，至此线程彻底阻塞
+             // 将当前线程挂起为WAITING状态，需要中断或者unpark()来唤醒，至此线程彻底阻塞
+            parkAndCheckInterrupt())       
             interrupted = true;
     }
 } finally {
@@ -97,6 +99,51 @@ if (ws > 0) {         // 前驱节点为CANCELLED
 return false;
 ```
 - acquireShared
+```
+// 共享模式，所以判断获取状态的条件不同
+if (tryAcquireShared(arg) < 0)
+            doAcquireShared(arg);
+```
+- doAcquireShared(arg) 共享非中断获模式下取状态
+```
+//初始化队列，增加当前线程代表的节点
+final Node node = addWaiter(Node.SHARED); 
+boolean failed = true;
+try {
+    boolean interrupted = false;
+    for (;;) {
+        final Node p = node.predecessor();
+        if (p == head) {
+            int r = tryAcquireShared(arg);
+            if (r >= 0) {
+                setHeadAndPropagate(node, r);
+                p.next = null; // help GC
+                if (interrupted)
+                    selfInterrupt();
+                failed = false;
+                return;
+            }
+        }
+        if (shouldParkAfterFailedAcquire(p, node) &&
+            parkAndCheckInterrupt())
+            interrupted = true;
+    }
+} finally {
+    if (failed)
+        cancelAcquire(node);
+}
+```
+- setHeadAndPropagate(node, propagate)将当前节点设置为头节点，并无条件传播，确保后续节点能被正常唤醒
+```
+Node h = head; // Record old head for check below
+setHead(node);
+if (propagate > 0 || h == null || h.waitStatus < 0 ||
+    (h = head) == null || h.waitStatus < 0) {
+    Node s = node.next;
+    if (s == null || s.isShared())
+        doReleaseShared();
+}
+```
 #### 释放状态
 - release(int arg)
 ```
@@ -116,14 +163,16 @@ private void unparkSuccessor(Node node) { //传入的是head节点，head节点�
         compareAndSetWaitStatus(node, ws, 0); // 处理当前节点，非CANCELLED状态重置为0
 
     Node s = node.next;                       // 寻找下个节点
-    if (s == null || s.waitStatus > 0) {      // 如果是CANCELLED状态，说明节点中途溜了，从队尾开始寻找最前面等待的节点
+    // 如果是CANCELLED状态(>0)，说明节点中断了，从队尾开始寻找最前面等待的节点
+    if (s == null || s.waitStatus > 0) {      
         s = null;
         for (Node t = tail; t != null && t != node; t = t.prev)
             if (t.waitStatus <= 0)
                 s = t;
     }
     if (s != null)
-        LockSupport.unpark(s.thread);       // 唤醒下个节点里的线程，与release()中的判断条件对应
+      // 唤醒下个节点里的线程，与release()中的判断条件对应
+        LockSupport.unpark(s.thread);       
 }
 ```
 
