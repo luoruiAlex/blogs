@@ -22,6 +22,25 @@ if (state may permit a blocked thread to acquire)
 - 控制公平
   - 新到的线程和队列头部的线程一起公平竞争，所以FIFO不一定是公平的
   - 为了保证公平，tryAcquire方法，不在队首返回false即可。
+  
+### 唤醒线程unparkSucessor(Node)
+```
+private void unparkSuccessor(Node node) {
+    int ws = node.waitStatus;
+    if (ws < 0)
+        compareAndSetWaitStatus(node, ws, 0); // 处理当前节点，非CANCELLED状态重置为0
+
+    Node s = node.next;                       // 寻找下个节点
+    if (s == null || s.waitStatus > 0) {      // 如果是CANCELLED状态，说明节点中途溜了，从队尾开始寻找最前面等待的节点
+        s = null;
+        for (Node t = tail; t != null && t != node; t = t.prev)
+            if (t.waitStatus <= 0)
+                s = t;
+    }
+    if (s != null)
+        LockSupport.unpark(s.thread);       // 唤醒下个节点里的线程
+}
+```
 
 ### 队列
 #### CLH队列锁
