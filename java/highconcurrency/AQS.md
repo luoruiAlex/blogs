@@ -37,8 +37,13 @@ if (state may permit a blocked thread to acquire)
 - 添加队列中的线程获取锁之前，必须先被transfer到同步队列中去
 
 ### 节点
-- 新加入的节点的前置节点必须状态为SIGNAL，因为只有前置及诶点为SIGNAL时当前节点才可能被唤醒
-- CANCELLED表示节点被取消，该节点不再被唤醒
+- 状态：
+  - 0：新节点，无状态
+  - CANCELLED表示节点被取消(超时或者中断)，该节点不再被唤醒，会被踢出队列等待GC回收
+  - SIGNAL：节点的继任节点被阻塞了，需要唤醒它
+  - CONDITION：节点在条件队列中，因为等待某个条件而被阻塞
+  - PROPAGATE：使用在共享模式头结点有可能牌处于这种状态，表示锁的下一次获取可以无条件传播
+- 新加入的节点的前置节点必须状态为SIGNAL，因为只有前置节点为SIGNAL时当前节点才可能被唤醒 
 - setHeadAndPropagate：将当前节点设置为头结点，并无条件传播，以确保后续节点能被正常唤醒
 - shouldParkAfterFailedAcquire：在获取资源失败后将节点所持有的线程阻塞，阻塞过程中需要确保节点的前置节点为SIGNAL，以确保节点能被正常唤醒
 - unparkSuccessor(h)：唤醒该节点的后继线程，有可能该线程的next指向的节点被中断，此时会从尾部开始往前查找，找到一个可以唤醒的节点
