@@ -97,8 +97,21 @@ if (state may permit a blocked thread to acquire)
   ```
 #### 共享式
 - **在同一时刻可以有多个线程获取同步状态**
-- 同步状态获取(acquireShared)：tryAcquireShared(int arg)方法尝试获取同步状态，返回值为int，当其 >= 0 时，表示能够获取到同步状态，这个时候就可以从自旋过程中退出
+- 同步状态获取(acquireShared)：`if (tryAcquireShared(arg) < 0) doAcquireShared(arg)`
+  - 创建新节点(共享模式)，加入到队尾
+  - 判断新节点的前驱节点是否为头结点，如果不是，则设置前驱节点的waitStatus为SIGNAL，此时当前线程可安全地挂起
+  - 如果是头结点，前驱节点在共享模式下获取锁(子类实现tryAcqurieShared)，如果获取成功，就把当前节点设置为头结点。
+  - 设置为头结点后，满足释放锁条件(允许传播或者需要通知继任节点或者继任节点为共享模式的节点)就阻塞等待释放锁
 - 同步状态释放：因为可能会存在多个线程同时进行释放同步状态资源，所以需要确保同步状态安全地成功释放，一般都是通过CAS和循环来完成的
+  - `if(tryReleaseShared) {doReleaseShared}`
+  - 把当前节点设置为SIGNAL或者PROPAGATE
+  - 如果当前节点不是头结点、尾节点，先判断当前节点状态是否为SIGNAL，如果是就设置为0，因为共享模式下更多使用PROPAGATE来传播。SIGNAL会被经过两步改为PROPAGATE：compareAndSetWaitStatus(h, Node.SIGNAL, 0) compareAndSetWaitStatus(h, 0, Node.PROPAGATE)
+    - 为什么是2步：如果直接从SIGNAL到PROPAGATE,那么到unparkSuccessor方法里面又被设置为0：SIGNAL--PROPAGATE---0----PROPAGATE 对头结点相当于多做了一次compareAndSet操作
+- CountDownLatch
+  - state的初始值为count值
+  - 调用await时tryAcqurieShared返回-1(state=count)，即这些线程都阻塞在doAcqurieShared的for循环中
+  - 调用countDown时tryReleaseShared递减state的值，直到0返回false，此时线程退出for循环
+  - 退出for循环后doReleaseShared，头结点为PROPAGATE，而且节点都是共享模式，头结点传播后结点都获取锁
 
 
 ### 同步队列
