@@ -2,6 +2,39 @@
 - **多线程并发的执行，之间通过某种 共享 状态来同步，只有当状态满足 xxxx 条件，才能触发线程执行 xxxx**，这个共同的语义可以称之为同步器
 - AQS(AbstractQueuedSynchronizer)是JUC并发包中的核心基础组件
 - 解决了子类实现同步时涉及的大量细节问题，比如获取同步状态、FIFO同步队列
+- 3个关键点
+  - 原子操作同步状态：子类的tryAcquire tryRelease
+  - 阻塞或唤醒一个线程：LockSupport
+  - 内部维护一个队列：CLH 条件队列
+- 伪代码
+```
+// 获取
+while (synchronization state does not allow acquire) {
+    enqueue current thread if not already queued;
+    possibly block current thread;
+}
+dequeue current thread if it was queued;
+//释放
+update synchronization state;
+if (state may permit a blocked thread to acquire)
+    unblock one or more queued threads;
+```
+- 控制公平
+  - 新到的线程和队列头部的线程一起公平竞争，所以FIFO不一定是公平的
+  - 为了保证公平，tryAcquire方法，不在队首返回false即可。
+
+### 队列
+#### CLH队列锁
+- 仅适用自旋锁，但更容易处理cancel和timeout，所以AQS采用CLH Lock而不是MSC Lock
+- 进出队快，无锁，有竞争也能很快插入，检查是否有线程在等待也容易(检查头尾指针是否相同)
+- AQS中的CLH的改进：
+  - 为了处理timeout和cancel，每个node维护一个前驱指针。如果一个node的前驱被cancel，这个node可以前向移动使用前驱的状态字段。
+  - 每个node里使用一个状态字段去控制阻塞，而不是自旋。一个排队的线程调用acquire，只有在通过了子类实现的tryAcquire才能返回，确保只有队头线程才允许调用tryAcquire
+  - head结点使用的是傀儡结点
+#### 条件队列
+- 条件结点Condition内部的nextWaiter指针穿起来
+- 条件结点内部也有状态字段，修复了JVM内置同步器的不足，一个锁可以有多个条件。
+- 添加队列中的线程获取锁之前，必须先被transfer到同步队列中去
 
 ### 节点
 - 新加入的节点的前置节点必须状态为SIGNAL，因为只有前置及诶点为SIGNAL时当前节点才可能被唤醒
@@ -11,7 +44,7 @@
 - unparkSuccessor(h)：唤醒该节点的后继线程，有可能该线程的next指向的节点被中断，此时会从尾部开始往前查找，找到一个可以唤醒的节点
 
 ### 同步状态
-- 该整数可以表现任何状态。比如， Semaphore 用它来表现剩余的许可数，ReentrantLock 用它来表现拥有它的线程已经请求了多少次锁；FutureTask 用它来表现任务的状态(尚未开始、运行、完成和取消)
+- 该整数可以表现任何状态。Semaphore 用它来表现剩余的许可数，ReentrantLock 用它来表现拥有它的线程已经请求了多少次锁；FutureTask 用它来表现任务的状态(尚未开始、运行、完成和取消)，ReentrantReadWriteLock将32位的state分成高低位，16位写锁计数，16位读锁计数，CountDownLatch代表计数，所有线程都获得锁时，状态为0，开始唤醒
 - int类型的成员变量**state**来表示同步状态，state>0表示已获取锁，state=0表示已释放锁
 - getState()、setState(int newState)、compareAndSetState(int expect,int update)
 - 自定义子类使用AQS提供的模板方法就可以实现自己的同步语义
