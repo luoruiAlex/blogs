@@ -111,7 +111,9 @@ if (state may permit a blocked thread to acquire)
 ### 阻塞和唤醒线程
 - 获取同步状态失败后加入CLH同步队列，通过自旋不断获取同步状态，在自旋的过程中则需要判断当前线程是否需要阻塞，其主要方法在acquireQueued()
 
-### [好博客](https://www.jianshu.com/u/42116042245c)
+### 博客
+- [博客1](https://blog.csdn.net/aesop_wubo/article/category/1147178)
+- [博客2](https://www.jianshu.com/u/42116042245c)
 ### 公平锁与非公平锁
 - 非公平锁只要CAS设置同步状态成功，当前线程也就获取锁成功
 - 公平锁多了一个hasQueuedPredecessors()
