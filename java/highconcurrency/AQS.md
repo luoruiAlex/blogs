@@ -6,26 +6,111 @@
   - 原子操作同步状态：子类的tryAcquire tryRelease
   - 阻塞或唤醒一个线程：LockSupport
   - 内部维护一个队列：CLH 条件队列
-- 伪代码
-```
-// 获取
-while (synchronization state does not allow acquire) {
-    enqueue current thread if not already queued;
-    possibly block current thread;
-}
-dequeue current thread if it was queued;
-//释放
-update synchronization state;
-if (state may permit a blocked thread to acquire)
-    unblock one or more queued threads;
-```
+
 - 控制公平
   - 新到的线程和队列头部的线程一起公平竞争，所以FIFO不一定是公平的
   - 为了保证公平，tryAcquire方法，不在队首返回false即可。
   
-### 唤醒线程unparkSucessor(Node)
+### 节点
+- 状态：
+  - 0：新节点，无状态
+  - CANCELLED表示节点被取消(超时或者中断)，该节点不再被唤醒，会被踢出队列等待GC回收
+  - SIGNAL：节点的继任节点被阻塞了，需要unpark()唤醒它。新加入的节点的前置节点必须状态为SIGNAL，因为只有前置节点为SIGNAL时当前节点才可能被唤醒 
+  - CONDITION：节点在条件队列中，基于Condition对象发生了等待，需要Condition对象来激活
+  - PROPAGATE：使用在共享模式头结点有可能处于这种状态，表示锁的下一次acquireShared可以无条件传播
+- setHeadAndPropagate：将当前节点设置为头结点，并无条件传播，以确保后续节点能被正常唤醒
+  
+### 基本方法
+#### 获取状态
+- acquire
 ```
-private void unparkSuccessor(Node node) {
+if (!tryAcquire(arg) &&
+  acquireQueued(addWaiter(Node.EXCLUSIVE), arg))
+  selfInterrupt();
+```
+- addWaiter(Node)在tryAcquire失败后调用，返回了最终要写入的node节点，作为acquireQueued()方法的入参
+```
+Node node = new Node(Thread.currentThread(), mode);     // 创建新节点：包含当前线程和同步为共享同步还是排他同步这两个信息
+// Try the fast path of enq; backup to full enq on failure
+Node pred = tail;
+if (pred != null) {
+    node.prev = pred;
+    if (compareAndSetTail(pred, node)) { //在链表尾部加入，同enq，但只尝试一次入队列
+        pred.next = node;
+        return node;
+    }
+}
+enq(node);
+return node;
+```
+- enq(Node) //初始化CLH队列，确保node进入CLH队列
+```
+for (;;) { // 死循环保证成功，CAS保证多线程竞争时一次只有一个成功
+            Node t = tail;
+            if (t == null) {                        // 初始化CLH队列，head结点使用的是傀儡结点
+                if (compareAndSetHead(new Node()))
+                    tail = head;
+            } else {
+                node.prev = t;
+                if (compareAndSetTail(t, node)) { //在链表尾部加入
+                    t.next = node;
+                    return t;
+                }
+            }
+        }
+```
+- acquireQueued(Node)
+```
+boolean failed = true;
+try {
+    boolean interrupted = false;
+    for (;;) {
+        final Node p = node.predecessor();
+        if (p == head && tryAcquire(arg)) { // 死循环只有在这个条件下推出：前前驱节点是head(第一次为傀儡结点)，而且tryAcquire(arg)成功
+            setHead(node);                  // addWaiter加入CLH的结点
+            p.next = null; // help GC       // 执行完的结点
+            failed = false;
+            return interrupted;
+        }
+        if (shouldParkAfterFailedAcquire(p, node) &&
+            parkAndCheckInterrupt())        // 将当前线程挂起为WAITING状态，需要中断或者unpark()来唤醒，至此线程彻底阻塞
+            interrupted = true;
+    }
+} finally {
+    if (failed)
+        cancelAcquire(node);
+}
+```
+- shouldParkAfterFailedAcquire(pred, node)
+```
+int ws = pred.waitStatus;
+if (ws == Node.SIGNAL) // 前驱节点为SIGNAL，表示本节点需要唤醒
+    return true;
+if (ws > 0) {         // 前驱节点为CANCELLED
+    do {
+        node.prev = pred = pred.prev;
+    } while (pred.waitStatus > 0); // 从前驱节点开始找到第一个没有被CANCELLED的结点
+    pred.next = node;              // 保证acquireQueued下一轮循环时node的前驱节点为SIGNAL
+} else {
+    compareAndSetWaitStatus(pred, ws, Node.SIGNAL); // 设置前驱节点为SIGNAL
+}
+return false;
+```
+- acquireShared
+#### 释放状态
+- release(int arg)
+```
+if (tryRelease(arg)) { // 状态彻底释放
+    Node h = head;
+    if (h != null && h.waitStatus != 0) // 头结点的后继节点需要唤醒
+        unparkSuccessor(h);
+    return true;
+}
+return false;
+```
+- 唤醒线程unparkSucessor(Node)
+```
+private void unparkSuccessor(Node node) { //传入的是head节点，head节点表示已执行完的节点
     int ws = node.waitStatus;
     if (ws < 0)
         compareAndSetWaitStatus(node, ws, 0); // 处理当前节点，非CANCELLED状态重置为0
@@ -38,9 +123,10 @@ private void unparkSuccessor(Node node) {
                 s = t;
     }
     if (s != null)
-        LockSupport.unpark(s.thread);       // 唤醒下个节点里的线程
+        LockSupport.unpark(s.thread);       // 唤醒下个节点里的线程，与release()中的判断条件对应
 }
 ```
+
 
 ### 队列
 #### CLH队列锁
@@ -54,18 +140,6 @@ private void unparkSuccessor(Node node) {
 - 条件结点Condition内部的nextWaiter指针穿起来
 - 条件结点内部也有状态字段，修复了JVM内置同步器的不足，一个锁可以有多个条件。
 - 添加队列中的线程获取锁之前，必须先被transfer到同步队列中去
-
-### 节点
-- 状态：
-  - 0：新节点，无状态
-  - CANCELLED表示节点被取消(超时或者中断)，该节点不再被唤醒，会被踢出队列等待GC回收
-  - SIGNAL：节点的继任节点被阻塞了，需要唤醒它
-  - CONDITION：节点在条件队列中，因为等待某个条件而被阻塞
-  - PROPAGATE：使用在共享模式头结点有可能牌处于这种状态，表示锁的下一次获取可以无条件传播
-- 新加入的节点的前置节点必须状态为SIGNAL，因为只有前置节点为SIGNAL时当前节点才可能被唤醒 
-- setHeadAndPropagate：将当前节点设置为头结点，并无条件传播，以确保后续节点能被正常唤醒
-- shouldParkAfterFailedAcquire：在获取资源失败后将节点所持有的线程阻塞，阻塞过程中需要确保节点的前置节点为SIGNAL，以确保节点能被正常唤醒
-- unparkSuccessor(h)：唤醒该节点的后继线程，有可能该线程的next指向的节点被中断，此时会从尾部开始往前查找，找到一个可以唤醒的节点
 
 ### 同步状态
 - 该整数可以表现任何状态。Semaphore 用它来表现剩余的许可数，ReentrantLock 用它来表现拥有它的线程已经请求了多少次锁；FutureTask 用它来表现任务的状态(尚未开始、运行、完成和取消)，ReentrantReadWriteLock将32位的state分成高低位，16位写锁计数，16位读锁计数，CountDownLatch代表计数，所有线程都获得锁时，状态为0，开始唤醒
