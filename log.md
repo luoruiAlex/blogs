@@ -13,3 +13,9 @@
   - GC算法
   - volatile
   - happens\-before as\-if\-serial
+
+- 9.4
+  - synchronized
+- 9.5
+  - CAP
+  - AQS
