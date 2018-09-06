@@ -59,22 +59,25 @@ for (;;) { // 死循环保证成功，CAS保证多线程竞争时一次只有一
             }
         }
 ```
-- acquireQueued(Node) 排他非响应中断模式下获取状态，也用于等待condition情况
+- acquireQueued(Node) 排他非响应中断模式下获取同步状态，也用于等待condition情况
 ```
 boolean failed = true;
 try {
     boolean interrupted = false;
     for (;;) {
         final Node p = node.predecessor();
-        // 死循环只有在这个条件下推出：前前驱节点是head(第一次为傀儡结点)，而且tryAcquire(arg)成功
+        // 死循环只有在这个条件下推出：前前驱节点是头结点head，而且获取同步状态tryAcquire(arg)成功
         if (p == head && tryAcquire(arg)) { 
-            setHead(node);                  // addWaiter加入CLH的结点
+            // 设置当前节点(addWaiter加入CLH的结点)为头结点
+            setHead(node);
             p.next = null; // help GC       // 执行完的结点
             failed = false;
             return interrupted;
         }
+        // 不满足条件的线程在循环中不断进入等待状态:
+        // 1.前驱节点状态设置为SIGNAL
+        // 2.park()方法，将当前线程挂起为WAITING状态，需要中断或者unpark()来唤醒，至此线程彻底阻塞
         if (shouldParkAfterFailedAcquire(p, node) &&
-             // 将当前线程挂起为WAITING状态，需要中断或者unpark()来唤醒，至此线程彻底阻塞
             parkAndCheckInterrupt())       
             interrupted = true;
     }
@@ -83,10 +86,10 @@ try {
         cancelAcquire(node);
 }
 ```
-- shouldParkAfterFailedAcquire(pred, node)
+- shouldParkAfterFailedAcquire(pred, node) // 设置node的前驱节点为SIGNAL
 ```
 int ws = pred.waitStatus;
-if (ws == Node.SIGNAL) // 前驱节点为SIGNAL，表示本节点需要唤醒
+if (ws == Node.SIGNAL) // 前驱节点为SIGNAL，表示本节点可以被唤醒，可以放心地阻塞当前线程
     return true;
 if (ws > 0) {         // 前驱节点为CANCELLED
     do {
@@ -155,12 +158,12 @@ if (tryRelease(arg)) { // 状态彻底释放
 }
 return false;
 ```
-- 唤醒线程unparkSucessor(Node)
+- 唤醒线程unparkSucessor(Node) unpark()唤醒最前面等待的节点(不一定是头结点后面的节点)
 ```
 private void unparkSuccessor(Node node) { //传入的是head节点，head节点表示已执行完的节点
     int ws = node.waitStatus;
     if (ws < 0)
-        compareAndSetWaitStatus(node, ws, 0); // 处理当前节点，非CANCELLED状态重置为0
+        compareAndSetWaitStatus(node, ws, 0); // 处理头结点，非CANCELLED状态重置为0
 
     Node s = node.next;                       // 寻找下个节点
     // 如果是CANCELLED状态(>0)，说明节点中断了，从队尾开始寻找最前面等待的节点
