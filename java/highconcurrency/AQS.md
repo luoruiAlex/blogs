@@ -115,10 +115,10 @@ boolean failed = true;
 try {
     boolean interrupted = false;
     for (;;) {
-        final Node p = node.predecessor();
-        if (p == head) {
-            int r = tryAcquireShared(arg);
-            if (r >= 0) {
+        final Node p = node.predecessor(); //获取前驱节点
+        if (p == head) {  // 如果前驱节点为头结点
+            int r = tryAcquireShared(arg);  // 获取到的共享同步状态
+            if (r >= 0) {   // >=0，表示能获取到同步状态
                 setHeadAndPropagate(node, r);
                 p.next = null; // help GC
                 if (interrupted)
@@ -127,7 +127,7 @@ try {
                 return;
             }
         }
-        if (shouldParkAfterFailedAcquire(p, node) &&
+        if (shouldParkAfterFailedAcquire(p, node) && // 否则等待
             parkAndCheckInterrupt())
             interrupted = true;
     }
@@ -143,7 +143,7 @@ setHead(node);
 if (propagate > 0 || h == null || h.waitStatus < 0 ||
     (h = head) == null || h.waitStatus < 0) {
     Node s = node.next;
-    if (s == null || s.isShared())
+    if (s == null || s.isShared()) // 这里与exclusive不同，需要向后唤醒节点，实现共享状态的向后传播
         doReleaseShared();
 }
 ```
@@ -179,7 +179,25 @@ private void unparkSuccessor(Node node) { //传入的是head节点，head节点�
         LockSupport.unpark(s.thread);       
 }
 ```
-
+- doReleaseShared() 确保release传播
+```
+for (;;) {
+    Node h = head;
+    if (h != null && h != tail) {
+        int ws = h.waitStatus;
+        if (ws == Node.SIGNAL) {
+            if (!compareAndSetWaitStatus(h, Node.SIGNAL, 0))
+                continue;            // loop to recheck cases
+            unparkSuccessor(h);
+        }
+        else if (ws == 0 &&
+                 !compareAndSetWaitStatus(h, 0, Node.PROPAGATE))
+            continue;                // loop on failed CAS
+    }
+    if (h == head)                   // loop if head changed
+        break;
+}
+```
 
 ### 队列
 #### CLH队列锁
