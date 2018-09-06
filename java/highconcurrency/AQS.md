@@ -101,9 +101,9 @@ if (ws > 0) {         // 前驱节点为CANCELLED
 }
 return false;
 ```
-- acquireShared
+- acquireShared 共享式获取同步状态
 ```
-// 共享模式，所以判断获取状态的条件不同
+// 共享模式，所以判断获取状态的条件不同，只有大于0才表示能获取到同步状态
 if (tryAcquireShared(arg) < 0)
             doAcquireShared(arg);
 ```
@@ -159,6 +159,7 @@ if (tryRelease(arg)) { // 状态彻底释放
 return false;
 ```
 - 唤醒线程unparkSucessor(Node) unpark()唤醒最前面等待的节点(不一定是头结点后面的节点)
+- 头结点在acquireQueued方法中回收(p.next=null)
 ```
 private void unparkSuccessor(Node node) { //传入的是head节点，head节点表示已执行完的节点
     int ws = node.waitStatus;
