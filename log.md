@@ -19,3 +19,7 @@
 - 9.5
   - CAP
   - AQS
+- 9.6
+  - bitmap bloomfilter
+  - 敏捷开发
+  - 单例模式
