@@ -31,3 +31,6 @@
 - jdk8：摒弃了分段锁的方案，直接使用一个大数组
   - put：null值的数组元素，CAS设置其值；非null的数组元素，synchronized加锁该元素然后操作
   - get：value和next都是volatile，具有可见性
+### CopyOnWriteArrayList
+- 读不加锁
+- 写的时候加ReentrantLock，然后拷贝数组，Arrays.copyOf()，本质上调用System.arraycopy()
