@@ -23,3 +23,6 @@
   - bitmap bloomfilter
   - 敏捷开发
   - 单例模式
+- 9.11
+  - Mysql 事务 锁
+  - AQS ReentrantLock ThreadLocal Executors
