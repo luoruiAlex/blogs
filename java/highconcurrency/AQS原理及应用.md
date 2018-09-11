@@ -1,3 +1,4 @@
+## 原理
 ### CLH队列
 - FIFO双向队列
 - 仅适用自旋锁，但更容易处理cancel和timeout，所以AQS采用CLH Lock而不是MSC Lock
@@ -47,3 +48,21 @@
 - 释放同步状态后，则需要唤醒该线程的后继节点
 - unparkSuccessor
   - 可能会存在当前线程的后继节点为null，超时、被中断的情况(waitStatus\>0)，从tail开始回溯，找到第一个可用节点(waitStatus\<=0)，唤醒该节点对应的线程
+
+## 应用
+### ReentrantLock
+- 加锁释放锁委托给Sync的两个子类FairSync和NonfairSync完成
+- 获取到同步状态则将exclusiveOwnerThread设置为当前线程
+#### 非公平锁
+- nonfairTryAcquire
+  - state=0表示锁空闲，直接CAS获取
+  - 持有锁的线程为当前线程，state增长1，表示重入
+  - 非当前线程而且CAS失败，返回false
+- tryRelease
+  - state减去1
+  - 如果state=0，表示完全释放锁，将exclusiveOwnerThread设置为null
+  - 返回state是否为0
+#### 公平锁
+- 区别在于是否按照FIFO的顺序来
+- state=0是非公平锁直接CAS获取
+- 公平锁先hasQueuedPredecessors判断当前线程是否为头结点，是头结点则尝试获取锁
