@@ -18,6 +18,7 @@
   
 ### 同步状态state
 - int类型的成员变量**state**来表示同步状态，state\>0表示已获取锁，state=0表示已释放锁
+- 每次设置前判断是否超过最大范围
 - getState()、setState(int newState)、compareAndSetState(int expect,int update)
 - 自定义子类使用AQS提供的模板方法就可以实现自己的同步语义。Semaphore 用它来表现剩余的许可数，ReentrantLock 用它来表现拥有它的线程已经请求了多少次锁；FutureTask 用它来表现任务的状态(尚未开始、运行、完成和取消)，ReentrantReadWriteLock将32位的state分成高低位，16位写锁计数，16位读锁计数，CountDownLatch代表计数，所有线程都获得锁时，状态为0，开始唤醒。
 #### 独占式获取
@@ -66,3 +67,20 @@
 - 区别在于是否按照FIFO的顺序来
 - state=0是非公平锁直接CAS获取
 - 公平锁先hasQueuedPredecessors判断当前线程是否为头结点，是头结点则尝试获取锁
+### ReentrantReadWriteLock
+- 特点
+  - 支持公平和非公平
+  - 支持重入
+  - 写锁能降级为读锁
+- state高16位表示读锁，低16位表示写锁，获取锁的state值与普通ReentrantLock需要特殊处理，比如state最大范围就不是Integer.MAX_VALUE
+#### WriteLock
+- 获取锁tryAcquire
+  - 已有锁
+    - 已有写锁而且exclusiveOwnerThread为当前线程而且**没有读锁**(保证读线程能感知当前写线程的操作)，满足条件则state\+1，否则返回false
+  - 判断是否需要阻塞，需要则返回false
+  - 没有锁也不需要阻塞：exclusiveOwnerThread设置为当前线程
+- 释放锁：类似于ReentrantLock，设置state，设置exclusiveOwnerThread
+#### ReadLock
+- 获取锁tryAcquireShared
+  - 如果有写锁而且exclusiveOwnerThread非当前线程，直接失败
+  - 
