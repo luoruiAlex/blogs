@@ -1,0 +1,479 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>JVM</title>
+<style type="text/css">
+    li { list-style: none;  margin: 0; }
+    p { margin: 0; }
+
+    span.l { color: red; font-weight: bold; }
+
+    a.mapnode:link {text-decoration: none; color: black; }
+    a.mapnode:visited {text-decoration: none; color: black; }
+    a.mapnode:active {text-decoration: none; color: black; }
+    a.mapnode:hover {text-decoration: none; color: black; background: #eeeee0; }
+
+</style>
+<!-- ^ Position is not set to relative / absolute here because of Mozilla -->
+</head>
+<body>
+<p><span style="font-size: 233%;font-family: SansSerif, sans-serif; ">JVM</span>
+<ul><li><span style="font-size: 200%;font-family: SansSerif, sans-serif; ">&#21442;&#25968;&#35774;&#32622;</span>
+<ul><li><span style="font-size: 166%;font-family: SansSerif, sans-serif; ">java [-options] class [args...]</span>
+
+</li>
+<li><span style="font-size: 166%;font-family: SansSerif, sans-serif; ">&#25171;&#21360;GC</span>
+<ul><li><span style="font-size: 150%;font-family: SansSerif, sans-serif; ">-XX:+PrintGC</span>
+
+</li>
+<li><span style="font-size: 150%;font-family: SansSerif, sans-serif; ">-XX:+PrintGCDetails</span>
+
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li><span style="font-size: 200%;font-family: SansSerif, sans-serif; ">&#32467;&#26500;</span>
+<ul><li><span style="font-size: 166%;font-family: SansSerif, sans-serif; ">&#31867;&#21152;&#36733;&#23376;&#31995;&#32479;</span>
+
+</li>
+<li><span style="font-size: 166%;font-family: SansSerif, sans-serif; ">&#20869;&#23384;&#21306;</span>
+<ul><li><span style="font-size: 150%;font-family: SansSerif, sans-serif; ">&#26041;&#27861;&#21306;</span>
+<ul><li><span style="font-size: 116%;font-family: SansSerif, sans-serif; ">&#21448;&#21483;&#27704;&#20037;&#21306;(Perm)</span>
+<ul><li>-xx:PermSize=128M&#65292;&#40664;&#35748;&#20026;&#29289;&#29702;&#20869;&#23384;&#30340;1/64
+
+</li>
+<li>-XX:MaxPermSize=128M&#65292;&#40664;&#35748;&#20026;&#29289;&#29702;&#20869;&#23384;&#30340;1/4
+
+</li>
+
+</ul>
+</li>
+<li><span style="font-size: 133%;font-family: SansSerif, sans-serif; ">1.8&#24320;&#22987;&#65292;&#36801;&#31227;&#21040;MetaSpace</span>
+
+</li>
+
+</ul>
+</li>
+<li><span style="font-size: 150%;font-family: SansSerif, sans-serif; ">&#30452;&#25509;&#20869;&#23384;</span>
+<ul><li><span style="font-size: 133%;font-family: SansSerif, sans-serif; ">NIO&#20801;&#35768;JAVA&#20351;&#29992;&#30452;&#25509;&#20869;&#23384;&#65292;&#19981;&#21463;Xmx&#38480;&#21046;&#65292;&#36866;&#29992;&#20110;&#35835;&#20889;&#39057;&#32321;&#30340;&#22330;&#21512;</span>
+
+</li>
+
+</ul>
+</li>
+<li><span style="font-size: 150%;font-family: SansSerif, sans-serif; ">&#22534;</span>
+<ul><li>-Xms128M
+
+</li>
+<li>-Xmx512M
+
+</li>
+
+</ul>
+</li>
+<li><span style="font-size: 150%;font-family: SansSerif, sans-serif; ">Java&#26632;</span>
+<ul><li><span style="font-size: 133%;font-family: SansSerif, sans-serif; ">&#26632;&#24103;</span>
+<ul><li><span style="font-size: 116%;font-family: SansSerif, sans-serif; ">&#23616;&#37096;&#21464;&#37327;&#34920;</span>
+<ul><li><span style="font-size: 116%;font-family: SansSerif, sans-serif; ">&#20445;&#23384;&#21442;&#25968;&#21644;&#23616;&#37096;&#21464;&#37327;</span>
+
+</li>
+<li><span style="font-size: 116%;font-family: SansSerif, sans-serif; ">&#27133;&#20301;&#21487;&#22797;&#29992;</span>
+<ul><li><span style="font-size: 116%;font-family: SansSerif, sans-serif; ">&#26632;&#24103;&#20013;&#30340;&#21464;&#37327;&#22312;&#20986;&#20102;&#20316;&#29992;&#22495;&#20043;&#21518;&#20063;&#19981;&#20250;&#39532;&#19978;&#24377;&#20986;&#65292;&#38500;&#38750;&#21518;&#38754;&#26377;&#26032;&#30340;&#23616;&#37096;&#21464;&#37327;&#22797;&#29992;&#35813;&#27133;&#20301;</span>
+
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li><span style="font-size: 116%;font-family: SansSerif, sans-serif; ">&#25805;&#20316;&#25968;&#26632;</span>
+<ul><li><span style="font-size: 116%;font-family: SansSerif, sans-serif; ">&#20445;&#23384;&#35745;&#31639;&#30340;&#20013;&#38388;&#32467;&#26524;&#65292;&#29992;&#20110;&#23383;&#33410;&#30721;&#25351;&#20196;&#30340;&#21442;&#25968;&#20256;&#36882;</span>
+
+</li>
+
+</ul>
+</li>
+<li><span style="font-size: 116%;font-family: SansSerif, sans-serif; ">&#24103;&#25968;&#25454;&#21306;</span>
+<ul><li><span style="font-size: 116%;font-family: SansSerif, sans-serif; ">&#20445;&#23384;&#35775;&#38382;&#24120;&#37327;&#27744;&#30340;&#25351;&#38024;</span>
+
+</li>
+<li><span style="font-size: 116%;font-family: SansSerif, sans-serif; ">&#27491;&#24120;&#26041;&#27861;&#36820;&#22238;</span>
+
+</li>
+<li><span style="font-size: 116%;font-family: SansSerif, sans-serif; ">&#24322;&#24120;&#22788;&#29702;&#34920;</span>
+
+</li>
+
+</ul>
+</li>
+<li><span style="font-size: 116%;font-family: SansSerif, sans-serif; ">&#38750;&#36867;&#36920;&#23567;&#23545;&#35937;&#30340;&#26632;&#19978;&#20998;&#37197;</span>
+
+</li>
+
+</ul>
+</li>
+<li><span style="font-size: 133%;font-family: SansSerif, sans-serif; ">-Xss128K&#25351;&#23450;&#26632;&#22823;&#23567;</span>
+
+</li>
+
+</ul>
+</li>
+<li><span style="font-size: 150%;font-family: SansSerif, sans-serif; ">&#26412;&#22320;&#26041;&#27861;&#26632;</span>
+
+</li>
+<li><span style="font-size: 150%;font-family: SansSerif, sans-serif; ">PC&#23492;&#23384;&#22120;</span>
+<ul><li><span style="font-size: 133%;font-family: SansSerif, sans-serif; ">&#25351;&#21521;&#24403;&#21069;&#25191;&#34892;&#30340;&#25351;&#20196;</span>
+
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li><span style="font-size: 166%;font-family: SansSerif, sans-serif; ">GC</span>
+<ul><li>&#26085;&#24535;&#35835;&#21462;
+<ul><li>[GC/[FullGC:&#22403;&#22334;&#25910;&#38598;&#30340;&#20572;&#39039;&#31867;&#22411;&#65292;FullGC&#34920;&#31034;&#21457;&#29983;&#20102;Stop-The-World
+
+</li>
+<li>GC&#21457;&#29983;&#30340;&#21306;&#22495;
+<ul><li>&#20998;&#21035;&#20026;&#26032;&#29983;&#20195;New&#12289;&#32769;&#24180;&#20195;Old/Tenured&#12289;&#27704;&#20037;&#20195;Perm&#65292;&#21517;&#31216;&#19982;GC&#25910;&#38598;&#22120;&#26377;&#20851;
+
+</li>
+<li>DefNew:Serial&#25910;&#38598;&#26032;&#29983;&#20195;
+
+</li>
+<li>ParNew:ParNew&#25910;&#38598;&#26032;&#29983;&#30340;
+
+</li>
+<li>PSYoungGen/PSOldGen/PSPermGen:Paralled Scavenge&#25910;&#38598;&#26032;&#29983;&#20195;/&#32769;&#24180;&#20195;/&#27704;&#20037;&#20195;
+
+</li>
+
+</ul>
+</li>
+<li>&#26041;&#25324;&#21495;&#20869;
+<ul><li>GC&#21069;&#35813;&#20869;&#23384;&#21306;&#22495;&#24050;&#20351;&#29992;&#23481;&#37327;-&gt;GC&#21518;&#35813;&#20869;&#23384;&#21306;&#24050;&#20351;&#29992;&#23481;&#37327;(&#35813;&#20869;&#23384;&#21306;&#24635;&#23481;&#37327;)
+
+</li>
+
+</ul>
+</li>
+<li>&#26041;&#25324;&#21495;&#22806;
+<ul><li>GC&#21069;Java&#22534;&#24050;&#20351;&#29992;&#23481;&#37327;-&gt;GC&#21518;Java&#22534;&#24050;&#20351;&#29992;&#23481;&#37327;(Java&#22534;&#24635;&#23481;&#37327;)
+
+</li>
+
+</ul>
+</li>
+<li>&#20855;&#20307;&#26102;&#38388;
+<ul><li>user &#29992;&#25143;&#24577;&#28040;&#32791;&#30340;CPU&#26102;&#38388;
+
+</li>
+<li>sys&#12288;&#20869;&#26680;&#24577;&#28040;&#32791;&#30340;CPU&#26102;&#38388;
+
+</li>
+<li>real &#25805;&#20316;&#20174;&#24320;&#22987;&#21040;&#20171;&#32461;&#32463;&#36807;&#30340;&#22681;&#38047;&#26102;&#38388;(Wall Clock TIme&#65292;&#21253;&#25324;&#31561;&#24453;&#30913;&#30424;IO&#31561;&#38750;&#35745;&#31639;&#30340;&#31561;&#24453;&#32791;&#26102;&#65292;CPU&#26102;&#38388;&#19981;&#21547;&#36825;&#20123;)
+
+</li>
+<li>&#31995;&#32479;&#26377;&#22810;CPU&#25110;&#32773;&#22810;&#26680;&#30340;&#35805;&#65292;&#22810;&#32447;&#31243;&#25805;&#20316;&#20250;&#21472;&#21152;&#36825;&#20123;CPU&#26102;&#38388;&#65292;&#25152;&#20197;&#35835;&#32773;&#30475;&#21040;user&#25110;sys&#26102;&#38388;&#36229;&#36807;real&#26102;&#38388;&#26159;&#23436;&#20840;&#27491;&#24120;&#30340;
+
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li><span style="font-size: 166%;font-family: SansSerif, sans-serif; ">&#25191;&#34892;&#24341;&#25806;</span>
+
+</li>
+
+</ul>
+</li>
+<li><span style="font-size: 200%;font-family: SansSerif, sans-serif; ">&#23383;&#33410;&#30721;</span>
+<ul><li><span style="font-size: 166%;font-family: SansSerif, sans-serif; ">&#32534;&#35793;&#27493;&#39588;</span>
+<ul><li>&#35789;&#27861;&#20998;&#26512;
+
+</li>
+<li>&#35821;&#27861;&#20998;&#26512;
+
+</li>
+<li>&#35821;&#20041;&#20998;&#26512;
+
+</li>
+<li>&#29983;&#25104;&#23383;&#33410;&#30721;
+
+</li>
+
+</ul>
+</li>
+<li><span style="font-size: 166%;font-family: SansSerif, sans-serif; ">&#32452;&#25104;</span>
+<ul><li>&#27010;&#36848;
+<ul><li>&#30001;&#26080;&#31526;&#21495;&#25968;&#21644;&#34920;&#32452;&#25104;
+
+</li>
+<li>&#26080;&#31526;&#21495;&#25968;(u1 u2 u4 u8)
+<ul><li>&#21487;&#29992;&#20110;&#25551;&#36848;&#25968;&#23383;&#12289;&#32034;&#24341;&#24341;&#29992;&#12289;&#25968;&#37327;&#20540;&#21644;UTF-8&#32534;&#30721;&#32452;&#25104;&#30340;&#23383;&#31526;&#20018;
+
+</li>
+
+</ul>
+</li>
+<li>&#34920;
+<ul><li>&#22797;&#21512;&#32467;&#26500;&#65292;&#20197;"_info"&#32467;&#23614;
+
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li><span style="font-size: 150%;font-family: SansSerif, sans-serif; ">&#25991;&#20214;&#22836;&#37096;</span>
+<ul><li>magic(u4)
+<ul><li>0xCAFEBABE
+
+</li>
+
+</ul>
+</li>
+<li>minor version(u2)
+
+</li>
+<li>major version(u2)
+
+</li>
+
+</ul>
+</li>
+<li><span style="font-size: 150%;font-family: SansSerif, sans-serif; ">&#24120;&#37327;&#27744;</span>
+<ul><li>constant_pool_count(u2)
+
+</li>
+<li>constant_pool[contant_pool_count -1](cp_info)
+<ul><li>&#23384;&#25918;&#23383;&#38754;&#37327;literal&#21644;&#31526;&#21495;&#24341;&#29992;symbolic references
+<ul><li>&#31526;&#21495;&#24341;&#29992;&#22312;&#31867;&#21019;&#24314;&#25110;&#32773;&#36816;&#34892;&#26102;&#36716;&#25442;&#20026;&#20855;&#20307;&#30340;&#20869;&#23384;&#22320;&#22336;
+
+</li>
+<li>&#20840;&#38480;&#23450;&#21517;
+
+</li>
+<li>&#31616;&#21333;&#21517;&#31216;
+<ul><li>&#31867;&#21644;&#25509;&#21475;&#20013;&#30340;&#23383;&#27573;&#21517;&#21644;&#26041;&#27861;&#21517;&#20351;&#29992;&#31616;&#21333;&#21517;&#31216;&#23384;&#20648;
+
+</li>
+
+</ul>
+</li>
+<li>&#25551;&#36848;&#31526;
+<ul><li>&#23383;&#27573;&#25551;&#36848;&#31526;
+<ul><li>B C D F I J(long) S Z(boolean) L(obj reference) [(arr reference)
+
+</li>
+
+</ul>
+</li>
+<li>&#26041;&#27861;&#25551;&#36848;&#31526;
+<ul><li>&#36820;&#22238;&#20540;&#20026;void&#30340;&#25551;&#36848;&#31526;&#20026;&#65334;
+
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li>&#20174;&#65297;&#24320;&#22987;&#35745;&#25968;&#65292;&#65296;&#29992;&#20110;
+
+</li>
+
+</ul>
+</li>
+<li>&#24120;&#37327;
+<ul><li>&#27599;&#19968;&#20010;&#24120;&#37327;&#37117;&#26159;&#19968;&#20010;&#34920;
+
+</li>
+<li>&#27599;&#20010;&#34920;&#30340;&#31532;&#19968;&#20301;&#20026;u1&#31867;&#22411;&#30340;&#26631;&#24535;&#20301;(14&#31181;&#31867;&#22411;)
+
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li><span style="font-size: 150%;font-family: SansSerif, sans-serif; ">&#31867;&#20449;&#24687;</span>
+<ul><li>access_flags(u2)
+
+</li>
+<li>this_class(u2)
+<ul><li>&#25351;&#21521;CONSTANT_Class_info&#24120;&#37327;
+<ul><li>&#35813;&#24120;&#37327;&#25351;&#21521;CONSTANT_Utf8-info&#31867;&#22411;&#30340;&#24120;&#37327;&#65292;&#20540;&#20026;&#20840;&#38480;&#23450;&#21517;&#23383;&#31526;&#20018;
+
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li>super_class(u2)
+
+</li>
+<li>interfaces_count(u2)
+
+</li>
+<li>interfaces[interface_count](u2)
+
+</li>
+
+</ul>
+</li>
+<li><span style="font-size: 150%;font-family: SansSerif, sans-serif; ">&#23383;&#27573;&#21015;&#34920;</span>
+<ul><li>fields_count(u2)
+
+</li>
+<li>fields[fileds_count](field_info)
+
+</li>
+<li>&#23383;&#27573;&#26377;&#21487;&#33021;&#25317;&#26377;&#23646;&#24615;&#65292;&#29992;&#20110;&#23384;&#20648;&#21021;&#22987;&#21270;&#20540;&#12289;&#27880;&#37322;&#31561;&#39069;&#22806;&#20449;&#24687;
+
+</li>
+
+</ul>
+</li>
+<li><span style="font-size: 150%;font-family: SansSerif, sans-serif; ">&#26041;&#27861;&#21015;&#34920;</span>
+<ul><li>methods_count(u2)
+
+</li>
+<li>methods[methods_count](method_info)
+
+</li>
+<li>&#20063;&#21487;&#20197;&#24102;&#33509;&#24178;&#20010;&#23646;&#24615;&#65292;&#23384;&#20648;&#23383;&#33410;&#30721;&#12289;&#26041;&#27861;&#30340;&#24322;&#24120;&#20449;&#24687;&#31561;
+
+</li>
+<li>Code&#23646;&#24615;
+<ul><li>attribute_name_index&#27704;&#36828;&#20026;&#25351;&#21521;&#24120;&#37327;&#27744;&#30340;&#32034;&#24341;&#65292;&#20540;&#20026;CONSTANT_Utf8&#31867;&#22411;&#30340;"Code"
+
+</li>
+<li>attribute_length&#12288;&#19981;&#21547;&#21069;&#38754;&#65302;&#23383;&#33410;
+
+</li>
+<li>&#25805;&#20316;&#25968;&#26632;&#28145;&#24230;max_stack
+
+</li>
+<li>&#23616;&#37096;&#21464;&#37327;&#34920;&#26368;&#22823;&#20540;max_locals
+
+</li>
+<li>codelength + code[code_length]
+
+</li>
+<li>exception_table_length + exception_table[exception_table_length]
+<ul><li>start_pc
+
+</li>
+<li>end_pc
+
+</li>
+<li>handler_pc
+
+</li>
+<li>catch_type
+
+</li>
+<li>&#22914;&#26524;&#22312;start_pc&#21040;end_pc&#20559;&#31227;&#37327;&#20043;&#38388;&#36935;&#21040;catch_type&#25351;&#23450;&#30340;&#24322;&#24120;&#65292;&#23601;&#36339;&#36716;&#21040;handler_pc&#22788;&#25191;&#34892;
+
+</li>
+
+</ul>
+</li>
+<li>attributes_count + attributes[attributes_count]
+<ul><li>&#23384;&#20648;&#34892;&#21495;&#12289;&#23616;&#37096;&#21464;&#37327;&#34920;&#31561;&#20449;&#24687;
+
+</li>
+<li>&#27604;&#22914;LineNumberTable LocalVariableTable StackMapTable
+
+</li>
+<li>&#38500;&#20102;&#23383;&#27573;&#12289;&#26041;&#27861;&#12289;&#31867;&#25991;&#20214;&#22806;&#65292;&#23646;&#24615;&#26412;&#36523;&#20063;&#21487;&#20197;&#23384;&#20648;&#23646;&#24615;
+
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li><span style="font-size: 150%;font-family: SansSerif, sans-serif; ">&#23646;&#24615;&#34920;</span>
+<ul><li>attributes_count(u2)
+
+</li>
+<li>attributes[attributes_count](attribute_info)
+<ul><li>attribute_info = u2 attribute_name_index + u4 attribute_length + u1 info[attribute_length]
+
+</li>
+<li>Code_attribute
+<ul><li>&#23384;&#25918;&#26041;&#27861;&#30340;&#23383;&#33410;&#30721;&#25351;&#20196;&#21644;&#20854;&#20182;&#36741;&#21161;&#20449;&#24687;(&#23616;&#37096;&#21464;&#37327;&#34920;&#38271;&#24230;&#12289;&#25805;&#20316;&#25968;&#38271;&#24230;&#12289;&#24322;&#24120;&#34920;)
+
+</li>
+<li>abastract&#26041;&#27861;&#21644;native&#26041;&#27861;&#19981;&#21547;Code&#23646;&#24615;
+
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li><span style="font-size: 200%;font-family: SansSerif, sans-serif; ">Class&#35013;&#36733;</span>
+<ul><li><span style="font-size: 150%;font-family: SansSerif, sans-serif; ">&#22522;&#26412;&#27493;&#39588;</span>
+<ul><li>&#21152;&#36733;
+
+</li>
+<li>&#36830;&#25509;
+<ul><li>&#39564;&#35777;
+
+</li>
+<li>&#20934;&#22791;
+
+</li>
+<li>&#35299;&#26512;
+
+</li>
+
+</ul>
+</li>
+<li>&#21021;&#22987;&#21270;
+
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+</ul></body>
+</html>
