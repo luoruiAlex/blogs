@@ -1,4 +1,6 @@
 - synchronized
+  - 对象头：Mark Word \+ Class Metadata Address \[\+ Array length\]
+  - 字节码：monitorenter和monitorexit指令实现
   - 偏向锁的释放
     - 全局安全点（在这个时间点上没有正在执行的字节码）
     - 先暂停拥有偏向锁的线程，然后检查持有偏向锁的线程是否活着
