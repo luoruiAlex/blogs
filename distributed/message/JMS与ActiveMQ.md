@@ -1,0 +1,21 @@
+### 概念
+- Provider/MessageProvider：生产者
+- Consumer/MessageConsumer：消费者
+- PTP：Point To Point，点对点通信消息模型
+  - Queue：队列，目标类型之一，和PTP结合
+- Pub/Sub：Publish/Subscribe，发布订阅消息模型
+  - Topic：主题，目标类型之一，和Pub/Sub结合
+### 流程
+- ConnectionFactory = new ActiveMQConnectionFactory() createConnection()
+- Connection
+  - connection.start()
+  - createSession(事务, 签收)
+    - AUTO_ACKNOWLEDGE：自动确认，客户端发送和接收消息不需要做额外的工作
+    - CLIENT_ACKNOWLEDGE：客户端确认。客户端接收到消息后，必须调用javax.jms.Message的acknowledge方法。jms服务器才会删除消息
+    - DUPS_OK_ACKNOWLEDGE：允许副本的确认模式。一旦接收方应用程序的方法调用从处理消息处返回，会话对象就会确认消息的接收；而且允许重复确认
+- Sesion
+  - createQueue(name)
+  - createProducer()
+  - createTextMessage()：treamMessage MapMessage TextMessage ObjectMessage BytesMessage
+- MessageProducer setDeliveryMode(DeliveryMode) send(Message)
+- connection.close()
