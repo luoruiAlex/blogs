@@ -33,5 +33,9 @@
   - BASE CAP
   - IO模型
   - 一致性
+- 9.19
+  - tcc
+  - zipkin
+  - activemq
 
 - [log](https://www.jianshu.com/u/cb569cce501b)
