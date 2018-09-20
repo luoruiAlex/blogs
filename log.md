@@ -39,3 +39,4 @@
   - activemq
 
 - [log](https://www.jianshu.com/u/cb569cce501b)
+- [log2](https://segmentfault.com/blog/walk-sky)
