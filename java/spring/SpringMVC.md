@@ -102,6 +102,11 @@ mockMvc.perform(get("/normal"))
       .andExpect(model().attribute("key", expectValue))预期model里的值
 ```
 ## 原理
+### 启动过程
+- ContextLoaderListener初始化：实例化IoC容器，并将容器注册到ServletContext中
+  - ContextLoaderListener implements ServletContextListener
+- DispatcherServlet初始化
+  - 每个 DispatcherServlet 都持有一个自己的上下文对象 WebApplicationContext
 ### 请求处理
 - 检测是否为multipart，如果是则通过MultipartResolver解析
 - 1.request => 前端控制器DispatcherServlet(web.xml中配置)
