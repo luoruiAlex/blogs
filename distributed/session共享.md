@@ -1,0 +1,5 @@
+- Spring-Session \+ Redis
+  - 配置JdeisPoolConfig
+  - 配置JedisConnectionFactory
+  - 配置RedisHttpSessionConfiguration
+  - web.xml中配置过滤器 springSessionRepositoryFilter DelegatingFilterProxy
