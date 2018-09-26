@@ -49,7 +49,7 @@ if (connection != null) {
 }
 ```
 - createSession(事务, 确认模式)
-  - 事务为true时，确认只能为AUTO_ACKNOWLEDGE
+  - 事务为true时，确认只能为AUTO_ACKNOWLEDGE。事务性会话中，**不执行 session.commit()，消息不会创建或被消费**
   - 事务为false时，确认有3中模式
     - AUTO_ACKNOWLEDGE：自动确认，客户端发送和接收消息不需要做额外的工作
     - CLIENT_ACKNOWLEDGE：客户端确认。客户端接收到消息后，必须调用javax.jms.Message的acknowledge方法。jms服务器才会删除消息
