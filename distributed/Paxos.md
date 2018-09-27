@@ -1,7 +1,13 @@
 - paxos算法主要解决的问题就是如何保证分布式系统中**各个节点都能执行一个相同的操作序列**
 
 ### 概念
-- 角色：**proposers**，**acceptors**，和learners（允许身兼数职），此外，议题最开始来源于Client
+- 角色：**proposers**，**acceptors**，和learners，此外，议题最开始来源于Client
+  - 允许一个节点身兼数职，只是使用不同端口
+  - Acceptor们启动不同端口的TCP监听，Proposer来主动连接即可
+  - Zookeeper自身包含了Acceptor, Proposer, Learner
+    - Zookeeper领导选举就是paxos过程
+    - Client对Zookeeper写Znode时，也是要进行Paxos过程的
+    - Znode包含了写入Client的IP与端口，其他的Client也可以读取到这个Znode来进行Learner
 - 基本约束
   - value(决议)只有被proposer提出后才能被批准(未经批准的决议称为提案proposal)
   - 一次算法执行实例中，只批准(chosen)一个value(多数acceptor接受了同一个value)
