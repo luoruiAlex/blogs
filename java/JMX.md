@@ -19,3 +19,6 @@
   - Agent 用来管理相应的资源，并且为远端用户提供访问的接口
 - Distributed 层 
   - Distributed层关心Agent如何被远端用户访问的细节。它定义了一系列用来访问Agent的接口和组件，包括Adapter和Connector的描述。
+
+### Stardard MBean
+- 每一个MBean定义一个接口，而且这个接口的名字必须是其被管理的资源的对象类的名称后面加上”MBean”
