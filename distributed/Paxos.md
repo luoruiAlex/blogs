@@ -1,7 +1,7 @@
 - paxos算法主要解决的问题就是如何保证分布式系统中**各个节点都能执行一个相同的操作序列**
 
 ### 概念
-- 角色：proposers，acceptors，和learners（允许身兼数职），此外，议题最开始来源于Client
+- 角色：**proposers**，**acceptors**，和learners（允许身兼数职），此外，议题最开始来源于Client
 - 基本约束
   - value(决议)只有被proposer提出后才能被批准(未经批准的决议称为提案proposal)
   - 一次算法执行实例中，只批准(chosen)一个value(多数acceptor接受了同一个value)
@@ -14,7 +14,13 @@
     - 一旦一个具有value v的提案被批准（chosen），那么以后任何proposer提出的提案必须具有value v
     - P2c：如果一个编号为n的提案具有value v，那么存在一个多数派，要么他们中所有人都没有接受（accept）编号小于n 的任何提案，要么他们已经接受（accept）的所有编号小于n的提案中编号最大的那个提案具有value v
 
-### 步骤
+### 算法
+#### 行为
+- Proposer提出议题
+- Acceptor初步接受 或者 Acceptor初步不接受
+- 如果上一步Acceptor初步接受则Proposer再次向Acceptor确认是否最终接受
+- Acceptor 最终接受 或者Acceptor 最终不接受
+- Learner最终学习的目标是Acceptor们(所有的Acceptor)最终接受了什么议题(多数Acceptor接受的提议)
 #### 决议的提出与批准
 - prepare阶段
   - proposer选择一个提案编号n并将prepare请求发送给acceptors中的一个多数派
