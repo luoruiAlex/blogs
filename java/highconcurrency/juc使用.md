@@ -101,3 +101,10 @@
 - ConcurrentLinkedQueue 线程安全的LinkedList
 - BlockingQueue put() take()为阻塞操作
 - ConcurrentSkipListMap 跳表，时间复杂度O(log n)
+
+## Java8增强
+- CompletableFuture implements Future, CompletionStage
+- ForkJoinPool性能优化，新增getCommonPoolParallelism() 、commonPool()
+- atomic：DoubleAccumulator、DoubleAdder、LongAccumulator、 LongAdder
+  - 提升性能：将AtomicInteger的内部核心数据value分离成一个数组,每个线程访问时,通过哈希等算法映射到其中一个数字进行计数,而最终的计数结果,则为这个数组的求和累加,其中,热点数据value被分离成多个单元cell,每个cell独自维护内部的值,当前对象的实际值由所有的cell累计合成
+- StampedLock：在大多数场景都可以替代ReentrantReadWriteLock。它为读写操作提供了三种模式：Writing、ReadingOptimistic、 Reading
