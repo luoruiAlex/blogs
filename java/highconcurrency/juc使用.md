@@ -30,6 +30,13 @@
 - new CyclicBarrier（int parties, Runnable barrierAction)
 - await()
 
+## Phaser
+- 可在运行时动态增减参与量
+- arriveAndAwaitAdvance()
+- arriveAndDeregister()：告知phaser对应的线程已经完成了当前阶段，并它不会参与到下一阶段的操作中。
+- bulkRegister(int)：将指定数目的参与者注册到phaser中，所有这些新的参与者都将被当成没有执行完本阶段的线程。
+- arrive()：这个方法通知phase对象一个参与者已经完成了当前阶段，但是它不应该等待其他参与者都完成当前阶段，必须小心使用这个方法，因为它不会与其他线程同步
+
 ## ReadWriteLock
 - 读和读之间不阻塞，读写之间相互阻塞，写写之间相互阻塞
 - new ReentrantReadWriteLock()
