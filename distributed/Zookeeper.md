@@ -136,3 +136,12 @@
 - 运行时期的leader选举
   - 变更状态，Leader挂机后，剩余的非Observer服务器将自己的状态改为LOOKING，然后进入leader选举过程
   - 剩余基本与启动时期一致。启动时期的ZXID都是0，主要比较myid，而运行时期的ZXID可能不同
+
+### 编程
+- Zookeeper API：核心为ZooKeeper类
+  - 获取Zookeeper
+  ```
+  ZookeeperConnection con = new ZookeeperConnection();
+  ZooKeeper zk = con.connect("localhost");
+  ```
+  - 创建znode：`create(String path, byte[] data, List<ACL> acl, CreateMode createMode)`，注意data为`byte[]`
