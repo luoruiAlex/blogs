@@ -79,7 +79,7 @@
   - **只能有一台机器充当Leader的角色，只有Leader才有权力发起更改数据的操作**，Follower如果接收到了更改数据的请求，需要转交给Leader来处理
 - Learner
   - Follower 接收客户请求并向客户端返回结果，在选举过程中参与投票
-  - Observer 接收客户端链接并将请求转发给leader。不参与投票，只同步Leader的状态。Observer的目的是为了扩展系统，提高读取速度
+  - Observer 接收客户端链接并将请求转发给leader。不参与投票，不参与写操作的『过半写成功』策略，只同步Leader的状态。Observer的目的是为了扩展系统，提高读取速度
 - Client 发起请求
 - 流程
   - Leader接受到一个更改数据的请求后，会广播消息通知对某个节点进行某项指令
@@ -145,3 +145,21 @@
   ZooKeeper zk = con.connect("localhost");
   ```
   - 创建znode：`create(String path, byte[] data, List<ACL> acl, CreateMode createMode)`，注意data为`byte[]`
+  - 不足
+  ```
+  （1）Zookeeper的Watcher是一次性的，每次触发之后都需要重新进行注册； 
+  （2）Session超时之后没有实现重连机制； 
+  （3）异常处理繁琐，Zookeeper提供了很多异常，对于开发人员来说可能根本不知道该如何处理这些异常信息； 
+  （4）只提供了简单的byte[]数组的接口，没有提供针对对象级别的序列化； 
+  （5）创建节点时如果节点存在抛出异常，需要自行检查节点是否存在； 
+  （6）删除节点无法实现级联删除；
+  ```
+- ZkClient：对原生API进行了简单地封装
+  ```
+  几乎没有参考文档；
+  异常处理简化（抛出RuntimeException）；
+  重试机制比较难用；
+  没有提供各种使用场景的实现；
+  ```
+- Curator
+  - 提供了Zookeeper各种应用场景（Recipe，如共享锁服务、Master选举机制和分布式计算器等）的抽象封装。
