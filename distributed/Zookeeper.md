@@ -168,5 +168,16 @@
     - zk客户端实例管理
     - 各种使用场景支持
   - 链式调用
-    - 首先CuratorFrameworkFactory创建CuratorFramework
+    - 首先CuratorFrameworkFactory创建CuratorFramework，client.start()
     - cf调用create等方法获取对应的builder，然后forPath()
+  - 监听器(3种)：通过缓存来监听节点的变化
+    - Path Cache 监视一个路径下1）孩子结点的创建、2）删除，3）以及结点数据的更新。产生的事件会传递给注册的PathChildrenCacheListener
+    - Node Cache 监视一个结点的创建、更新、删除，并将结点的数据缓存在本地
+    - Tree Cache Path Cache和Node Cache的“合体”，监视路径下的创建、更新、删除事件，并缓存路径下所有孩子结点的数据。
+  - recipes
+    - 分布式锁：InterProcessMutex 
+    - Leader选举：LeaderSelectorListener，同一时刻，只有一个Listener会进入takeLeadership()方法，说明它是当前的Leader。注意：当Listener从takeLeadership()退出时就说明它放弃了“Leader身份”。autoRequeue()方法使放弃Leadership的Listener有机会重新获得Leadership，如果不设置的话放弃了的Listener是不会再变成Leader的。
+    - Barrier：DistributedBarrier，可以看做JDK Concurrent包中Barrier的分布式实现
+    - 缓存
+    - 持久化节点：连接或Session终止后仍然在Zookeeper中存在的结点
+    - 队列：分布式队列、分布式优先级队列
