@@ -72,3 +72,9 @@
 - 删除核心
   - solr delete -c coreName
   - 也可管理界面删除
+ 
+### 构面
+- 构面或分组(faceting)指的是将搜索结果分类到各种类别中
+- 可用的faceting类型
+  - 查询faceting
+  - 日期faceting
