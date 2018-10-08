@@ -11,6 +11,7 @@
 - Broker：消息中转角色，负责存储和转发消息。Broker分为Master和Slave
   - Master和Slave的对应关系通过指定相同的BrokerName，不同的BrokerId来定义，BrokerId为0表示Master，BrokerId非0表示Slave
   - 所有的Broker和Name Server上的节点建立长连接,定时注册Topic信息到所有Name Server
+  - 单个broker和所有nameserver保持长连接
 - Producer
   - Producer与Name Server其中一个节点建立连接
   - 定期从Name Server取Topic信息，并与提供该Topic信息的Master建立长连接
