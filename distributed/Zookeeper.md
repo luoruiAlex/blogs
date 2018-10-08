@@ -167,3 +167,6 @@
     - 连接状态监控
     - zk客户端实例管理
     - 各种使用场景支持
+  - 链式调用
+    - 首先CuratorFrameworkFactory创建CuratorFramework
+    - cf调用create等方法获取对应的builder，然后forPath()
