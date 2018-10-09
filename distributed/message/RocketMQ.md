@@ -12,13 +12,18 @@
   - Master和Slave的对应关系通过指定相同的BrokerName，不同的BrokerId来定义，BrokerId为0表示Master，BrokerId非0表示Slave
   - 所有的Broker和Name Server上的节点建立长连接,定时注册Topic信息到所有Name Server
   - 单个broker和所有nameserver保持长连接
+  - 每隔30秒（此时间无法更改）向所有nameserver发送**心跳**，心跳包含了自身的topic配置信息
+  - 负载均衡
+    - 一个topic分布在多个broker上，一个broker可以配置多个topic，它们是多对多的关系
+    - 如果某个topic消息量很大，应该给它多配置几个队列，并且尽量多分布在不同broker上，减轻某个broker的压力
+    - topic消息量都比较均匀的情况下，如果某个broker上的队列越多，则该broker压力越大
 - Producer
   - Producer与Name Server其中一个节点建立连接
-  - 定期从Name Server取Topic信息，并与提供该Topic信息的Master建立长连接
+  - 定期(默认30秒)从Name Server取Topic信息，并与提供该Topic信息的Master建立长连接
   - 可建立集群
 - Consumer
   - Consumer 与Name Server 集群中的其中一个节点（随机选择）建立长连接
-  - 定期从Name Server 取Topic 路由信息，并向提供Topic服务的Master、Slave建立长连接，且定时向Master、Slave发送心跳
+  - 定期(默认30秒)从Name Server 取Topic 路由信息，并向提供Topic服务的Master、Slave建立长连接，且定时向Master、Slave发送心跳
   - Consumer既可以从Master订阅消息，也可以从Slave订阅消息，订阅规则由Broker配置决定
   - 可建立集群
   
