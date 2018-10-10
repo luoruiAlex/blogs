@@ -31,6 +31,11 @@
   ...
   producer.shutdown();
   ```
+  - 重试机制：指定时间内没有发送成功，则重试N次
+  ```
+  producer.setRetryTimesWhenSendFailed(num);
+  producer.send(msg, xxms);
+  ```
 - Consumer
   - Consumer 与Name Server 集群中的其中一个节点（随机选择）建立长连接
   - 定期(默认30秒)从Name Server 取Topic 路由信息，并向提供Topic服务的Master、Slave建立长连接，且定时向Master、Slave发送心跳
@@ -50,6 +55,9 @@
   consumer.registerMessageListener...
   consumer.start()
   ```
+  - 失败重试
+    - timeout：内部不断重试直至发送成功为止
+    - exception：消息重试直至进入死信队列
   
 ### 存储特点
 - Consumer消费消息过程，使用了零拷贝
@@ -59,7 +67,11 @@
 ### Group
 - RocketMQ只有一种模式，即发布订阅模式
 - 生产者、消费者都可以有多个group
-- group机制让RocketMQ天然支持消息负载均衡
+- group机制让RocketMQ**天然支持消息负载均衡**
+
+### 消费方式
+- 集群消费(默认，即负载均衡消费)
+- 广播消费：Pub/Sub模式，消息会发给Consume Group中的每一个消费者进行消费
  
 ### 部署模式
 - 单Master：宕机不可用
