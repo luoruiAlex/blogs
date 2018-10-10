@@ -113,6 +113,8 @@
   - `msg.setDelayTimeLevel(3);`
   
 ### 解决分布式事务
+- 使用TransactionMQProducer
+- 
   
 ### 使用细节
 - 消息过滤
