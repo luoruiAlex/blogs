@@ -79,6 +79,12 @@
 - 集群消费(默认，即负载均衡消费)
 - 广播消费：Pub/Sub模式，消息会发给Consume Group中的每一个消费者进行消费
 
+### Pull Consumer
+- 本质上PUSH PULL都是拉取模式PULL，即消费者从MQ中轮询取得消息
+- 在Push模式下，Consumer把轮询过程封装了，并注册了MessageListener监听器，取到消息后，唤醒MessageListener监听器中的consumeMessage()进行消费，所以给我们造成了感觉上好像是“推消息”
+- 在Pull模式下，需要特别注意的是，本质上是从一个Topic下的所有Queue进行拉取，而且每个Queue都必须记录**拉取位置**，否则会导致重复消费。还有**拉取的时间间隔，拉取的大小**等等。这些在MQPullConsumerScheduleService中设置
+- Push方式都有返回值，Pull的doPullTask的返回值是void，需要注意每条消息消费的异常情况
+
 ### 消息重复消费
 - consume broker的重启
 - 水平扩容
