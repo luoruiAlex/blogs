@@ -78,6 +78,7 @@
 ### 消费方式
 - 集群消费(默认，即负载均衡消费)  MessageModel.CLUSTERING
 - 广播消费：Pub/Sub模式，消息会发给Consume Group中的每一个消费者进行消费。MessageModel.BROADCASTING
+  `consumer.setMessageModel(MessageModel.BROADCASTING);`
 
 ### Pull Consumer
 - 本质上PUSH PULL都是拉取模式PULL，即消费者从MQ中轮询取得消息
