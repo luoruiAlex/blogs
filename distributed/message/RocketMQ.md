@@ -120,7 +120,11 @@
   
 ### 解决分布式事务
 - 使用TransactionMQProducer
-- 
+- producer.setTransactionListener(TransactionListener)
+- sendMessageInTransaction(msg, arg)
+  - 阶段1：发送prepare消息
+  - 阶段2：执行本地事务
+  - 阶段3：发送确认消息
   
 ### 使用细节
 - 消息过滤
@@ -143,6 +147,7 @@
   - 对于一条消息的处理结果，不管这条消息被处理多少次，最终的结果都一样
   - 对于一些允许消息重复的场景，大可以不必关心消费幂等
   - 对于那些不允许消息重复的业务场景来说，处理建议就是通过业务上的唯一标识来作为幂等处理的依据
+- autoCreateTopicEnable：线上应关闭，否则无法负载均衡。应该手动创建topic。
 
 
 ### RocketMQ Filter
