@@ -132,13 +132,24 @@
 ### 解决分布式事务
 - 限制：
   - 不支持延迟和批量发送
+  - 事务性消息可能被重复消费，未来防止重复消费太多次，默认消费15次(transactionCheckMax可修改)，超过次数则broker丢弃消息并打印错误日志(可通过覆盖AbstractTransactionCheckListener修改处理方法)
+  - 事务性消息可能被重复check，在transactionMsgTimeout(broker中配置)时间后被check，用户属性CHECK_IMMUNITY_TIME_IN_SECONDS可覆盖该配置
+  - 已提交的Message重新提交可能会失败，如果要保证消息不丢失而且保证事务完整，建议用同步双写
+  - Message的Producer ID不能合其他类型的Message共享。
+- 事务状态
+  - TransactionStatus.CommitTransaction 允许consumer消费这条消息
+  - TransactionStatus.RollbackTransaction 消息将被删除，不允许消费
+  - TransactionStatus.Unknown 中间状态，MQ需要检查来决定状态
 - 使用TransactionMQProducer
 - producer.setTransactionListener(TransactionListener)
+  - `TransactionStatus executeLocalTransaction()`：当发送半程消息成功用于执行本地事务
+  - `TransactionStatus checkLocalTransaction()`：用于检查本地事务状态并响应MQ的检查请求
+- producer.setExecutorService(ExecutorService)
 - sendMessageInTransaction(msg, arg)
   - 阶段1：发送prepare消息
   - 阶段2：执行本地事务
   - 阶段3：发送确认消息
-  
+
 ### 使用细节
 - 消息过滤
   - 可用多个topic区分，也可用同一个topic下不同tag区分
