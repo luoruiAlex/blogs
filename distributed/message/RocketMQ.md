@@ -7,6 +7,42 @@
 - 消息失败重试机制、高效的订阅者水平扩展能力、强大的API、事务机制等等
 - 消息默认都存储、天然负载均衡
 
+### 核心概念
+- Message
+  - messageId
+  - messageKey
+  - 大小建议不超过512K
+- Topic
+  - tags
+  - subTopics
+- Queue 1 : 1 Offset
+- Broker
+  - ASYNC_MASTER SYNC_MASTER SLAVE
+  - 防止丢失消息
+    - SYNC_MASTER \+ SLAVE
+  - 高可用(可能丢失)
+    - ASYNC_MASTER \+ SLAVE，也可以不用SLAVE
+  - FlushDiskType
+    - 建议用ASYNC_FLUSH
+    - SYNC_FLUSH影响性能
+- Producer
+  - SendResult之SendStatus
+    - FLUSH_DISK_TIMEOUT：Broker设置为SYNC_FLUSH而超过了syncFlushTimeout(默认5s)
+    - FLUSH_SLAVE_TIMEOUT：Broker为SYNC_MASTER而且slave Broker同步超时(syncFlushTimeout)
+    - SLAVE_NOT_AVAILABLE：Bbroker为SYNC_MASTER但是没有配置slave Broker
+    - SEND_OK：并不意味着可靠，要防止丢失消息，必须配置SYNC_MASTER 或者 SYNC_FLUSH
+  - FLUSH_DISK_TIMEOUT FLUSH_SLAVE_TIMEOUT同时borker关闭，则会丢失消息，此时可根据需要重发消息。但是SLAVE_NOT_AVAILABLE时重发消息时无效的，只能管理员来处理。
+  - 默认同步发送消息
+  - 如果要求高性能(比如大数据处理)：可改为异步发送，而且创建多个producer(3~5个已足够，要给每个producer设置InstanceName)
+  - producer是线程安全的
+- Consumer
+  - 不同的Consumer Group可以消费同一个topic，它们各自有自己的consuming offsets
+  - MessageListener
+    - Orderly：不建议抛出异常，而是用ConsumeOrderlyStatus.SUSPEND_CURRENT_QUEUE_A_MOMENT 替代。
+    - Concurrently：不建议抛出异常，而是用ConsumeOrderlyStatus.RECONSUME_LATER 替代。
+    - Blocking：不建议阻塞，会阻塞线程池
+    - 线程数：setConsumeThreadMin setConsumeThreadMax
+
 ### 组成
 - NameServer：大致相当于 jndi技术，更新和发现 broker服务。一个几乎无状态节点，可集群部署，节点之间无任何信息同步
 - Broker：消息中转角色，负责存储和转发消息。Broker分为Master和Slave
