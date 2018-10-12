@@ -41,7 +41,21 @@
     - Orderly：不建议抛出异常，而是用ConsumeOrderlyStatus.SUSPEND_CURRENT_QUEUE_A_MOMENT 替代。
     - Concurrently：不建议抛出异常，而是用ConsumeOrderlyStatus.RECONSUME_LATER 替代。
     - Blocking：不建议阻塞，会阻塞线程池
-    - 线程数：setConsumeThreadMin setConsumeThreadMax
+  - 线程数：setConsumeThreadMin setConsumeThreadMax
+  - ConsumeFromWhere
+    - CONSUME_FROM_LAST_OFFSET 忽略历史消息
+    - CONSUME_FROM_FIRST_OFFSET 消费broker中的每一条消息
+    - CONSUME_FROM_TIMESTAMP 可消费随后指定时间以后的消息
+  - 注意重复消息
+- NameServer
+  - 优先级：Programmatic Way > Java Options > Environment Variable > HTTP Endpoint(`http://jmenv.tbsite.net:8080/rocketmq/nsaddr`)
+- 环境配置
+  - jvm
+    - `-server -Xms8g -Xmx8g -Xmn4g`
+    - 禁用偏向锁减少暂停
+    - G1：`-XX:+UseG1GC -XX:G1HeapRegionSize=16m -XX:G1ReservePercent=25 -XX:InitiatingHeapOccupancyPercent=30`
+    - `-XX:MaxGCPauseMillis`不能设置太小，否则Minor GC太频繁
+    - 日志：`-XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=5 -XX:GCLogFileSize=30m`。如果GC日志增加了borker的延迟，则考虑使用`-Xloggc:/dev/shm/mq_gc_%p.log`
 
 ### 组成
 - NameServer：大致相当于 jndi技术，更新和发现 broker服务。一个几乎无状态节点，可集群部署，节点之间无任何信息同步
