@@ -104,8 +104,13 @@
   - `registerMessageListener(MessageListenerConcurrently)`
 - 有序消息
   - `new Message(topic, tags, keys, body)`
-  - `producer.send(msg, MessageQueueSelector)`
+  - `producer.send(msg, MessageQueueSelector)` 重写select方法
   - `registerMessageListener(MessageListenerOrderly)`
+  - ConsumeOrderlyStatus
+    - SUCCESS
+    - SUSPEND_CURRENT_QUEUE_A_MOMENT：延缓多长时间执行，在当前队列里
+    - COMMIT：Deprecated
+    - ROLLBACK：Deprecated
   - 分类
     - 全局有序消息
     - 局部有序消息
@@ -113,11 +118,16 @@
     - topic只是消息的逻辑分类，内部由queue组成(一个topic可能有多个queue)
     - topic的queue数目改成1，发送有序则消费必然有序，此时为全局有序
     - 发送时按照特定规律发送到不同的queue，而消费时按照queue进行消费，则可保证局部有序，且性能比全局有序大大提升
-- 延时消息
+- 延时消息(Scheduled Message)
   - 当 producer 将消息发送到 broker 后，会延时一定时间后才投递给 consumer 进行消费
   - 延时等级：1s，5s，10s，30s，1m，2m，3m，4m，5m，6m，7m，8m，9m，10m，20m，30m，1h，2h。level=0，表示不延时。level=1，表示 1 级延时，对应延时 1s。level=2 表示 2 级延时，对应5s，以此类推
   - 比如网购，下单后超时未支付则关闭订单
   - `msg.setDelayTimeLevel(3);`
+  
+### 批量发送
+- 批量发送小型消息以提升性能
+- `send(List<Message>)`
+- 要求topic waitStatusOK相同，且不支持延迟消息
   
 ### 解决分布式事务
 - 使用TransactionMQProducer
@@ -150,7 +160,10 @@
   - 对于那些不允许消息重复的业务场景来说，处理建议就是通过业务上的唯一标识来作为幂等处理的依据
 - autoCreateTopicEnable：线上应关闭，否则无法负载均衡。应该手动创建topic。
 
-
 ### RocketMQ Filter
 - Tag机制已经足够应付日常绝大数的过滤功能，除非要求性能高
 - RocketMQ Filter的性能要更高效些，因为RocketMQ是在broker上将过滤后的数据发往filter，然后消费者直接从filter上取得数据；而ActiveMQ是消费者直接在broker上进行过滤消费
+
+### 其他
+- logappender：自定义日志输出
+- OpenMessaging：支持OpenMessaging分布式消息分发规范
