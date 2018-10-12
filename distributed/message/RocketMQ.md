@@ -130,6 +130,8 @@
 - 要求topic waitStatusOK相同，且不支持延迟消息
   
 ### 解决分布式事务
+- 限制：
+  - 不支持延迟和批量发送
 - 使用TransactionMQProducer
 - producer.setTransactionListener(TransactionListener)
 - sendMessageInTransaction(msg, arg)
