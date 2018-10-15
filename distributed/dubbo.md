@@ -4,13 +4,24 @@
 
 ### 通信协议
 - Dubbo协议(默认)
+  - 采用异步单一长连接和 NIO 异步通讯
+  - 适合于小数据量大并发的服务调用，以及服务消费者机器数远大于服务提供者机器数的情况
 - Hessian
+  - 多连接、短连接、HTTP协议传输、同步、Hessian二进制序列化
+  - 适用于传入传出参数数据包比较大、提供者比消费者个数多、提供者压力较大
+  - 参数及返回值需实现 Serializable 接口
+  - 参数及返回值不能自定义实现 List, Map, Number, Date, Calendar 等接口，只能用 JDK 自带的实现，因为 hessian 会做特殊处理，自定义实现类中的属性值都会丢失
 - HTTP
+  - 多连接、短连接、同步传输、表单序列化
+  - 适用于传入传出参数数据包大小混合，提供者比消费者个数多
 - RMI
 - WebService
 - Thrift
+  - 对原生thrift的扩展
+  - thrift不支持null值
 - Memcached
 - Redis
+- Rest
 
 ### 注册中心
 - Multicast
