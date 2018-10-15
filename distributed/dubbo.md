@@ -50,3 +50,7 @@
   - `<dubbo:protocol port="9090" />`奖Simple注册中心暴露成dubbo服务
   - `address="127.0.0.1:9090`
   - 不支持集群，不适用于生产环境
+
+### 配置
+- dubbo:service
+  - interface：服务接口
