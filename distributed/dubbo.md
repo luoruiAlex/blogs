@@ -52,5 +52,27 @@
   - 不支持集群，不适用于生产环境
 
 ### 配置
-- dubbo:service
-  - interface：服务接口
+#### 服务发现
+- Common
+  - dubbo:application：应用信息配置，对应ApplicationConfig
+    - name：当前应用名称，用于计算应用之间的依赖关系
+  - dubbo:registry：注册中心配置，对应RegistryConfig类
+    - 可通过多个registry声明多个注册中心，并在service/reference的registry属性中指定使用的注册中心
+    - address：注册中心地址url
+- Provider
+  - dubbo:service：暴露服务，对应ServiceConfig类
+    - interface：服务接口名
+    - ref：服务对象实现引用，即实现类的Bean
+  - dubbo:protocol：provider的协议
+    - name：默认为dubbo
+    - port：dubbo协议缺省端口为20880，rmi协议缺省端口为1099，http和hessian协议缺省端口为80；如果没有配置port，则自动采用默认端口，如果配置为-1，则会分配一个没有被占用的端口。Dubbo 2.4.0+，分配的端口在协议缺省端口的基础上增长，确保端口段可控。
+- Consumer
+  - dubbo:reference：引用服务，对应ReferenceConfig类
+    - id：唯一标识
+    - interface：服务接口名
+#### 服务治理
+- dubbo:monitor：监控中心配置，对应MonitorConfig
+  - protocol：监控中心协议，默认为dubbo，如果为protocol="registry"，表示从注册中心发现监控中心地址，否则直连监控中心。
+  - address：直连监控中心服务器地址，比如address="10.20.130.230:12080"
+#### 性能调优
+
