@@ -45,3 +45,8 @@
     <dubbo:registry id="chinaRegistry" protocol="zookeeper" address="10.20.153.10:2181" group="china" />
     <dubbo:registry id="intlRegistry" protocol="zookeeper" address="10.20.153.10:2181" group="intl" />
     ```
+- Simple注册中心
+  - Simple 注册中心本身就是一个普通的 Dubbo 服务，可以减少第三方依赖，使整体通讯方式一致。
+  - `<dubbo:protocol port="9090" />`奖Simple注册中心暴露成dubbo服务
+  - `address="127.0.0.1:9090`
+  - 不支持集群，不适用于生产环境
