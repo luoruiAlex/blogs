@@ -128,6 +128,15 @@
   Future<String> future = RpcContext.getContext().getFuture();
   future.get()可得到正确的返回值
   ```
+- 结果缓存
+  - consumer端缓存：reference配置`cache="lru"`
+  - 三种缓存方案
+    - LruCacheFactory
+    - ThreadLocalCacheFactory
+    - JCacheFactory
+- 参数校验
+  - javax中的校验注解
+  - dubbo:service中配置`validation="true"`
 - 启动检查
   - 默认在启动时检查依赖的服务是否可用
   - dubbo:reference设置`check="false"`关闭某个服务的启动检查
