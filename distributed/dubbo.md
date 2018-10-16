@@ -99,9 +99,35 @@
 ### 特性使用
 - 服务分组与服务版本号
   - 接口类并不能唯一确定一个服务，`接口 + 服务分组 + 版本号`才能唯一确定一个服务
-  - 接口有多种实现时
-    - provider：dubbo:service的group属性区分
-    - consumer：dubbo:reference的group属性区分
+  - 接口有多种实现时，使用 service/reference 的group属性区分
+  - 同一个group的接口实现不兼容时，可使用版本号兼容。使用service/reference的version属性区分
+    - 在低压力时间段，先升级一半提供者为新版本
+    - 再将所有消费者升级为新版本
+    - 然后将剩下的一半提供者升级为新版本
+- 服务直连
+  - 为了方便开发及测试，绕过注册中心，直接指定服务提供者
+  - 方法
+    - 通过-D：`-Dcom.test.UserServiceBo=dubbo://30.8.59.182:20880`表示调用com.test.UserServiceBo接口时候访问30.8.59.182:20880提供的服务
+    - dubbo:reference的url属性指定，多个地址用分号隔开
+    - `-Ddubbo.resolve.file`指定properties文件，优先级比reference高
+- 泛化调用
+  - 用于consumer没有API接口类和模型类的情况，参数和返回值中的POJO都用Map表示
+  - 泛化调用通常用于框架集成，比如：实现一个通用的服务测试框架，可通过 GenericService 调用所有服务实现
+  - 代码
+  ```
+  referenceConfig.setGeneric(true);
+  GenericService service = referenceConfig.get();
+  service.$invoke('funcName', new String[]{"java.lang.String"}, new Object[]{"arg"});
+  ```
+- 异步调用
+  - 基于 NIO 的非阻塞实现并行调用，客户端不需要启动多线程即可完成并行调用多个远程服务，相对多线程开销较小
+  - 代码
+  ```
+  referenceConfig.setAsync(true);
+  ...异步调用方法都直接返回null
+  Future<String> future = RpcContext.getContext().getFuture();
+  future.get()可得到正确的返回值
+  ```
 
 ### dubbo-monitor
 - 统计服务的调用次数和调用时间，这些数据有助于系统运维和调优
