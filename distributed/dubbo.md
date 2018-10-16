@@ -77,6 +77,11 @@
   - dubbo:argument：方法参数配置，对应ArgumentConfig，为dubbo:method的子标签
   - dubbo:parameter：选项参数配置。对应的配置类：java.util.Map。
     - 为protocol service provider reference consumer的子标签
+  - dubbo:monitor：监控中心配置，对应MonitorConfig
+    - protocol：监控中心协议，默认为dubbo，如果为protocol="registry"，表示provider/consumer从注册中心发现监控中心地址，否则直连监控中心。
+    - address：直连监控中心服务器地址，比如address="10.20.130.230:12080"
+  - dubbo:module：模块信息配置，对应ModuleConfig
+    - name：当前模块名称，用于注册中心计算模块间依赖关系
 - Provider
   - dubbo:service：暴露服务，对应ServiceConfig类
     - interface：服务接口名
@@ -90,8 +95,15 @@
     - id：唯一标识
     - interface：服务接口名
   - dubbo:consumer：服务消费者缺省值配置，对应ConsumerConfig
-- dubbo:monitor：监控中心配置，对应MonitorConfig
-  - protocol：监控中心协议，默认为dubbo，如果为protocol="registry"，表示从注册中心发现监控中心地址，否则直连监控中心。
-  - address：直连监控中心服务器地址，比如address="10.20.130.230:12080"
-- dubbo:module：模块信息配置，对应ModuleConfig
-  - name：当前模块名称，用于注册中心计算模块间依赖关系
+  
+### 特性使用
+- 服务分组与服务版本号
+  - 接口类并不能唯一确定一个服务，`接口 + 服务分组 + 版本号`才能唯一确定一个服务
+  - 接口有多种实现时
+    - provider：dubbo:service的group属性区分
+    - consumer：dubbo:reference的group属性区分
+
+### dubbo-monitor
+- 统计服务的调用次数和调用时间，这些数据有助于系统运维和调优
+
+### 源码
