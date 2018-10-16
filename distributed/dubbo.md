@@ -95,4 +95,3 @@
   - address：直连监控中心服务器地址，比如address="10.20.130.230:12080"
 - dubbo:module：模块信息配置，对应ModuleConfig
   - name：当前模块名称，用于注册中心计算模块间依赖关系
-
