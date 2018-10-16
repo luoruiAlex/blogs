@@ -128,6 +128,14 @@
   Future<String> future = RpcContext.getContext().getFuture();
   future.get()可得到正确的返回值
   ```
+- 启动检查
+  - 默认在启动时检查依赖的服务是否可用
+  - dubbo:reference设置`check="false"`关闭某个服务的启动检查
+  - dubbo:consumer设置`check="false"`关闭所有服务的启动检查
+  - dubbo:registry设置`check="false"`关闭注册中心的启动检查
+- 集群容错
+  - 默认failover重试
+   
 
 ### dubbo-monitor
 - 统计服务的调用次数和调用时间，这些数据有助于系统运维和调优
