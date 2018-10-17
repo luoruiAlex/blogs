@@ -181,20 +181,34 @@
   - 遍历`for (MyService service: serviceLoader){...}`
 #### Dubbo中的SPI
 - Java SPI的缺点：一次性实例化所有实现
-- Dubbo SPI的改进：增加了对扩展点IOC和AOP的支持，一个扩展点可以直接setter注入其他扩展点
+- Dubbo SPI的改进
+  - 按需加载
+  - 增加了对扩展点IOC和AOP的支持，一个扩展点可以直接setter注入其他扩展点
+  - 扩展点加载失败有提示
 - 约定
   - spi文件存储在`META-INF/dubbo/internal`、`META-INF/services/`、`META-INF/dubbo/`目录下,并且名称为接口的全路径名
   - 文件内容为`扩展名=com.test.MyServiceImpl1`，通过扩展名来加载指定的实现类，避免资源浪费
-- ExtensionLoader
-  - 入口，扩展点载入器
-  - 用于载入Dubbo中的各种可配置组件，比如ProxyFactory、LoadBalance、Protocol、Filter、Container、Cluster、Registry：Dubbo中所有组件都是通过SPI方式来管理的
-  - `public static <T> ExtensionLoader<T> getExtensionLoader(Class<T> type)` 内部为一个ConcurrentHashMap保持不同的接口类型对应的ExtensionLoader
-    - 获取实现类实例：`ProxyFactory proxy = ExtensionLoader.getExtensionLoader(ProxyFactory.class).getAdaptiveExtension();`
+- 实现
+  - 1.获取ExtensionLoader
+    - 入口，扩展点载入器
+    - 用于载入Dubbo中的各种可配置组件，比如ProxyFactory、LoadBalance、Protocol、Filter、Container、Cluster、Registry：Dubbo中所有组件都是通过SPI方式来管理的
+    - `public static <T> ExtensionLoader<T> getExtensionLoader(Class<T> type)` 内部为一个ConcurrentHashMap保持不同的接口类型对应的ExtensionLoader
+  - 2.获取适配器实例：`ProxyFactory proxy = ExtensionLoader.getExtensionLoader(ProxyFactory.class).getAdaptiveExtension();`
+    - 获取该spi对应的所有实现类的class对象，然后创建适配器实例，最后注入该适配器依赖的其他spi
+  - 3.根据名称获取具体的spi实现类，创建类实例，使用wrap包装后返回
 #### Provider暴露服务
 - ServiceConfig类拿到接口实现类ref，然后通过ProxyFactory.getInvoker()使ref生成一个AbstractProxyInvoker实例
+  - JavassistProxyFactory.getInvoker()
+    - 先创建代理类的wrapper类(**消除反射调用以提升性能**)
+    - 创建AbstractProxyInvoker实现类，覆盖doInvoke()方法(收到消费请求后调用该方法)，该方法内部委托wrapper类来具体执行
 - Invoker通过Protocol.export()转换为Exporter
-  - 打开Netty Server侦听服务，接收请求
+  - RegistryProtocol.doLocalExport()打开Netty Server侦听服务，接收请求
+  - RegistryProtocol.register注册到服务治理中心
+  - MulticastRegistry中通过ConcurrentHashMap来保存，值为ConcurrentHashSet
 #### Consumer消费服务
 - ReferenceConfig.init()调用Protocol.refer()生成Invoker实例
-- Invoker在Protocol.refer()方法中转为客户端接口
-  - 主要是创建一个netty client 链接服务提供者
+  - 通过增强的wrapper类一步步调用到具体的spi实现类RegistryProtocol
+  - 在注册中心订阅服务提供方地址列表，并创建DubboInvoker的装饰类，用于负载均衡和容错处理
+- Invoker在proxyFactory.getProxy(invoker, clazz)方法中转为客户端接口
+  - JavassistProxyFactory.getProxy()
+    - 代理接口，i别难过使用InvokerInvocationHandler对具体调用进行拦截
