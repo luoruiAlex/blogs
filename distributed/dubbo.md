@@ -196,6 +196,7 @@
   - 2.获取适配器实例：`ProxyFactory proxy = ExtensionLoader.getExtensionLoader(ProxyFactory.class).getAdaptiveExtension();`
     - 获取该spi对应的所有实现类的class对象，然后创建适配器实例，最后注入该适配器依赖的其他spi
   - 3.根据名称获取具体的spi实现类，创建类实例，使用wrap包装后返回
+    - SPI返回的不是单纯的扩展点的实现类，而是被Wrapper后的增强的类
 #### Provider暴露服务
 - ServiceConfig类拿到接口实现类ref，然后通过ProxyFactory.getInvoker()使ref生成一个AbstractProxyInvoker实例
   - JavassistProxyFactory.getInvoker()
