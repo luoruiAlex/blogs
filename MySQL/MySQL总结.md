@@ -48,6 +48,7 @@
   - 更新频繁和数据区分度不高的字段不易建立索引
   - 避免在where中使用or来连接条件，会使索引失效(新版MySQL中能命中索引，但是还是比IN慢)
   - 前导模糊查询不能用索引，非前导可以
+  - where中使用NULL判断会使索引失效
 
 ### 锁
 - UPDATE INSERT DELETE语句，InnoDB自动给涉及的数据集加排他锁
@@ -95,5 +96,45 @@
     - UPDATE：插入一行新纪录，保存当前系统版本号作为行版本号，并保存当前系统版本号到原来的行作为行删除标识
 
 ### 优化
-- `select count(*)`：MyISAM直接存储总行数，InnoDB按行扫描
+- `select count(*)`：MyISAM直接存储总行数，InnoDB按行扫描，有where条件时都一样
 - 不建议用外检，而是通过应用程序来保证完整性
+- 优化维度
+  - 成本：硬件>系统配置>数据库表结构>SQL及索引
+  - 效果：硬件<系统配置<数据库表结构<SQL及索引
+- 优化工具
+  - `show [SESSION | GLOBAL] variables` 查看数据库参数
+  - `show [SESSION | GLOBAL] STATUS`  查看数据库状态
+  - `show processlist`  查看当前所有连接session的状态
+  - `explain` 查看执行计划
+  - `show index`查看索引
+  - `slow-log` 记录慢查询语句
+  - `mysqldumpslow` 分析slowlog的工具
+  - zabbix  监控主机、系统、数据库
+  - pt-query-digest 分析慢日志
+  - mysqlslap 分析慢日志
+  - sysbench  压力测试
+  - mysql profiling 统计数据库整体状态
+  - Performance Schema mysql 性能状态统计的数据
+  - workbench 管理、备份、监控、分析、优化
+- 临时卡顿
+  - show processlist
+  - explain + show index
+  - 判断索引问题或语句问题
+  - `show status like '%lock%'`查询锁状态
+  - kill SESSION_ID：杀掉有问题的session
+- 周期性卡顿
+  - 查看slowlog，分析出查询慢的语句
+  - 分析stop sql，进行explain调试
+  - 调整索引或者语句
+- 单表优化
+  - 尽量减小字段，减小主键，比如用整型存储IP
+  - 避免使用NULL，NULL很难查询优化而且占用额外索引空间
+  - 单表字段不要太多
+  - 不用外键
+  - 尽量不用UNIQUE
+  - OR改成IN
+  - 不用函数、存储过程和触发器
+  - 连续数值用between而不是in
+- 和缓存结合
+  - 直写式：写入数据库后同时更新缓存，大多缓存框架比如Spring Cache都用这种，简单、同步号，但效率一般
+  - 回写式：异步批量写入数据库，效率高但是可能导致数据不一致
