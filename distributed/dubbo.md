@@ -159,3 +159,42 @@
 - 统计服务的调用次数和调用时间，这些数据有助于系统运维和调优
 
 ### 源码
+#### 分层
+- Service层(接口及实现类)
+- Config层(ReferenceConfig ServiceConfig)：以下层均为SPI
+- Proxy层：扩展接口为 ProxyFactory，dubbo实现的SPI主要JavassistProxyFactory（默认使用）和JdkProxyFactory，用来对服务提供方和服务消费方的服务进行代理
+- Registry层：扩展接口为 Registry，实现为ZookeeperRegistry，RedisRegistry，MulticastRegistry，DubboRegistry
+- Cluster层：路由、负载均衡、桥接注册中心，扩展接口为 Cluster , Directory , Router ,LoadBalance
+- Monitor层：扩展接口为 MonitorFactory , Monitor , MonitorService
+- Protocol层：封装RPC调用，扩展接口为 Protocol , Invoker , Exporter
+- Exchange层：封装请求响应模式，同步转异步，扩展接口为 Exchanger , ExchangeChannel ,ExchangeClient , ExchangeServer
+- Transport层：抽象 mina 和 netty 为统一接口扩展接口为 Channel , Transporter , Client , Server , Codec
+- Serialize层：扩展接口为 Serialization, ObjectInput, ObjectOutput, ThreadPool
+#### Java SPI(service provider interface)
+- 设计目标
+  - 为接口寻找服务，接口实现类可插拔，类似于IoC
+- 约定
+  - 接口类com.test.Myservice
+  - jar包的`/META-INF/service`目录下，创建该接口的同名文件(全路径名)com.test.Myservice
+  - 文件内容为实现类的全路径名，比如`com.test.MyServiceImpl1`，多个实现类则有多行
+  - `ServiceLoader<MyService> serviceLoader = ServiceLoader.load(MyService.class)`
+  - 遍历`for (MyService service: serviceLoader){...}`
+#### Dubbo中的SPI
+- Java SPI的缺点：一次性实例化所有实现
+- Dubbo SPI的改进：增加了对扩展点IOC和AOP的支持，一个扩展点可以直接setter注入其他扩展点
+- 约定
+  - spi文件存储在`META-INF/dubbo/internal`、`META-INF/services/`、`META-INF/dubbo/`目录下,并且名称为接口的全路径名
+  - 文件内容为`扩展名=com.test.MyServiceImpl1`，通过扩展名来加载指定的实现类，避免资源浪费
+- ExtensionLoader
+  - 入口，扩展点载入器
+  - 用于载入Dubbo中的各种可配置组件，比如ProxyFactory、LoadBalance、Protocol、Filter、Container、Cluster、Registry：Dubbo中所有组件都是通过SPI方式来管理的
+  - `public static <T> ExtensionLoader<T> getExtensionLoader(Class<T> type)` 内部为一个ConcurrentHashMap保持不同的接口类型对应的ExtensionLoader
+    - 获取实现类实例：`ProxyFactory proxy = ExtensionLoader.getExtensionLoader(ProxyFactory.class).getAdaptiveExtension();`
+#### Provider暴露服务
+- ServiceConfig类拿到接口实现类ref，然后通过ProxyFactory.getInvoker()使ref生成一个AbstractProxyInvoker实例
+- Invoker通过Protocol.export()转换为Exporter
+  - 打开Netty Server侦听服务，接收请求
+#### Consumer消费服务
+- ReferenceConfig.init()调用Protocol.refer()生成Invoker实例
+- Invoker在Protocol.refer()方法中转为客户端接口
+  - 主要是创建一个netty client 链接服务提供者
