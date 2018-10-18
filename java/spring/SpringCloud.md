@@ -27,5 +27,8 @@ fetch-registry: false       自己就是注册中心
  ### 服务调用
  - 可用RestTemplate
  - 负载均衡
-   - Ribbon
-     - 客户端的负载均衡
+   - 客户端的负载均衡：Ribbon
+   - 服务端的负载均衡：Nginx
+ - Ribbon
+  - 默认均衡策略为轮询
+   
