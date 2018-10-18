@@ -3,6 +3,38 @@
 - 可靠性能力补齐
 - 定制能力强
 - 解决了已发现的所有NIO的BUG，比如`epoll bug`
+
+### 模型
+```
+/**
+     * 
+     * 
+     * 
+     * 
+     *                   ________________________                                 __________________________
+     *                  |                        |                               |                          |    
+     *                  |   <-----Inbound-----   |                               |   ---inbound------- >    |   ________
+     *                  |   _____        ______  |                               |    _______      ____     |  |        |
+     *      _______     |  |     |       |    |  |                               |    |     |     |    |    |  |        |  
+     *     |       |    |  |  ②  |       |  ③ |  |      ___________________      |    |  ⑤  |     |  ⑥ |    |  |        |
+     *     |       |    |  |_____|       |____|  |     |                   |     |    |_____|     |____|    |  |        |     
+     *     |client |----|-------______-----------|-----|      network      |-----|--------------------------|--| server |
+     *     |       |    |       |     |          |     |___________________|     |          ______          |  |        |
+     *     |       |    |       |  ①  |          |                               |          |     |         |  |        |         
+     *     |       |    |       |_____|          |                               |          |  ④  |         |  |________|
+     *     |       |    |                        |                               |          |_____|         |
+     *     |_______|    |   -----Outbound--->    |                               |    <-----outbound----    | 
+     *                  |___ChannelPipeline______|                               |______ChannelPipeline_____| 
+     *                                                                               
+     *  ①：StringEncoder继承于MessageToMessageEncoder，而MessageToMessageEncoder又继承于ChannelOutboundHandlerAdapter
+     *  ②：HelloWorldClientHandler.java
+     *  ③：StringDecoder继承于MessageToMessageDecoder，而MessageToMessageDecoder又继承于ChannelInboundHandlerAdapter
+     *  ④：StringEncoder 编码器
+     *  ⑤：StringDecoder 解码器
+     *  ⑥：HelloWorldServerHandler.java
+     * 
+```
+
 ### 实用ChannelHandler
 - ByteToMessageCodec 系统编码界面框架
 - LengthFieldBaseFrameDecoder 基于长度的半包解码器
@@ -224,3 +256,5 @@ message SubscribeReq{
 					return b.build();
         }
 ```
+
+### ByteBuf
