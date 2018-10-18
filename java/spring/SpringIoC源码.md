@@ -10,8 +10,15 @@
 - 继承BeanDefinitionRegistry，注册、取消注册等
 
 ### AbstractApplicationContext.refresh()
-- 所有的实现类的实例化都会进入这个方法
+- 所有的实现类的实例化都会进入这个方法，**最核心的方法**
 - 作用是加载Spring容器配置，包括xml property文件和数据库模式等
+- 符合开闭原则
+- 应用举例：开发环境修改python解释器配置
+
+### BeanPostProcessor
+- 允许用户自定义修改创建的Bean实例
+- postProcessBeforeInitialization() 初始化之前处理
+- postProcessAfterInitialization()  初始化之后处理
 
 ### getBean
 - BeanFactory 和 ApplicationContext 加载Bean的区别
