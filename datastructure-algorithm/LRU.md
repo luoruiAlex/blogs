@@ -1,0 +1,3 @@
+- 关键在于装饰模式增强LinkedHashMap
+  - 1.覆盖removeEldestEntry方法 `return size() > maxCapacity;`
+  - 2.覆盖getAll()方法 `return new ArrayList(cacheMap.entrySet());`
