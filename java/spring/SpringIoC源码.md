@@ -22,7 +22,7 @@
     - 加载BeanDefinition：创建BeanDefinitionReader(容器作为BeanDefinitionRegistry传入构造)，然后初始化BeanDefinitionReader，加载BeanDefinition(解析xml等配置文件，然后注册到容器中)
   - `ConfigurableListableBeanFactory beanFactory = getBeanFactory();`返回上一步创建的容器
 - `prepareBeanFactory();`准备beanfactory来使用这个上下文.做一些准备工作，例如classloader，beanfactoryPostProcessor等
-- 执行prostProcessor、注册BeanPostProcessor、初始化消息源、注册监听器等ApplicationContext的工作
+- 执行prostProcessor、注册BeanPostProcessor、初始化消息源、注册监听器等ApplicationContext的工作，首先就是invokeBeanFactoryPostProcessors(该接口直接修改beanDefinition，所以优先初始化)
 - 实例化所有非懒加载的bean
 - `finishRefresh()`发布所有的应用
 
@@ -40,13 +40,13 @@
   - 修改的是要打印的work文档
   
 ### Bean的初始化顺序
+- BeanFactoryPostProcessor
 - 构造
 - BeanNameAware
 - BeanFactoryAware
 - 执行InitializingBean接口中的afterPropertiesSet的方法
 - init-method
 - 以上都是在getBean()方法中执行
-- BeanFactoryPostProcessor
 
 ### getBean
 - BeanFactory 和 ApplicationContext 加载Bean的区别
