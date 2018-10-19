@@ -7,6 +7,12 @@
 - 底层双向链表
 
 ## Map
+### LinkedHashMap
+- 继承了HashMap，内部形成双向链表
+- 两种排序方式
+  - 默认按照插入顺序排序
+  - LinkedHashMap(int initialCapacity,float loadFactor,boolean accessOrder) accessOrder设置为true则为按照访问顺序排序
+- 按照访问顺序排序则将当前的Entry移动到链表头部
 ### HashMap
 - 底层为数组，每个元素为一个单向链表，默认size为16
 - capacity：当前数组容量，始终保持2^n，每次扩容后数组大小为当前2倍
