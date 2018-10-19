@@ -25,6 +25,7 @@
 - 扩容后，长度为之前的2倍
 - key的hashcode和equals方法必须同时改写
 - jdk8：利用**红黑树**优化链表，链表查找复杂度为O(n)，为红黑树的查找复杂度为O(log n)
+  - 改成了先插值后扩容
   - TREEIFY_THRESHOLD：当bucket大于8的时候就转化为红黑树
   - UNTREEIFY_THRESHOLD：小于6时还原为链表
   - MIN_TREEIFY_CAPACITY：当哈希表中的容量大于这个值时，表中的桶才能进行树形化
@@ -40,11 +41,11 @@
 - jdk8：摒弃了分段锁的方案，直接使用一个大数组
   - put
     - 定位出位置
-    - 如果需要扩容则复制到新的数组
     - 为空直接CAS设置其值，失败则自旋保证成
     - 非null的数组元素，synchronized加锁该元素然后操作
     - 如果数量大于 TREEIFY_THRESHOLD 则要转换为红黑树
   - get：value和next都是volatile，具有可见性，无需加锁就能保证可见性
+  - treeifyBin 不一定是进行红黑树转换，有可能仅仅扩容
   
 ### CopyOnWriteArrayList
 - 读不加锁
