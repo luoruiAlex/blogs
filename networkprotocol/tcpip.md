@@ -21,7 +21,7 @@
 ## 四次挥手
 - 由于TCP连接时全双工的，因此，每个方向都必须要单独进行关闭
 - 过程
-  - client向B发送FIN(状态位FIN=1,发送seq=J)，client进入**FIN_WAIT_1**
+  - client向Server发送FIN(状态位FIN=1,发送seq=J)，client进入**FIN_WAIT_1**
   - Server向client发送ACK(状态位ACK=1，发送ack=J+1)，Server进入**CLOSE_WAIT**状态
   - Client收到ACK，进入**FIN_WAIT_2**。此时为**半连接**
   - Server向client发送FIN(状态位FIN=1,发送seq=K)，Server进入**LAST_ACK**状态
