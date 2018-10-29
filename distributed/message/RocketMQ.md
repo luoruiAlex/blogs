@@ -108,7 +108,7 @@
   ```
   - 失败重试
     - timeout：内部不断重试直至发送成功为止
-    - exception：消息重试直至进入死信队列
+    - exception：消息重试直至进入死信队列(CONSUME_SUCCESS RECONSUME_LATER，实际使用过程中可判断已重复一定次数然后使用其他方式处理)
   - 多线程消费
   ```
   consumer.setConsumerThreadMin(10);
