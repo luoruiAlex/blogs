@@ -11,6 +11,9 @@
 - Message
   - messageId
   - messageKey
+  - Topic
+  - Tag
+  - Key
   - 大小建议不超过512K
 - Topic
   - tags
@@ -19,9 +22,9 @@
 - Broker
   - ASYNC_MASTER SYNC_MASTER SLAVE
   - 防止丢失消息
-    - SYNC_MASTER \+ SLAVE
+    - SYNC_MASTER(同步双写Master) \+ SLAVE
   - 高可用(可能丢失)
-    - ASYNC_MASTER \+ SLAVE，也可以不用SLAVE
+    - ASYNC_MASTER（异步复制Master） \+ SLAVE，也可以不用SLAVE
   - FlushDiskType
     - 建议用ASYNC_FLUSH
     - SYNC_FLUSH影响性能
@@ -35,6 +38,10 @@
   - 默认同步发送消息
   - 如果要求高性能(比如大数据处理)：可改为异步发送，而且创建多个producer(3~5个已足够，要给每个producer设置InstanceName)
   - producer是线程安全的
+  - RocketMQ提供了3中模式的Producer
+    - NormalProducer
+    - OrderProducer(producer端send有MessageQueueSelector，consumer使用MessageListenerOrderly)
+    - TransactionProducer
 - Consumer
   - 不同的Consumer Group可以消费同一个topic，它们各自有自己的consuming offsets
   - MessageListener
@@ -190,15 +197,19 @@
   - TransactionStatus.CommitTransaction 允许consumer消费这条消息
   - TransactionStatus.RollbackTransaction 消息将被删除，不允许消费
   - TransactionStatus.Unknown 中间状态，MQ需要检查来决定状态
-- 使用TransactionMQProducer
-- producer.setTransactionListener(TransactionListener)
+- producer端：使用**TransactionMQProducer**(T1业务表/T2**消息确认表**)
+- producer.setTransactionListener(**TransactionListener**)
   - `TransactionStatus executeLocalTransaction()`：当发送半程消息成功用于执行本地事务
   - `TransactionStatus checkLocalTransaction()`：用于检查本地事务状态并响应MQ的检查请求
 - producer.setExecutorService(ExecutorService)
 - sendMessageInTransaction(msg, arg)
-  - 阶段1：发送prepare消息
-  - 阶段2：执行本地事务
-  - 阶段3：发送确认消息
+  - 阶段1：发送prepare消息，消息到MQ之后回调**本地事务**，此时事务消息对consumer还**不可见**。
+  - 阶段2：执行本地事务(executeLocalTransaction)，一个事务中对T1(业务表)/T2(消息确认表)操作
+    - T2(status、updatetime)
+  - 阶段3：发送确认消息（向MQ发送消息，prepare消息是否对consumer可见由这里的消息中的状态码决定）
+  - 定时任务扫描T2表(指定status和updatetime条件)将确认消息发送失败的消息找出来，更新updatetime，并发送给MQ
+- consumer端(T3业务表/T4定时任务表/T5日志记录表)
+  - 有一个定时任务扫描T5获取一段时间内的数据(T4表中记录time，每次启动先更新time)发送给producer端，让producer更新T2表的status、updatetime
 
 ### 使用细节
 - 消息过滤
