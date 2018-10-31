@@ -87,7 +87,7 @@
 - MVCC(多版本并发控制)
   - 在Read Committed和Repeatable Read下工作
   - 能通过很小的开销实现非锁定读：写的时候复制一份数据(以版本区分)并操作直至提交，同时读任务可读取旧的数据
-  - 原理：每个表有额外字段，与MVCC有关的为 DATA_TRX_ID DATA_ROLL_PTR
+  - 原理：每个表有额外字段，与MVCC有关的为 DATA_TRX_ID DATA_ROLL_PTR(创建时间、删除时间)
     - DATA_TRX_ID：最近一次修改(add|update)本行记录的事务的标识符
     - DATA_ROLL_PTR：写入回滚段的undo log record(插入新数据的回滚段指针为null)
     - SELECT需要满足两个条件：早于(<=)当前事务版本的数据行;行的删除版本未定义或者大于当前事务版本号
