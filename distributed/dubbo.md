@@ -181,7 +181,7 @@
   - 为接口寻找服务，接口实现类可插拔，类似于IoC
 - 约定
   - 接口类com.test.Myservice
-  - jar包的`/META-INF/service`目录下，创建该接口的同名文件(全路径名)com.test.Myservice
+  - jar包的`/META-INF/services`目录下，创建该接口的同名文件(全路径名)com.test.Myservice
   - 文件内容为实现类的全路径名，比如`com.test.MyServiceImpl1`，多个实现类则有多行
   - `ServiceLoader<MyService> serviceLoader = ServiceLoader.load(MyService.class)`
   - 遍历`for (MyService service: serviceLoader){...}`
@@ -224,15 +224,15 @@
   - JavassistProxyFactory.getProxy()
     - 代理接口，i别难过使用InvokerInvocationHandler对具体调用进行拦截
 #### 线程模型
-- 使用Netty通讯
+- 使用Netty通讯，用protocol的`dispatcher`和`threadpool`配置
 - Provider使用两级线程池(统称为IO线程)：EventLoopGroup(boss)主要用来接受客户端的链接请求，并把接受的请求分发给EventLoopGroup（worker）来处理
 - Provider的逻辑如果比较耗时，比如查询数据库，必须派发到新线程池，否则IO线程将阻塞，不能接收请求
-- 所有的线程模型
+- 所有的线程模型(dispatcher)
   - all 所有消息都派发到线程池，包括请求，响应，连接事件，断开事件，心跳等
   - direct 所有消息都不派发到线程池，全部在 IO 线程上直接执行
   - execution 只有**请求消息**派发到线程池，不含响应，响应和其它连接断开事件，心跳等消息，直接在 IO 线程上执行
   - connection 在 IO 线程上，将连接断开事件放入队列，有序逐个执行，其它消息派发到线程池
-- ThreadPool的spi实现
+- ThreadPool的spi实现(threadpool)
   - fixed 固定大小线程池，启动时建立线程，不关闭，一直持有。(缺省)
   - cached 缓存线程池，空闲一分钟自动删除，需要时重建。
   - limited 可伸缩线程池，但池中的线程数只会增长不会收缩。只增长不收缩的目的是为了避免收缩时突然来了大流量引起的性能问题。
