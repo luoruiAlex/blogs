@@ -19,3 +19,4 @@ a.shape         -> (4L, )
 a.shape = 2, 2  -> array([1, 2], [3, 4])
 a * a           -> array([1, 4], [9, 16]) 多维数组乘法仍然是对应元素的乘积，并不是按照矩阵乘法来计算
 ```
+- 生成等差数组： linspace(start, end, arr_size)
