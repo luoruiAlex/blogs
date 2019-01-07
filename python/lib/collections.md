@@ -4,6 +4,7 @@
 
 #### collections.deque
 - 链表结构
+- deque(list)
 - appendleft popleft
 - deque(maxlen=N) 保留最后N个元素
 
@@ -12,8 +13,11 @@
 - dict.get(key\[, defaultvalue])在每次调用的时候指定默认值
 
 #### collections.OrderedDict
+- 按照插入的顺序排序
+- FIFO
 
 #### collections.Counter
+- `counter[key] = counter[key] + 1`
 
 #### heapq
 - heapq.nsmallest(N, iterable, key=None) key可以为函数，指定用iterable中每个item的哪个字段比较，比如 lambda s: s\['price']
