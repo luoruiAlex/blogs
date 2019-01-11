@@ -26,3 +26,25 @@
 - heappop() heappush() 可用于实现优先级队列
 ```
 ```
+
+#### collections.ChainMap
+- 本质上还是一个dict，由一系列dict组成，按顺序在内部的dict依次查找
+- 示例：应用程序传参，可按照命令行、环境变量、默认参数的顺序查找值
+- ```
+  from collections import ChainMap
+  import os, argparse
+
+  defaults = {
+      'color': 'red',
+      'user': 'guest'
+  }
+
+  parser = argparse.ArgumentParser()
+  parser.add_argument('-u', '--user')
+  parser.add_argument('-c', '--color')
+  namespace = parser.parse_args()
+  command_line_args = {k: v for k, v in vars(namespace).items() if v}
+  combined = ChainMap(command_line_args, os.environ, defaults)
+  print(combined['color'])
+  print(combined['user'])
+  ```
