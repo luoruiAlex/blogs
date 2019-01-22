@@ -1,0 +1,14 @@
+- pseudo class pseudo element
+- drop cap 首字母大写下沉
+- bullet list 项目符号;无符号列表
+- 常见符号
+  - back slash \
+  - (forward )slash /
+  - 'colon :
+  - 'semicolon ;
+  - 'comma ,
+  - hash sign #
+  - asterisk *
+  - excla'mation !
+  - quote 引号;引述
+    - single quote 单引号
