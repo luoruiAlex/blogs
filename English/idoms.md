@@ -1,3 +1,42 @@
 - ***above board***
   - legitimate, legal.
   - She knows it shouldn’t be kept a secret. She wants to keep everything ***above board***.
+- ***across the board***
+  - including everyone or everything
+  - The company had a successful year. All salaries were increased by 10% ***across the board***.
+- ***air one’s dirty laundry in public***
+  - discuss personal problems openly
+  - He is a very private person. If he has a problem in his family he doesn’t want to ***air his dirty laundry in public***.
+- ***all along***
+  - all the time
+  - She was accepted into the university, but she knew ***all along*** that she’d get in.
+- ***all ears***
+  - eager to listen
+  - I was excited to hear about her vacation. When she told me about it, I was ***all ears***.
+- ***all thumbs***
+  - clumsy, unable to fix things
+  - Don't ask me to put that clock back together. I'm ***all thumbs***.
+- ***an arm and a legv
+  - a large amount of money
+  - It cost ***an arm and a leg*** to fix the stove.
+- ***ant in one's pants***
+  - nervous, anxious
+  - He wasn’t sure if he would be chosen to win the award. He had ***ants in his pants***.
+- ***the apple doesn’t fall far from the tree***
+  - being similar to a parent or family member
+  - He acts just like his father. You know, ***the apple doesn’t fall far from the tree***.
+- ***apple of one’s eye***
+  - someone special, usually a son or daughter
+  - Although he loves his son, his daughter is ***the apple of his eye***.
+- ***at fault***
+  - responsible for making errors
+  - He is ***at fault*** for all the errors on the computer.
+- ***at odds***
+  - in disagreement
+  - He is ***at odds*** with his boss.
+- ***at one’s beck and call***
+  - always ready to do what is ordered
+  - Whenever she calls him, he’s always helping her. He is ***at her beck and call***.
+- ***at one's wit's end***
+  - anxious, frantic
+  - I need to speak with him to finish the report by tomorrow but he's not available. I'm ***at my wit's end***!
