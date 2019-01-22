@@ -1,0 +1,3 @@
+- ***above board***
+  - legitimate, legal.
+  - She knows it shouldn’t be kept a secret. She wants to keep everything ***above board***.
