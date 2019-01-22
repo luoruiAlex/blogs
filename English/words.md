@@ -33,3 +33,6 @@
    - non-trivial 不平凡的
 
 - gotcha 抓住你了，明白了，理解了
+
+- vocation 职业，使命，天命
+   - vacation 假期，休假
