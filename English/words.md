@@ -31,3 +31,5 @@
 
 - trivial 不重要的，琐碎的
    - non-trivial 不平凡的
+
+- gotcha 抓住你了，明白了，理解了
