@@ -93,3 +93,15 @@
 - ***be beside one’s self***
   - be very upset
   - I was so mad when I heard that she was making up stories about me that I ***was beside myself***.
+- ***beat around the bush***
+  - avoid giving a clear answer
+  - didn’t want to hurt his feelings and tell him that he wasn’t selected for the team. So when he asked me if I had any information, I basically ***beat around the bush***.
+- ***beat someone to the punch***
+  - do something before someone else can
+  - She was going to buy the last red dress that the store had, but I ***beat her to the punch*** and bought it first.
+- ***beat the rap***
+  - escape punishment
+  - There was not enough evidence to convict him, so he ***beat the rap*** and was set free.
+- ***behind the 8-ball***
+  - in trouble
+  - My department is late on its deadline. We are ***behind the 8-ball***.
