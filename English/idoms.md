@@ -57,7 +57,7 @@
   - When my supervisor told me that our idea would not work, we had to ***go back to the drawing board*** to ***come up with*** something else
 - ***backbone***
   - courage
-  - He has no ***backbone*** because he was afraid to '***reprimand*** her
+  - He has no ***backbone*** because he was afraid to '***reprimand***(批评) her
 - ***backseat driver***
   - passenger who tells you how to drive
   - I’ll never drive Joe to the airport again. He kept on wanting me to take another road which I knew was wrong. He is such a ***backseat driver***
@@ -73,3 +73,23 @@
 - ***bank on it***
   - be sure of, count on
   - I’ll be there to help you. You can ***bank on it***.
+- ***banker’s hours***
+  - short work hours 上班时间短、工作轻松的职业
+  - He loves his job because on Friday, he gets to work ***banker’s hours***.
+  - I'm sure most congressmen(议员) work as hard as I do. But this guy likes to keep ***banker's hours***: he gets there at noon, eats lunch, sees a few people, and goes home at four or five PM
+  - the eleventh hour:最后时刻; zero hour:关键时刻; happy hour:饮食店为了吸引顾客而提供减价饮料的时段,一般是下午五点到六点;
+- ***bark up the wrong tree***
+  - make a wrong choice or a false assumption
+  - If he thinks that I’m going to help him paint his house, well he’s ***barking up the wrong tree***.
+- ***bat a thousand***
+  - have a perfect record
+  - He is so happy that everyone he invited to the party is coming. He's ***batting a thousand***.
+- ***bat an eyelash(眼睫毛)***
+  - show emotion
+  - He was ***filled with emotion*** during his speech, but she didn't ***bat an eyelash***.
+- bawl（嚎啕大哭; 大叫，大喊) out
+  - reprimand
+  - The team was ***bawled out*** after they lost the game.
+- ***be beside one’s self***
+  - be very upset
+  - I was so mad when I heard that she was making up stories about me that I ***was beside myself***.
