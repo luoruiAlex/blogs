@@ -4,6 +4,9 @@
 - ***across the board***
   - including everyone or everything
   - The company had a successful year. All salaries were increased by 10% ***across the board***.
+- ***act up***
+  - (病痛等)复发; 炫耀; 行动倔强; （机器等） 功能失常;
+  - The stupid computer is ***acting up*** again.
 - ***air one’s dirty laundry in public***
   - discuss personal problems openly
   - He is a very private person. If he has a problem in his family he doesn’t want to ***air his dirty laundry in public***.
@@ -46,4 +49,27 @@
 - ***back on one’s feet***
   - financially or physically healthy again
   - Since sales improved, he is doing better and he's getting ***back on his feet***.
-- back out of
+- ***back out of***
+  - withdraw, end an obligation or promise
+  - I made a deal with my friend to help him at work. When I became too busy, I had to ***back out of it***.
+- ***back to the drawing board***
+  - rethink an idea, need to ***start overv
+  - When my supervisor told me that our idea would not work, we had to ***go back to the drawing board*** to ***come up with*** something else
+- ***backbone***
+  - courage
+  - He has no ***backbone*** because he was afraid to '***reprimand*** her
+- ***backseat driver***
+  - passenger who tells you how to drive
+  - I’ll never drive Joe to the airport again. He kept on wanting me to take another road which I knew was wrong. He is such a ***backseat driver***
+- ***bail one out*** bail: n.保释金;v.保释
+  - help
+  - Thanks for picking me up when my car broke down. You really ***bailed me out*** of a bad situation
+- ***ballpark figure*** ballpark:棒球场；合理范围内的估计数值，后面的figure有时会省略;Let's ballpark this.表示让大家开始头脑风暴
+  - approximate amount
+  - When I asked the contractor(承包商) how much it would be to remodel the kitchen, he gave me a ***ballpark figure***
+- ***bang for the buck*** 可用bigger biggest best修饰
+  - value for the money spent 物有所值；合算；货真价实
+  - Newspaper advertising works well for us because we get the best ***bang for the buck***.
+- ***bank on it***
+  - be sure of, count on
+  - I’ll be there to help you. You can ***bank on it***.
