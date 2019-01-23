@@ -16,7 +16,7 @@
 - ***all thumbs***
   - clumsy, unable to fix things
   - Don't ask me to put that clock back together. I'm ***all thumbs***.
-- ***an arm and a legv
+- ***an arm and a leg***
   - a large amount of money
   - It cost ***an arm and a leg*** to fix the stove.
 - ***ant in one's pants***
@@ -40,3 +40,10 @@
 - ***at one's wit's end***
   - anxious, frantic
   - I need to speak with him to finish the report by tomorrow but he's not available. I'm ***at my wit's end***!
+- ***at the end of one's rope***
+  - desperate, with nowhere to turn
+  - I've tried every which way to figure out this problem but I can't. I'm ***at the end of my rope***!
+- ***back on one’s feet***
+  - financially or physically healthy again
+  - Since sales improved, he is doing better and he's getting ***back on his feet***.
+- back out of
