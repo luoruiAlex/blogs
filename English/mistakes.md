@@ -77,3 +77,65 @@
   
 - 出去办事
   - He often runs errands(短程的差事，跑腿，杂事) for his boss.
+
+- 问时间
+  - What time is it?没有now
+  - What't the time now?
+  - Do you hava the time?
+  - How goes the enemy
+
+- 有话直说
+  - Get to the point.
+  - Please be frank with me
+  - Let's cut to the chase
+  - Don't beat around the bush 别拐弯抹角
+  - Don't keep me in suspense.别卖关子
+  - Don't pull any punches. Tell it straight.
+  - We may as well put all cards on the table. 打开天窗说亮话
+  
+- 使眼色
+  -  The girl winked at me to let me know she was kidding.
+  - give you the eye抛媚眼
+  
+- 同情
+  - I feel sorry for you 替你感到可悲，不是同情
+  - I feel for you为你感到难过
+  - I feel you 我懂你
+
+- 委婉说法
+  - 穷 The government is introducing new schemes to help the disadvantaged/ people who are finacially embarrassed
+  - 死亡 pass away 被病魔打败 lost one's battle
+    - My brother lost his battle with lung cancer years ago.
+  - 胖 plump丰满；a bit chubby圆乎乎，chubby多用于小朋友；curvy指女性曲线丰满；well-built, a big man指男性结实、高大
+  - 瘦 slim,slender指苗条纤细；petite 娇小，尤指女性
+  
+- 送回家
+  - I'll see you home.
+  
+- end
+  - by the end of 到...为止，在...之前
+    - By the end of the holiday I had spent all my money.
+  - in the end终于，最终
+    - What did you decide in the end
+  - at the end 在...的尽头
+    - At the end of the street you will find a bookshop.
+    - 也表示在...结束时，但是侧重于时间点，而by the end强调时间段
+    - at the end of January 一月的最后一天
+    - by the end of January 一月结束的前几天
+    
+- 请客
+  - This dinner is on me. Please order whatever you want to have.
+  - My treat. It's my treat today.
+  - Let me foot/pay the bill tonight. Next time you'll treat.
+  - I'm paying tonight.
+- AA制
+  - Let's split the bill.
+  - We'd like to pay separately
+  - Separate check, please.
+  - Let's go dutch this time.
+  
+- 单身
+  - I’m on the market.
+  - I'm hopelessly single.
+  - I'm not taken.
+    
