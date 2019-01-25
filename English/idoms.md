@@ -41,7 +41,7 @@
   - always ready to do what is ordered
   - Whenever she calls him, he’s always helping her. He is ***at her beck and call***.
 - ***at one's wit's end***
-  - anxious, frantic
+  - anxious, frantic 山穷水尽，不知所措
   - I need to speak with him to finish the report by tomorrow but he's not available. I'm ***at my wit's end***!
 - ***at the end of one's rope***
   - desperate, with nowhere to turn
