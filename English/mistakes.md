@@ -37,3 +37,43 @@
   - I dread(惧怕，担心) to think what happen if he was left to cope on his own.
   - You had to admit it - the woman's got the balls.
   - She showed a lot of pluck in staning up to(顶撞) her boss. 
+
+- 工作
+  - My job is teaching English. 不能是 a teacher
+  - I wish I had a cushy(容易的，轻松的) job like her.
+  - I used to work nights, but now I have a nine-to-five(朝九晚五) job.
+  - The whole project is actually unnecessary. It's just jobs for the boys.给自己人安排差事
+  
+- penny
+  - I bet that cost you a pretty penny.一大笔钱
+  - A penny for your thoughts?你在想什么呢?
+  - a penny saved is a penny earned 省到就是赚到
+  - I'm sure we can do this. In for a penny, in for a pound.一不做二不休。不能半途而废，开始就要不遗余力完成。
+  
+- 最近在忙什么
+  - How have you been
+  - What are you up to
+  - What have you been up to
+  - Oh not much, you?
+  - Oh not a whole lot. What about you?
+  - I'm working on a new project.What are you doing?
+  
+- 看病
+  - got to a doctor
+  - see a doctor
+  - see an eye doctor
+  
+- 不见不散
+  - See you there, I'll wait till you show up.
+  - Let's meet at the usual place, rain or shine.老地方见，不见不散
+  
+- 走开
+  - Step aside 一边去
+  - Take a walk 走开
+  - Leave me alone.
+  - Buzz off, Im busy!
+  - Get out of my face.
+  - Take a hike. 哪儿凉快哪儿呆去
+  
+- 出去办事
+  - He often runs errands(短程的差事，跑腿，杂事) for his boss.
