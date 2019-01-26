@@ -105,3 +105,6 @@
 - ***behind the 8-ball***
   - in trouble
   - My department is late on its deadline. We are ***behind the 8-ball***.
+- ***go on about***
+  - 唠唠叨叨地谈
+  - It was just a passing comment(一笔带过的评论), he didn't ***go on about*** it.
