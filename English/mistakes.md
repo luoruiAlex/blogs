@@ -6,8 +6,8 @@
     - You can talk! Your're hardly ever on time yourself.
   - You don't say! 用来表示惊讶，相当于"OMG"（oh my god）；或是讽刺别人： 是吗？
   - I can't say.我不敢说
-  - yes and no.无法用一句话说清
-  - Half and half. 很难说
+  - yes and no.无法用一句话说清,(对问题的一种两可回答)既肯定又否定
+  - Half and half. 很难说，半好半坏
   - Not exactly.也不能这么说
   - There's no guarantee.我不能保证
   - It's difficult to say.不好说
