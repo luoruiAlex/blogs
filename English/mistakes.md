@@ -2,9 +2,9 @@
   - Talk to you later.  再见！
     - Talk to you soon.
     - See you later.
-  - You can talk! 你还好意思说！
+  - You can talk! 你还好意思说！你自己还不是一样
     - You can talk! Your're hardly ever on time yourself.
-  - You don't say! 这还用你说！
+  - You don't say! 用来表示惊讶，相当于"OMG"（oh my god）；或是讽刺别人： 是吗？
   - I can't say.我不敢说
   - yes and no.无法用一句话说清
   - Half and half. 很难说
