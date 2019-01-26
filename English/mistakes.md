@@ -1,11 +1,24 @@
-- Talk to you later.  再见！
-  - Talk to you soon.
-  - See you later.
-  
-- You can talk! 你还好意思说！
-  - You can talk! Your're hardly ever on time yourself.
+- 说话
+  - Talk to you later.  再见！
+    - Talk to you soon.
+    - See you later.
+  - You can talk! 你还好意思说！
+    - You can talk! Your're hardly ever on time yourself.
+  - You don't say! 这还用你说！
+  - I can't say.我不敢说
+  - yes and no.无法用一句话说清
+  - Half and half. 很难说
+  - Not exactly.也不能这么说
+  - There's no guarantee.我不能保证
+  - It's difficult to say.不好说
+  - It might be true
+  - It could be
+  - It's something like that
+  - It depends.
 
-- You don't say! 这还用你说！
+- fast
+  - fast friends好朋友
+  - fast sleep睡得很香
 
 - 不在状态
   - I'm not myself today.
@@ -139,3 +152,73 @@
   - I'm hopelessly single.
   - I'm not taken.
     
+- notice
+  - My boss gave me a month's notice.解雇通知
+  - The gave me my notice yesterday.解雇通知
+  - I handed in my notice yesterday.辞呈
+  - short notice紧急通知
+  - I can't cancel my plans at such short notice. 短时间内
+
+- 没听清
+  - What?用于熟人之间
+  - Pardon me? I beg your pardon
+  - Sorry, what did you say
+  - Come again
+  - Sorry, but I missed you that
+  - Sorry, I didn't hear/catch that
+  - Sorry, I didn't get any of that
+  - Could you say that again please
+  - Could you repeat that, please
+  - I'm sorry, would you mind repeating that, please
+  - I was saying/expressing
+  - I just mean that
+  - I was just asking if 
+  
+- kite
+  - I can always tell when the boss is flying a kite / kite flying?说些甚么视图别人的反应，打探消息
+  - Stop chattering, go fly your kite! 意思是Leave me alone
+  
+- 发消息
+  - text me(on WeChat)
+  - post：发布；repost：再次发布，转发(转发微博不用forward)
+  - God, that famous star reposted my micro-blog.
+  - He shared the post with me.
+  - Could you forward the boss's email to me please.
+  
+- 打断别人
+  - Can I say something
+  - I'm sorry to barge in, but
+  - I'm sorry to bother you, but
+  - Here's what I think
+  - Can I put in a word here
+  - Sorry to interrupt, but
+  
+- Please note...请注意
+  - please note the difference in the two cases.
+  - Please note this bill must be paid with 7 days.
+- I feel it is absolutely necessary for me to remind him of the meeting today.
+
+- 放狠话
+  - Just wait and see, I won't let you get away(得逞) with that.
+  - You will be sorry.你会后悔的
+  - You're gonna get what's coming to you.你会得到报应的
+  - If you're looking for a fight, you don't have to look far.想打架随时奉陪
+  - You want to take this outside?Anytime!想出去打架随时奉陪
+  - Watch your mouth.Do you know who you're talking to
+  - I will get even with you sonner or later.这笔账我迟早找你算
+  - Listen, you're piked the wrong person to mess with.
+  - You'd better take that back.
+  - Don't mess with me! Don't get fresh with me!
+  
+- egg
+  - He's a bad egg.坏蛋
+  - She had egg on her face(超尴尬的) when she stormed out of the office and fell over on her way out.
+  
+- room
+  - leave room留有余地
+    - Always leave room for disappointment.
+    - Give every opportunity a chance, leave no room for regrets.
+    - Stay back, leave room for people to get past.
+  - ladies's room; men's room;power room
+    - I have to leave the room.上卫生间的委婉说法
+    - I'll be back in a minute.上卫生间的委婉说法
