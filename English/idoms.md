@@ -53,7 +53,7 @@
   - withdraw, end an obligation or promise
   - I made a deal with my friend to help him at work. When I became too busy, I had to ***back out of it***.
 - ***back to the drawing board***
-  - rethink an idea, need to ***start overv
+  - rethink an idea, need to start overv
   - When my supervisor told me that our idea would not work, we had to ***go back to the drawing board*** to ***come up with*** something else
 - ***backbone***
   - courage
