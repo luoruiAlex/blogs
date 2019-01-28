@@ -87,7 +87,7 @@
 - ***bat an eyelash(眼睫毛)***
   - show emotion
   - He was ***filled with emotion*** during his speech, but she didn't ***bat an eyelash***.
-- bawl（嚎啕大哭; 大叫，大喊) out
+- ***bawl（嚎啕大哭; 大叫，大喊) out***
   - reprimand
   - The team was ***bawled out*** after they lost the game.
 - ***be beside one’s self***
