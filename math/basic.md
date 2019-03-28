@@ -1,1 +1,4 @@
 - 3 plus 4 is equal to seven.
+- `-5` minus five
+- notation: 符号
+- use sth to represent a whole set of **phenomenon**
