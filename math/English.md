@@ -1,3 +1,4 @@
 - backburner
 - in terms of
 - relative smaller 相对小点的
+- Let's say you are an ancient philosopher
