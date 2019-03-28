@@ -1,4 +1,9 @@
 - 3 plus 4 is equal to seven.
 - `-5` minus five
 - notation: 符号
-- use sth to represent a whole set of **phenomenon**
+- term 术语
+- use sth to represent a whole set of **phenomenon** 代表大多数情形
+- convention 约定
+- calculus 微积分
+  - differential 微分
+  - integral 积分
