@@ -1,6 +1,15 @@
-- The red/black Joker 大/小王
-- the king of spades
-- the queen of hearts
-- the jack of clubs
-- the ace of diamonds
-- two .... ten
+- 牌的读法
+  - The red/black Joker 大/小王
+  - face cards / court cards 花牌
+    - the king of spades
+    - the queen of hearts
+    - the jack of clubs
+  - the ace of diamonds
+  - two .... ten
+- 动作
+  - shuffle
+  - deal 分牌
+  - cut 倒牌
+- 角色
+  - banker 庄家
+  - hand
