@@ -1,5 +1,5 @@
 - 3 plus 4 is equal to seven.
-- `-5` minus five
+- `-5` negative five
 - notation: 符号
 - term 术语
 - use sth to represent a whole set of **phenomenon** 代表大多数情形
@@ -7,3 +7,10 @@
 - calculus 微积分
   - differential 微分
   - integral 积分
+- greater than / less than
+- plot(在图上画出；密谋；设计情节) these values on a number line
+- `|a|` abslute value sign 绝对值符号 how far are you away from 0?
+- the absolute value of a number
+- equation 方程 ` [ɪˈkweʒən]`
+- x/4 ~ x over 4
+- subscript 下标
