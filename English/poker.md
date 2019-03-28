@@ -6,10 +6,45 @@
     - the jack of clubs
   - the ace of diamonds
   - two .... ten
+  - points 点数
 - 动作
-  - shuffle
-  - deal 分牌
-  - cut 倒牌
-- 角色
+  - to shuffle
+  - to deal 分牌
+  - to cut 倒牌
+  - to follow suit 出同花牌
+  - to trump 出王牌
+  - to overtrump 大王压小王
+  - to win a trick 赢一圈
+  - to lay 下赌
+  - to stake 下赌注
+  - to bet 下注，必须跟或者弃牌
+  - to all in 全进
+  - to raise 加赌注
+  - to see 下同样赌注
+  - to call 跟注，同to see
+  - to bid 叫牌
+  - to bluff 虚张声势
+  - to go banco 赌全锅
+  - to dice 掷色子
+- 名词
   - banker 庄家
-  - hand
+  - bank 庄家赌本
+  - the dealer 发牌员
+  - rake 赌场抽成
+  - check 看牌
+  - the blinds 盲注
+  - stake 赌注
+  - royal flush 同花大顺
+  - straight flush 同花顺
+  - tour of a kind 四张相同的牌
+  - full house，同boat
+  - three of a kind
+  - two pairs
+  - on pair
+  - bridge 桥牌
+  - canasta 用两副牌的一种玩法
+  - rummy 一种纸牌游戏
+  - patience 打通关，过五关
+  - American Airlines 一对A的起手牌
+  - Cowboys 一对K的起手牌
+  - borad cards 台面上的公用牌
