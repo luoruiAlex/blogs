@@ -1,0 +1,6 @@
+- The red/black Joker 大/小王
+- the king of spades
+- the queen of hearts
+- the jack of clubs
+- the ace of diamonds
+- two .... ten
