@@ -1,4 +1,4 @@
-- p18
+- vmls.pdf p18
 ## 英文
 - **Matrices** is just the **plural** for matrix.
 - A 2-by-3 matrix has 2 rows, 3 columns. 
