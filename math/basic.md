@@ -4,7 +4,7 @@
 - term 术语
 - use sth to represent a whole set of **phenomenon** 代表大多数情形
 - convention 约定
-- calculus 微积分
+- calculus 微积分  dental calculus牙石、牙垢
   - differential 微分
   - integral 积分
 - greater than / less than
