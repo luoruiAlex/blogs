@@ -10,3 +10,5 @@
 - histogram`[ˈhɪstəˌɡræm]` 柱状图
 - chrome 铬(合金)
 - monochrome`[ˈmɑnəˌkrom] ` 单色画，单色照片，黑白照片 
+  - a monochrome image
+  - a color image
