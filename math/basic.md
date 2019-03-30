@@ -5,8 +5,8 @@
 - use sth to represent a whole set of **phenomenon** 代表大多数情形
 - convention 约定
 - calculus 微积分  dental calculus牙石、牙垢
-  - differential 微分
-  - integral 积分
+  - differential`[ˌdɪfəˈrɛnʃəl]` 微分
+  - integral`[ɪnˈtɛɡrəl]` 积分
 - greater than / less than
 - plot(在图上画出；密谋；设计情节) these values on a number line
 - `|a|` abslute value sign 绝对值符号 how far are you away from 0?
