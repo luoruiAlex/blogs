@@ -15,6 +15,13 @@
 - x/4 ~ x over 4
 - `6 * 6 * 6` six times six times six
 - subscript 下标
+- A prime number（质数）is a positive integer can be *divisible* by exactly 2 natural numbers: 1, itself
+  - 1 is not a prime number
+  - Find all the factors(因数) of 120
+  - Find the prime factorization of 75, write your answer using exponential notation: 3 * 5^2
+  - The *least common multiple*(最小公倍数*LCM*) of 10 and 8 is 40
+  - The LCM of 15x, 20 and (x^2 + 5x) is 60x^2 + 300x
+  - The *greatest common factor*(最大公约数) of 12 and 8 is 4
 - The reciprocal`[rɪˈsɪprəkəl]相互的；倒数的；互惠的;倒数` of 2/3 is 3/2. Flip(倒置) the number
 - 3/2 three halfs;three over two
 - The **cube**(三次幂；体积；立方体；求体积) of a number is another number that is produced by multiplying the first number by itself twice
