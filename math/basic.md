@@ -19,6 +19,7 @@
 - 3/2 three halfs;three over two
 - The **cube**(三次幂；体积；立方体；求体积) of a number is another number that is produced by multiplying the first number by itself twice
 - square 二次幂；正方形；面积；使成正方形
+- presentation 表述；报告；介绍 logarithm presentation对数介绍课程
 
 ### 指数
 - Write `6 * 6 * 6` in exponential`[ˌɛkspəˈnɛnʃəl]` notation
@@ -26,4 +27,8 @@
 - Take a negative number(base number基数) to a even power(exponent指数) results in a positive number
 - `2^(-3) = (1/2)^3 = 1/8` negative power means to take the inverse of the base, result is *one eighth*
 - `4^(1/2)` *means the square root of 4*
+- `3^2` three squared
 
+## 对数
+- `log2(8)` *log base two of eight*
+  - 8 is the *antilogarithm(真数)*
