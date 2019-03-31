@@ -13,4 +13,17 @@
 - the absolute value of a number
 - equation 方程 ` [ɪˈkweʒən]`
 - x/4 ~ x over 4
+- `6 * 6 * 6` six times six times six
 - subscript 下标
+- The reciprocal`[rɪˈsɪprəkəl]相互的；倒数的；互惠的;倒数` of 2/3 is 3/2. Flip(倒置) the number
+- 3/2 three halfs;three over two
+- The **cube**(三次幂；体积；立方体；求体积) of a number is another number that is produced by multiplying the first number by itself twice
+- square 二次幂；正方形；面积；使成正方形
+
+### 指数
+- Write `6 * 6 * 6` in exponential`[ˌɛkspəˈnɛnʃəl]` notation
+  - This is equal to **6 to the thrid power**
+- Take a negative number(base number基数) to a even power(exponent指数) results in a positive number
+- `2^(-3) = (1/2)^3 = 1/8` negative power means to take the inverse of the base, result is *one eighth*
+- `4^(1/2)` *means the square root of 4*
+
