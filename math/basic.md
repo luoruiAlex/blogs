@@ -1,6 +1,19 @@
 - 3 plus 4 is equal to seven.
 - `-5` negative five
 - notation: 符号
+- The place value(位值)
+  - hundreds place 百位 tens place 十位 ones place个位 tenths （1/10）位 hundredths (1/100)位
+  - ten to the second/first/zero/negative one/negative two
+- subtract减去 divide 除法
+- decimal number小数
+  - Round 9.564 to the nearest tenth up/down
+- fraction 分数
+  - numerator 分子 the number on the top
+  - de'nominator 分母 the number on the bottom
+  - equivalent fractions 等价分数
+  - Simplify 48/64 to lowest terms(最简式). 求最简分数
+- ratio of as to bs a与b的比例
+  - Ratios are just expressions that compare quantities.
 - term 术语
 - use sth to represent a whole set of **phenomenon** 代表大多数情形
 - convention 约定
