@@ -42,6 +42,7 @@
 - presentation 表述；报告；介绍 logarithm presentation对数介绍课程
 - linear equation 线性方程
 - inequality不等式，也叫 algebraic inequality
+- displacement 位移；排水量；取代；免职
 
 ### 指数
 - Write `6 * 6 * 6` in exponential`[ˌɛkspəˈnɛnʃəl]` notation
